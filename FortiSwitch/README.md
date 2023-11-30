@@ -13,20 +13,18 @@ Protocol&#x20;
 
 **Trunk**: LAG (not necessarily accepting all VLANs)
 
-![](<.gitbook/assets/grafik (20).png>)
-
-Default management VLAN: 4094
+<figure><img src="../.gitbook/assets/grafik (20).png" alt=""><figcaption><p>FortiSwitch Link Typers</p></figcaption></figure>
 
 
 
-Documentation
+## Available Documentation
 
 By sure to check which features are supported in FortiLink and Standalone mode.\
 Also the smaller hardware plattforms do not support some features.
 
 MACSEC is only available on high end switches.
 
-Also check the standalone documentation if you use switches in FortiLink mode. Some features are better documented.
+Additionally, it's advisable to consult the standalone documentation, even when using switches in FortiLink mode. Certain features may be more thoroughly documented in these documents.
 
 
 

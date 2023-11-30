@@ -1,33 +1,31 @@
 # Loop Guard
 
-Loop Guard is a loop prevent feature.
-
-* Can detect more loop cases than loop protection
-* Does not rely on spanning tree BPDUs and port states
-* Designed to work in conjuction of STP, not as a replacement
-* Disabled by default
-* Fortinet proprietary protocol
-* loop guard periodically broadcasts loop guard frame on the Native VLAN of a port
-* Will shutdown port, if frame is received on switch
-* Orginal loop guard implementation didn't acount for loops other than the native VLAN
-* For this reason loop guard feature was improved to include the MAC Move option
+Loop Guard is a feature designed to prevent network loops. \
 
 
+It is capable of detecting more loop scenarios than standard loop protection, as it does not rely on Spanning Tree Protocol BPDUs or port states. \
+While it is designed to complement STP, it is not intended as a replacement. \
 
-* Mac move monitors repeated MAC address flapping events, which are likely caused by a loop
-* To enanble mac move, define threshold
-* threshold refers to minimum number of MAC addresses that must flap between ports within a second
-* Be careful before activating mac move and setting threshold if you have
-  * NAC enabled
-  * Wireless Bridge Mode
 
-Loop Guard packet (LPBDU):
+By default, Loop Guard is disabled and is a proprietary protocol of Fortinet.\
+Loop Guard functions by periodically broadcasting a Loop Guard frame on the Native VLAN of a port. If this frame is received back on the switch, the port will be shut down.&#x20;
+
+The original implementation of Loop Guard did not account for loops in VLANs other than the native one. Therefore, the Loop Guard feature was enhanced to include the MAC Move option to address this limitation.
+
+MAC move monitors repeated MAC address flapping events, often indicative of a loop.&#x20;
+
+To enable MAC move, a threshold must be defined. This threshold is the minimum number of MAC addresses required to flap between ports within one second.&#x20;
+
+Exercise caution when activating MAC move and setting the threshold, especially if NAC or Wireless Bridge Mode is enabled.
+
+Following Screenshot shows a Loop Guard packet (LPBDU):
 
 <figure><img src="../.gitbook/assets/grafik (19).png" alt=""><figcaption><p>f</p></figcaption></figure>
 
-Log entry witch-controller : `Loop Guard: loop detected on port2. Shutting down port2.`
+When a network loop is detected by Loop Guard following message as added to the FortiSwitch logs: \
+`Loop Guard: loop detected on port2. Shutting down port2.`
 
-CLI on Switch:
+Show loop-guard on FortiSwitch:
 
 ```
 SWITCH03 # diagnose loop-guard status
@@ -74,7 +72,7 @@ config switch global
  set loop-guard-tx-interval 3
 ```
 
-Process is called /bin/lpgd
+The Process on the FortiSwitch is named /bin/lpgd
 
 
 
