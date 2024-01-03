@@ -41,6 +41,12 @@ SWITCH03 # diagnose loop-guard status
   port5              disabled    -             -           -         -            -
 ```
 
+Show loop-guard status via Fortigate:
+
+```
+diagnose switch-controller switch-info loop-guard
+```
+
 The port cannot be re-enabled through the Fortigate GUI. Either the port must be reset via CLI or wait for timeout to reset the loop-guard status.
 
 ```
