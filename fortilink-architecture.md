@@ -2,7 +2,13 @@
 
 ## Managed FortiSwitch
 
-Three methods are available to manage the FortiSwitches. Standalone mode, Cloud Managed and Fortigate Managed FortiSwitch. The factory default settings is standalone mode.
+Three methods are available to manage and configure FortiSwitches.&#x20;
+
+\- Standalone mode\
+\- Cloud Managed\
+\- Fortigate Managed FortiSwitch.&#x20;
+
+The factory default settings is standalone mode.
 
 In standalone mode, the switch is managed by GUI or CLI. Configuration are made on each FortiSwitch independently.
 
@@ -35,8 +41,6 @@ Auto ISL creation
 
 
 Fortigate requests two addresses via DHCP: One for management and depending on the Switch Model one for (E)RSPAN
-
-
 
 Possible Fortigate to FortiSwitch connectivity methods:
 

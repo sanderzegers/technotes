@@ -6,8 +6,6 @@ Clients should not send spanning-tree packets.
 
 It's a per port setting and can be enabled in the GUI:
 
-<figure><img src="../.gitbook/assets/grafik (17).png" alt=""><figcaption></figcaption></figure>
-
 In the CLI it's possible to change the bpdu-guard timeout from the default 5min value to another:
 
 ```

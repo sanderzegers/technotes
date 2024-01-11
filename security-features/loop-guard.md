@@ -8,7 +8,7 @@ While it is designed to complement STP, it is not intended as a replacement. \
 
 
 By default, Loop Guard is disabled and is a proprietary protocol of Fortinet.\
-Loop Guard functions by periodically broadcasting a Loop Guard frame on the Native VLAN of a port. If this frame is received back on the switch, the port will be shut down.&#x20;
+Loop Guard functions by periodically broadcasting a Loop Guard frame on the Native VLAN of a port. If this frame is received back on same switchport it was sent out, the port will shut down.&#x20;
 
 The original implementation of Loop Guard did not account for loops in VLANs other than the native one. Therefore, the Loop Guard feature was enhanced to include the MAC Move option to address this limitation.
 
@@ -22,10 +22,10 @@ Following Screenshot shows a Loop Guard packet (LPBDU):
 
 <figure><img src="../.gitbook/assets/grafik (19).png" alt=""><figcaption><p>f</p></figcaption></figure>
 
-When a network loop is detected by Loop Guard following message as added to the FortiSwitch logs: \
+When a network loop is detected by Loop Guard following message is written in the FortiSwitch logs.\
 `Loop Guard: loop detected on port2. Shutting down port2.`
 
-Show loop-guard on FortiSwitch:
+Show loop-guard on a FortiSwitch:
 
 ```
 SWITCH03 # diagnose loop-guard status
@@ -45,6 +45,12 @@ Show loop-guard status via Fortigate:
 
 ```
 diagnose switch-controller switch-info loop-guard
+```
+
+In larger switch environments it's recommended to filter the output:
+
+```
+diagnose switch-controller switch-info loop-guard | grep -i 'Triggered' -B 60
 ```
 
 The port cannot be re-enabled through the Fortigate GUI. Either the port must be reset via CLI or wait for timeout to reset the loop-guard status.
@@ -71,14 +77,14 @@ config switch-controller managed-switch
             next
 ```
 
-Change Loop Guard packet interval. Defaulft is every 3 sec
+Change loop guard packet interval. Defaulft is every 3 sec
 
 ```
 config switch global
  set loop-guard-tx-interval 3
 ```
 
-The Process on the FortiSwitch is named /bin/lpgd
+The Process on the FortiSwitch is called /bin/lpgd
 
 
 

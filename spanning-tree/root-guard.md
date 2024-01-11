@@ -1,6 +1,6 @@
 # Root Guard
 
-Changing the root switch, can cause a network disruption and reroute of traffic. To prevent this from happening root guard was introduced.
+A change of the root switch in a spanning-tree topology, can cause a network disruption and reroute of traffic. To prevent this from happening root guard was introduced.
 
 When root guard is enabled on a port, it ignores superior BPDUs and thus prevents root bridge change.
 

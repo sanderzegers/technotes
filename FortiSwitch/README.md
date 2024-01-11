@@ -3,7 +3,9 @@
 ## Link Types
 
 **Fortilink**: Connection between FortiSwitch and FortiGate\
-Protocol&#x20;
+Protocol.
+
+**Fortilink stack**: A managed FortiSwitch topology.
 
 **MCLAG**: Multi-Chassis Link aggregation
 
@@ -19,15 +21,13 @@ Protocol&#x20;
 
 ## Available Documentation
 
-By sure to check which features are supported in FortiLink and Standalone mode.\
-Also the smaller hardware plattforms do not support some features.
+Be aware that the supported featureset differs between a FortiSwitch in managed and in standalone mode.\
+Also smaller hardware plattforms lack some features.
 
-MACSEC is only available on high end switches.
+For example MACSEC is only available on highend switches.
 
-Additionally, it's advisable to consult the standalone documentation, even when using switches in FortiLink mode. Certain features may be more thoroughly documented in these documents.
+It's advisable to also consult the standalone documentation, even when using switches in FortiLink mode. Certain features are better documented in the standalone documentation.
 
-
-
-
+{% embed url="https://docs.fortinet.com/product/fortiswitch/" %}
 
 #### &#x20;
