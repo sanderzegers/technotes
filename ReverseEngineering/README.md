@@ -2,9 +2,14 @@
 
 #### Breakpoints
 
-| rwatch \*0xfeedface | break on read/write access |
+| break \*0x8049bd7   | break on execution         |
 | ------------------- | -------------------------- |
+| awatch \*0xfeedface | break on read/write access |
 | watch \*0x08049340  | break on write access      |
+| rwatch \*0x80123454 | break on read access       |
+| info breakpoints    | list breakpoints           |
+| del 2               | delete breakpoint 2        |
+| del breakpoints     | delete all breakpoints     |
 
 #### Info
 
