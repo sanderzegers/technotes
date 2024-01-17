@@ -18,6 +18,20 @@
 
 
 
+Convenience variables
+
+|                         |                                                                        |
+| ----------------------- | ---------------------------------------------------------------------- |
+| set $dat\_84 = 0x303042 | set local variable dat\_84. Has no impact on program. Just convenience |
+| x/bx $dat\_84+4         | Print out value at @0x303046                                           |
+|                         |                                                                        |
+
+#### Missing Entry Point
+
+Launch program in GDB. Set breakpoint on \_\_libc\_start\_main. Relaunch the program in GDB and retrieve main from RDI.
+
+
+
 #### Modify data
 
 | set $eax=0                      |                 |
