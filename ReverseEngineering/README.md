@@ -32,6 +32,15 @@ Launch program in GDB. Set breakpoint on \_\_libc\_start\_main. Relaunch the pro
 
 
 
+#### Control flow
+
+|        |                                            |
+| ------ | ------------------------------------------ |
+| si     | Step Into one instruction                  |
+| ni     | Next instruction (one step)                |
+| finish | Execute until selected stack frame returns |
+| thread | switch threads                             |
+
 #### Modify data
 
 | set $eax=0                      |                 |
@@ -40,8 +49,32 @@ Launch program in GDB. Set breakpoint on \_\_libc\_start\_main. Relaunch the pro
 | set $eflags &= \~(1 << 6)       | unset zero flag |
 | set \*(char\*)0x080480d9 = 0x90 | Modify Code     |
 
+GDB run
 
 
-### GDB Scripting
+
+|                                        |                |
+| -------------------------------------- | -------------- |
+| run <<< (python -c "print('B'\*300)")  | standard input |
+| run $(python -c "print('A','B'\*227)") |                |
+|                                        |                |
+
+## GDB Scripting
 
 {% embed url="https://gist.github.com/sanderzegers/e8076c3a5e954c13a480899349817af5" %}
+
+## PWNDBG
+
+
+
+|                                |                                                    |   |
+| ------------------------------ | -------------------------------------------------- | - |
+| pwndbg                         | List all pwndbg commands                           |   |
+| set context-sessions           | Set context to display                             |   |
+| ctx-watch BUF                  | Add Watch expression to context view               |   |
+| ctx-watch execute "x/20x $rsp" | Add watch expression (gdb command) to context view |   |
+| nextcall                       | Jump to next call                                  |   |
+| asm ADD EBP,EBP                | Assemble shellcode into bytes                      |   |
+| piebase                        | Retrieve relocated binary base address             |   |
+| nextcall                       | Jump to next call                                  |   |
+| distance 0x001043a0 0x10449f   | calculate distance between two addresses           |   |
