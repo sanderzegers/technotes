@@ -8,4 +8,4 @@
 | TEST AX,AX          | Add two variables, store calculation result in flag register                                                                                                                        |       |
 | CMP AX,1            | Subtract two variables, store calculation result in flag register                                                                                                                   |       |
 | LEA eax, \[rdi - 1] | Load effective address to register. It is used when the address is not known at compile time (for example on stack)                                                                 |       |
-|                     |                                                                                                                                                                                     |       |
+| SETE al             | Set byte if equal (ZF=1)                                                                                                                                                            |       |
