@@ -25,7 +25,7 @@ Multiple FortiLinks can be created. Fortigates in standalone, HA Active Passive 
 ## Traffic flow
 
 A FortiLink setup handles traffic like a classic router-on-a-stick design.\
-Intra-VLAN traffic is handled by the switch stack: traffic destinated in the same VLAN is not passing through the fortigate by default (see Block-intra VLAN Traffic).\
+Intra-VLAN traffic is handled by the switch stack: traffic destinated in the same VLAN is not passing through the Fortigate by default (see Block-intra VLAN Traffic).\
 Any other traffic must pass the Fortigate.\
 FortiLink management traffic is sent untagged on VLAN 4094 by default. VLAN 4094 is untagged on all ISLs, ICL and FortiLink Trunks.\
 

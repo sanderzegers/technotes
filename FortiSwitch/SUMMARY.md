@@ -25,6 +25,7 @@
 * [QoS](../qos.md)
 * [Best Practices / Security](../best-practices-security.md)
 * [Monitoring](../monitoring.md)
+* [Firmware Upgrade](firmware-upgrade.md)
 * [Other Topics](../other-topics.md)
 * [Protocols](../protocols/README.md)
   * [FortiLink](../protocols/fortilink.md)

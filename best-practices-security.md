@@ -69,17 +69,15 @@ config switch-controller security-policy local-access
 end
 ```
 
-* Enable storm control policy:
+* Enable storm control policy:\
+  Default rate is 500, adjust rate to your BUM-Traffic rate.
 
 ```
-config switch-controller storm-control-policy
-    edit "default"
-        set description "default storm control on all port"
-        set storm-control-mode override
-        set unknown-unicast enable
-        set unknown-multicast enable
-        set broadcast enable
-    next
+config switch-controller storm-control
+    set rate 2000
+    set unknown-unicast enable
+    set unknown-multicast enable
+    set broadcast enable
 end
 ```
 

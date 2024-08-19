@@ -6,19 +6,17 @@ By default this limit is set to 500 packets/second, but it's disabled by default
 
 Only packets categorized by the traffic types are blocked. All other packets are forwarded regulary on the switch port.
 
-By default in FortiOS 6.4 storm control is disabled on the mclag-icl, isl and fortilink connections.\
+By default storm control is disabled on the mclag-icl, isl and fortilink connections.\
 It's possible to define a global storm control policy, or a per-port storm control policy. The prefered way is to enable storm-control only on clients edge ports. The "Edge-Port" storm-control-policy is already assigned to all access ports by default. The default settings of the Edge-Port storm-control policy, is to use the global storm-control settings.
 
+Changing the global storm-control-policy will enable storm-control on all non ICL, ISL or FortiLink ports.
+
 ```
-config switch-controller storm-control-policy
-   edit "Edge-Port"
-        set description "Edge-port storm control"
-        set storm-control-mode override
-        set unknown-unicast enable
-        set unknown-multicast enable
-        set broadcast enable
-        rate 500
-    next
+config switch-controller storm-control
+    set rate 500
+    set unknown-unicast enable
+    set unknown-multicast enable
+    set broadcast enable
 end
 ```
 
