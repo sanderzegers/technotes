@@ -10,15 +10,35 @@
 | info breakpoints    | list breakpoints           |
 | del 2               | delete breakpoint 2        |
 | del breakpoints     | delete all breakpoints     |
+| disable 1           | disable breakpoint 1       |
+
+#### Hook stop
+
+Run command after every breakpoint:
+
+```
+define hook-stop
+>info registers
+>x/4i $eip
+```
+
+Run specific command for a specific breakpoint is hit:
+
+```
+command <breakpoint number>
+>info registers
+>x/4i $eip
+```
 
 #### Info
 
-| info proc mappings | show mapped memory addresses (stack, heap, libc location, etc) |
-| ------------------ | -------------------------------------------------------------- |
+| info proc mappings  | show mapped memory addresses (stack, heap, libc location, etc) |
+| ------------------- | -------------------------------------------------------------- |
+| info functions test | show all functions with regex: test                            |
 
 
 
-Convenience variables
+#### Convenience variables
 
 |                         |                                                                        |
 | ----------------------- | ---------------------------------------------------------------------- |
@@ -34,12 +54,13 @@ Launch program in GDB. Set breakpoint on \_\_libc\_start\_main. Relaunch the pro
 
 #### Control flow
 
-|        |                                            |
-| ------ | ------------------------------------------ |
-| si     | Step Into one instruction                  |
-| ni     | Next instruction (one step)                |
-| finish | Execute until selected stack frame returns |
-| thread | switch threads                             |
+|                |                                            |
+| -------------- | ------------------------------------------ |
+| si             | Step Into one instruction                  |
+| ni             | Next instruction (one step)                |
+| finish         | Execute until selected stack frame returns |
+| thread         | switch threads                             |
+| jump \*decrypt | Jump to address.                           |
 
 #### Modify data
 
@@ -49,13 +70,18 @@ Launch program in GDB. Set breakpoint on \_\_libc\_start\_main. Relaunch the pro
 | set $eflags &= \~(1 << 6)       | unset zero flag |
 | set \*(char\*)0x080480d9 = 0x90 | Modify Code     |
 
-GDB run
+#### Find Data
+
+| find 0x8048000,0x804b000,"accept()" | find string between starting and end address |
+| ----------------------------------- | -------------------------------------------- |
+
+#### GDB run
 
 
 
 |                                        |                |
 | -------------------------------------- | -------------- |
-| run <<< (python -c "print('B'\*300)")  | standard input |
+| run <<< $(python -c "print('B'\*300)") | standard input |
 | run $(python -c "print('A','B'\*227)") |                |
 |                                        |                |
 
@@ -67,14 +93,19 @@ GDB run
 
 
 
-|                                |                                                    |   |
-| ------------------------------ | -------------------------------------------------- | - |
-| pwndbg                         | List all pwndbg commands                           |   |
-| set context-sessions           | Set context to display                             |   |
-| ctx-watch BUF                  | Add Watch expression to context view               |   |
-| ctx-watch execute "x/20x $rsp" | Add watch expression (gdb command) to context view |   |
-| nextcall                       | Jump to next call                                  |   |
-| asm ADD EBP,EBP                | Assemble shellcode into bytes                      |   |
-| piebase                        | Retrieve relocated binary base address             |   |
-| nextcall                       | Jump to next call                                  |   |
-| distance 0x001043a0 0x10449f   | calculate distance between two addresses           |   |
+|                                |                                                    |
+| ------------------------------ | -------------------------------------------------- |
+| pwndbg                         | List all pwndbg commands                           |
+| entry                          | Set breakpoint at first instruction                |
+| set context-sessions           | Set context to display                             |
+| ctx-watch BUF                  | Add Watch expression to context view               |
+| ctx-watch execute "x/20x $rsp" | Add watch expression (gdb command) to context view |
+| nextcall                       | Jump to next call                                  |
+| asm ADD EBP,EBP                | Assemble shellcode into bytes                      |
+| piebase                        | Retrieve relocated binary base address             |
+| nextcall                       | Jump to next call                                  |
+| distance 0x001043a0 0x10449f   | calculate distance between two addresses           |
+| xuntil 0x0123123               | Continue untill address                            |
+| context                        | Display context window                             |
+| env                            | Show all environment variables and addresses       |
+| set environment variable value | Set a environment variable from within GDB         |
