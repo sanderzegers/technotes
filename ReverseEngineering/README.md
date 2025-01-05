@@ -54,13 +54,16 @@ Launch program in GDB. Set breakpoint on \_\_libc\_start\_main. Relaunch the pro
 
 #### Control flow
 
-|                |                                            |
-| -------------- | ------------------------------------------ |
-| si             | Step Into one instruction                  |
-| ni             | Next instruction (one step)                |
-| finish         | Execute until selected stack frame returns |
-| thread         | switch threads                             |
-| jump \*decrypt | Jump to address.                           |
+|                |                                                             |
+| -------------- | ----------------------------------------------------------- |
+| si             | Step Into one instruction                                   |
+| ni             | Next instruction (one step)                                 |
+| next           | Next source code line                                       |
+| finish         | Execute until selected stack frame returns                  |
+| thread         | switch threads                                              |
+| jump \*decrypt | Jump to address.                                            |
+| jump ch12.c:32 | Jump to line of code (when binary compiled with -g)         |
+| bt             | backtrace / inspect stack to see sequence of function calls |
 
 #### Modify data
 
@@ -74,16 +77,17 @@ Launch program in GDB. Set breakpoint on \_\_libc\_start\_main. Relaunch the pro
 
 | find 0x8048000,0x804b000,"accept()" | find string between starting and end address |
 | ----------------------------------- | -------------------------------------------- |
+| list main.c:34                      | list source code at line 34                  |
 
 #### GDB run
 
 
 
-|                                        |                |
-| -------------------------------------- | -------------- |
-| run <<< $(python -c "print('B'\*300)") | standard input |
-| run $(python -c "print('A','B'\*227)") |                |
-|                                        |                |
+|                                                                       |                                                                               |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| run <<< $(python -c "print('B'\*300)")                                | standard input                                                                |
+| run $(python -c "print('A','B'\*227)")                                | command line argument                                                         |
+| <p>#printf('5\n2\n\x41') > input.txt<br>gdb: run &#x3C; input.txt</p> | Run multiple commands. Eg. replacement for: printf('5\n2\n\x41') \| ./app.bin |
 
 ## GDB Scripting
 
