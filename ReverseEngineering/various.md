@@ -1,6 +1,6 @@
 # Various
 
-## neChecksec
+## Checksec
 
 Check executables and kernel properties
 
@@ -94,3 +94,17 @@ Run shell code for applications with interactive CLI:
 (python2 -c 'print "\x35\x0a\x32\x0a\x29\xcf\xff\xff\x35\xcf\xff\xff\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90"' ; cat) | ./application
 ```
 {% endcode %}
+
+Compile code without security features
+
+```bash
+gcc -z execstack -fno-stack-protector -no-pie -fno-pie -o myprogram myprogram.c
+```
+
+| Command parameter    |                                                                                                                                         |   |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | - |
+| -no-pie -fno-pie     | Disables Position Independent Executable (PIE) to prevent address randomization of the executable, making it run at a fixed address.    |   |
+| -fno-stack-protector | Turns off the generation of stack canaries, which are used to detect and prevent stack buffer overflow attacks.                         |   |
+| -z execstack         | Marks the stack as executable, allowing code execution from the stack, which is typically blocked to prevent certain types of exploits. |   |
+
+Disable ASLR: echo 0 | sudo tee /proc/sys/kernel/randomize\_va\_space

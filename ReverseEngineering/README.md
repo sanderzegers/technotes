@@ -97,19 +97,23 @@ Launch program in GDB. Set breakpoint on \_\_libc\_start\_main. Relaunch the pro
 
 
 
-|                                |                                                    |
-| ------------------------------ | -------------------------------------------------- |
-| pwndbg                         | List all pwndbg commands                           |
-| entry                          | Set breakpoint at first instruction                |
-| set context-sessions           | Set context to display                             |
-| ctx-watch BUF                  | Add Watch expression to context view               |
-| ctx-watch execute "x/20x $rsp" | Add watch expression (gdb command) to context view |
-| nextcall                       | Jump to next call                                  |
-| asm ADD EBP,EBP                | Assemble shellcode into bytes                      |
-| piebase                        | Retrieve relocated binary base address             |
-| nextcall                       | Jump to next call                                  |
-| distance 0x001043a0 0x10449f   | calculate distance between two addresses           |
-| xuntil 0x0123123               | Continue untill address                            |
-| context                        | Display context window                             |
-| env                            | Show all environment variables and addresses       |
-| set environment variable value | Set a environment variable from within GDB         |
+|                                |                                                       |
+| ------------------------------ | ----------------------------------------------------- |
+| pwndbg                         | List all pwndbg commands                              |
+| entry                          | Set breakpoint at first instruction                   |
+| set context-sessions           | Set context to display                                |
+| ctx-watch BUF                  | Add Watch expression to context view                  |
+| ctx-watch execute "x/20x $rsp" | Add watch expression (gdb command) to context view    |
+| ctx-unwatch 2                  | Remote watch expression 2                             |
+| nextcall                       | Jump to next call                                     |
+| asm ADD EBP,EBP                | Assemble shellcode into bytes                         |
+| piebase                        | Retrieve relocated binary base address                |
+| nextcall                       | Jump to next call                                     |
+| distance 0x001043a0 0x10449f   | calculate distance between two addresses              |
+| xuntil 0x0123123               | Continue untill address                               |
+| context                        | Display context window                                |
+| env                            | Show all environment variables and addresses          |
+| set environment variable value | Set a environment variable from within GDB            |
+| search "Enter"                 | Search for string in memory                           |
+| search 0xffff80cd -t dword     | Search for dword in memory                            |
+| checksec                       | Show security features (stack canaries, nx, pie, etc) |
