@@ -6,6 +6,8 @@ Upgrade Fortigate first and then work your way out from the access switches back
 
 Fortinet maintains a list of recommended Fortigate and FortiSwitch version combinations. Just search for 'FortiLink Compatibility' on the internet; it should provide the latest compatibility chart.
 
+Upgrading firmware generally does not require any intermediate steps. Fortiswitches can be upgraded from version 3.5.0 directly to the latest release. The only current exceptions are the FS-424E (incl. POE, FPOE, Fiber) and FS-M426-FPOE models. Be sure to check the release notes.
+
 ## Firmware Staging
 
 List currently installed Fortiswitch images on the Fortigate:
@@ -18,7 +20,7 @@ S448EF-v7.2-build495-IMG.swtp          35920005       S448EF-v7.2-build495    Mo
 S148FN-v7.2-build495-IMG.swtp          19860661       S148FN-v7.2-build495    Mon Aug 19 15:37:52 2024
 ```
 
-Upload new images to the FortiGate. It is recommended to use FTP for faster transfer. [BabyFTP ](https://www.pablosoftwaresolutions.com/html/baby\_ftp\_server.html)is suggested for setting up a one-time use FTP server.
+Upload new images to the FortiGate. It is recommended to use FTP for faster transfer. [BabyFTP ](https://www.pablosoftwaresolutions.com/html/baby_ftp_server.html)is suggested for setting up a one-time use FTP server.
 
 ```
 FW01 (global) # execute switch-controller switch-software upload ftp FSW_1024E-v7-build0495-FORTINET.out 10.1.20.61
@@ -32,7 +34,8 @@ Image Saving FS1E24-v7.2-build495-IMG.swtp ...
 Successful!
 ```
 
-Stage the firmware to all FortiSwitches. This will store the image on the FortiSwitch in the backup partition and set it as the default boot partition for the next switch restart.
+Stage the firmware to all FortiSwitches. This will store the image on the FortiSwitch in the backup partition and set it as the default boot partition for the next switch restart.\
+Rerun the `execute switch-controller switch-software list-available` command to get the new image name.
 
 ```
 FW01 (root) # execute switch-controller switch-software stage all S448EF-v7.2-build495-IMG.swtp

@@ -136,7 +136,7 @@ In this example Native VLAN is VLAN 200. The ingress packets are shown as untagg
 
 <figure><img src=".gitbook/assets/grafik (14).png" alt=""><figcaption></figcaption></figure>
 
-If you run a packet capture In the GUI in FortiOS 7.2.5 on the rspan interface, it will only show the incoming packets, the tagged packets (outgoing) are not visible.
+If you run a packet capture In the GUI in FortiOS 7.2.x on the rspan interface, it will only show the incoming packets, the outgoing packets (tagged) are not visible. To capture all relevent packets, the CLI capture must be used on the Fortigate: diagnose sniffer packet&#x20;
 
 
 
