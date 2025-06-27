@@ -86,9 +86,3 @@ end
 * Enable network-assisted device detection
 
 LLDP / CDP packets can't reach the Fortigate for additional device detection information. That's why it's recommended to enable it on the switches.
-
-```
-config switch-controller network-monitor-settings
-    set network-monitoring enable
-end
-```
