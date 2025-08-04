@@ -42,7 +42,9 @@ opposite of / failure of CIA = DAD:
 
 * Disclosure
 * Alternation
-* Destruction&#x20;
+* Destruction
+
+
 
 Security Roles
 
@@ -150,12 +152,18 @@ Risk types:
 * Control Risk: risk that is introduced by the introduction of the countermeasure to an environment.
 * Mitigated Risk: Risk that has been addressed by existing controls
 
-Threat modeling methodologies: STRIDE, PASTA, DREAD
+### Threat modeling methodologies
 
-Identify Threads: STRIDE and PASTA
+STRIDE, PASTA, DREAD
+
+Identify Threats: STRIDE and PASTA
 
 \
-**Stride** designed by microsoft, **threat-focused** methodology, less strategic.
+**STRIDE**&#x20;
+
+* <mark style="color:$primary;">**threat-focused**</mark> methodology, less strategic.
+* designed by Microsoft
+* type of threats
 
 | Threat category            | One-line description                                                     | Typical security objective violated |
 | -------------------------- | ------------------------------------------------------------------------ | ----------------------------------- |
@@ -167,25 +175,11 @@ Identify Threads: STRIDE and PASTA
 | **E**levation of Privilege | Gaining capabilities beyond those intended (e.g., privilege escalation)  | _Authorization_                     |
 
 \
-**Pasta**: Process for Attack Simulation and Threat Analysis
-
-Is attacker-focused, **risk-centric** methodology. Strategic perspective.\
-Identify business objectives, technical requirements, compliance issues, business sensitive risks
-
-
-
-* **Stage 1 – Define Objectives**
-* **Stage 2 – Define Technical Scope**
-* **Stage 3 – Application Decomposition**
-* **Stage 4 – Threat Analysis**
-* **Stage 5 – Weakness & Vulnerability Analysis**
-* **Stage 6 – Attack Modeling**
-* **Stage 7 – Risk & Impact Analysis**
-
-\
 **DREAD**
 
-Measuring and ranking the severity of threats.&#x20;
+* severity scoring of threats
+
+Measuring and ranking the <mark style="color:$primary;">severity of threats</mark>.&#x20;
 
 Often used in combination with STRIDE model. STRIDE identifies the threads, DREAD is used the to rank the severity of threats
 
@@ -197,6 +191,19 @@ Often used in combination with STRIDE model. STRIDE identifies the threads, DREA
 | **A**ffected Users   | What **percentage of users or systems** could be hit?          | ➤ Is it limited to a niche feature or the entire customer base?➤ Does it span tenants/regions?                               | “Everyone, every time” → high. “Only legacy admin portal users” → lower.                 |
 | **D**iscoverability  | How likely is it that **someone will find the vulnerability**? | ➤ Visible in a browser address bar? ➤ Needs source-code access and deep reverse-engineering?➤ Search-engine dork reveals it? | Obvious string in URL = high. Buried in obscure branch logic = low.                      |
 
+
+
+\
+**PASTA**&#x20;
+
+* Process for Attack Simulation and Threat Analysis
+* Is attacker-focused, **risk-centric** methodology. Strategic perspective.\
+  Identify business objectives, technical requirements, compliance issues, business sensitive risks
+
+<table><thead><tr><th width="64">#</th><th>PASTA stage</th><th>One-liner</th></tr></thead><tbody><tr><td>1</td><td><strong>Define Objectives</strong></td><td>Business &#x26; security objectives, compliance drivers</td></tr><tr><td>2</td><td><strong>Define Technical Scope</strong></td><td>Diagram the system, boundaries, tech stack</td></tr><tr><td>3</td><td><strong>Application Decomposition</strong></td><td>Break down components, dataflows, trust boundaries</td></tr><tr><td>4</td><td><strong>Threat Analysis</strong></td><td>Identify realistic attacker goals &#x26; capabilities (STRIDE, CAPEC, etc.)</td></tr><tr><td>5</td><td><strong>Vulnerability &#x26; Weakness Analysis</strong></td><td>Map known vulns (CWE, CVE), abuse cases</td></tr><tr><td>6</td><td><strong>Attack Modelling / Simulation</strong></td><td>Build attack trees, run proofs-of-concept</td></tr><tr><td>7</td><td><strong>Risk &#x26; Impact Analysis</strong></td><td>Quantify likelihood × impact, propose mitigations</td></tr></tbody></table>
+
+
+
 Wassenaar Arrangement: \
 Goal: **stop advanced arms or “dual-use” tech** (things with civilian _and_ military value—like AI chips, strong crypto, hacking tools) from ending up in the wrong hands.
 
@@ -206,9 +213,9 @@ The Wassenaar Arrangement is a voluntary pact where the world’s high-tech expo
 
 Security Control:\
 \- Functional: must do what it is designed to do\
-\- Assurance: contral can be evaluated to confirm working correctly (testing, monitoring, logging,etc)
+\- Assurance: control can be evaluated to confirm working correctly (testing, monitoring, logging,etc)
 
-Business continuity management:
+### Business continuity management
 
 | Metric                                                        | What it measures                                                                                                                                                                                                 | Typical exam angle                                                |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -272,6 +279,39 @@ Laws
 GPDR EU / CCPA (California Consumer Privacy Act) US
 
 The Fourth Amendment to the U.S. Constitution protects individuals from unreasonable searches and seizures by the government.
+
+
+
+Other
+
+|                                                     |                                                                    |   |
+| --------------------------------------------------- | ------------------------------------------------------------------ | - |
+| Copyright Act                                       |                                                                    |   |
+| Lanham Act                                          |                                                                    |   |
+| Glass-Steagall Act                                  |                                                                    |   |
+| Economic Espionage Act                              |                                                                    |   |
+| Privacy Act                                         |                                                                    |   |
+| HITECH Act                                          | Health Information Technology for Economic and Clinical Health Act |   |
+|                                                     | CALEA                                                              |   |
+| Children’s Online Privacy Protection Act            | COPPA                                                              |   |
+| Electronic Communications Privacy Act               | ECPA                                                               |   |
+|                                                     | USPTO                                                              |   |
+| Digital Millennium Copyright Act                    | DMCA                                                               |   |
+| Gramm Leach Bliley Act                              | GLBA                                                               |   |
+| USA Patriot ACT                                     |                                                                    |   |
+| Privacy Shield                                      |                                                                    |   |
+| Safe Harbor                                         |                                                                    |   |
+|                                                     | SOX                                                                |   |
+| Health Insurance Portability and Accountability Act | HIPAA                                                              |   |
+| Family Educational Rights and Privacy Act           | FERPA                                                              |   |
+|                                                     | FISMA                                                              |   |
+|                                                     | PCI DSS                                                            |   |
+|                                                     | GISRA                                                              |   |
+|                                                     | SOC2                                                               |   |
+
+
+
+
 
 
 
