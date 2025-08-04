@@ -149,7 +149,7 @@ Risk types:
 
 * Inherent Risk: level of natural, native or default risk prior to any risk management efforts
 * Residual risk: Risk after safeguards, security controls and countermeasures are implemented
-* Control Risk: risk that is introduced by the introduction of the countermeasure to an environment.
+* Control Risk/Secondary risk: risk that is introduced by the introduction of the countermeasure to an environment.
 * Mitigated Risk: Risk that has been addressed by existing controls
 
 ### Threat modeling methodologies
