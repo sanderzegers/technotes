@@ -68,8 +68,10 @@ Classification Levels
   * defines level of classification
   * defines controls for levels of classification
   * decide when to destroy
+  * establishing rules for the appropriate used and protection of data
 * System Owner
   * responsible for the systems that process data
+  * develop security plan, identifying and implementing security controls
 * Business and mission owner
   * own the processes and ensure that the systems provide values to the org
 * Data Controller
