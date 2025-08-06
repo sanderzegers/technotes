@@ -35,8 +35,11 @@ Five pillars = CIA triad +
 
 * authenticity
   * Data is genuine and not spoofed
+  * Verifying the identity of a subject or resource
 * non-repudiation
   * Someone cannot deny their actions (sending messages, making transanctions)
+  * provides undeniable proof
+  * always includes authenticity
 
 opposite of / failure of CIA = DAD:
 
@@ -91,8 +94,13 @@ NIST Cybersecurity Framework (CSF)
 Due care vs Due diligence
 
 * Due care is the <mark style="color:$primary;">responsible protection of assets</mark>
+  * doing what a reasonable person would do in a given situation
+  * implementation
+  * operation
 * Due diligence is the ability to <mark style="color:$primary;">prove due care</mark>
   * <mark style="color:$primary;">establish a plan, policy and process to protect interests of an organization</mark>
+  * evaluation
+  * think before you act
 
 
 

@@ -58,9 +58,24 @@ Zachman, Sherwood Applied Business Security Architecture (SABSA), The Open Group
 
 
 
-Security Models
+## Security Models
 
 "Rules to be implemented to achieve security"
+
+They are a way to formalize security policy.
+
+typical implemented by enforcing integrity, confidentiality or other controls.
+
+Three properties:
+
+* simple security property
+  * describe rules for <mark style="color:$primary;">read</mark>
+* Star security property
+  * describes rules for <mark style="color:$primary;">write</mark>
+* Invocation property
+  * Rules around invocations (calls), such as to subjects
+
+
 
 **lattice-based mode**l is like a ladder, layers going up and down. Requires layers of security.
 
@@ -76,9 +91,13 @@ Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 |                                                                                        | Graham-Denning             |
 |                                                                                        | Harrison-Ruzzo-Ullman      |
 
+Bell-LaPadula
 
-
-
+* state machine enforces confidentiality
+* mandatory access control
+  * to enforce DoD multilevel security policy (Government!!)
+* simple security property
+  * no read up
 
 | Aspect                   | Bell-LaPadula                                                                                                                           | Biba                                                                                                                                |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |

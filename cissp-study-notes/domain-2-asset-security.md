@@ -89,3 +89,56 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
   * data archive
   * data monitor
   * implement security controls
+
+
+
+Data Lifecycle
+
+* Create
+  * by systems
+  * by users
+* Store
+  * classified asap
+  * ideally encrypted at rest
+* Use
+  * security controls based on classification
+* Share
+  * transit over network
+  * ideally encrypted
+* Archive
+  * sometimes laws or regulations require retention of data
+* Destroy
+  * neither readable nor recoverable
+    * crypto-shredding
+
+
+
+## Scoping and Tailoring
+
+customize security controls to fit the specific needs of your Org:\
+repeating process, must be cost-effective for your business
+
+Scoping
+
+* decide where (or whether) the baseline control applies
+* Defining the <mark style="color:$primary;">boundaries</mark> and <mark style="color:$primary;">assets</mark> that security controls will <mark style="color:$primary;">apply to</mark>
+* part of the tailoring process
+* review list of baseline security and privacy controls and select only those security and privacy controls that apply to the IT systems you're trying to protect
+
+Tailoring
+
+* adjusting how the chosen control will be implemented
+* Adapting security controls to <mark style="color:$primary;">address the specific threats and vulnerabilities of your environment</mark>
+* modifying the list of security controls within a baseline to align with the orgs missions
+
+
+
+Examples scoping
+
+Remote Maintenance. Out of scope for air-gapped devices\
+Cryptographic protection. public data is left unencrypted
+
+Examples tailoring
+
+specify parameter values: org reviews all privileged accounts at least every 30 days.\
+select or drop control enhancements: Automated correlation/analysis is added for high-impact system, while AU-6(3) non-mandatory alerts is not selected because 24x7 SOC coverage isn't feasible

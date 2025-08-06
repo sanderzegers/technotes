@@ -302,7 +302,7 @@ Hardware and Software asset management: Following items must be present:
 
 
 
-Conduct incidint management
+Conduct incident management
 
 Incident Response
 
@@ -310,16 +310,26 @@ event = observable occurrence of something
 
 incident = an adverse event
 
-incident response process:
+### Incident response process
 
-* preparation
-* detection
-* response (active IR team)
-* mitigation (containment)
-* reporting
-* recovery
-* remediation (=prevention)
-* lessons learned
+DRMRRRL (Drumroll)
+
+
+
+* Detection
+  * monitor and identify potential incidents through alerts and user reports
+* Response (active IR team)
+  * activating the incident response team and coordinating initial response
+* Mitigation (containment)
+  * containing the incident and taking steps to limit its impact
+* Reporting
+  * notifying appropriate parties internal and external to the Org
+* Recovery
+  * restoring affected systems and services to normal operations
+* Remediation (=prevention)
+  * identifying and mitigating vulnerabilities that let to the incident
+* Lessons learned
+  * documenting the incident and identifying improvements
 
 
 

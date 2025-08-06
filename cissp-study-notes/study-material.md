@@ -52,3 +52,10 @@ Andrew from TIA 50 CISSP Practice Questions. Master the CISSP Mindset ([https://
 
 After all this I used LearnZapp (87% readiness) and the online Wiley Tests until I answered every question.
 
+
+
+
+
+150 questions: 1:15min per question
+
+[https://quantumexams.com/pricing.html](https://quantumexams.com/pricing.html)
