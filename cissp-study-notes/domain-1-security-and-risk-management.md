@@ -126,31 +126,40 @@ Policies (Overarching Security Policy)\
 ^- Baselines (minimal implementation methods/levels for security mechanisms and products)\
 ^- Guidelines (suggestions)
 
+Business impact analysis:
+
 **Quantitative Analysis**: Use monetary numbers $\
 **Qualitative Analysis**: Relative ranking systems (high, low)
 
+Quantitative and Qualitative Analysis can be combined
 
 
-ALE: Annualized Loss Expectancy\
-SLE: Single Loss Expectancy\
-\- AV: Asset Value\
-\- EF: Exposure Factor (0-100%)\
-\
-ARO: Annualized Rate of Occurrence
 
 ALE = SLE (AV x EF) x ARO
+
+|      |                               |                                                             |                                                                                   |
+| ---- | ----------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| ALE  | Annualized Loss Expectancy    | annual cost of risk materializing                           | $200 \* 3 = $600                                                                  |
+| SLE  | Single Loss Expectancy        | how much it will cost if risk occurs once                   | 2000$ \* 10% = 200$                                                               |
+|   AV | Asset Value                   | cost of the asset                                           | CCTV System costs 2\`000$ \* 10% = 200$                                           |
+|   EF | Exposure Factor (0-100%)      | how much the asset loses on value when the incident happens | <p>three camers fail during voltage spike:<br>$200 dollar damage -> 10% of AV</p> |
+| ARO  | Annualized Rate of Occurrence | How many times each year risk occurs.                       | Happens 3 times per year                                                          |
+
+
+
+
 
 Complete control: combination of preventive, detective and corrective controls at a minimum
 
 Continuous Improvement:\
 Deming Cycle: Plan, Do, Check, Act
 
-Risk types:
+### Risk types
 
-* Inherent Risk: level of natural, native or default risk prior to any risk management efforts
-* Residual risk: Risk after safeguards, security controls and countermeasures are implemented
-* Control Risk/Secondary risk: risk that is introduced by the introduction of the countermeasure to an environment.
-* Mitigated Risk: Risk that has been addressed by existing controls
+* **Inherent Risk**: level of natural, native or default risk prior to any risk management efforts
+* **Residual risk**: Risk after safeguards, security controls and countermeasures are implemented
+* **Control Risk/Secondary risk**: risk that is introduced by the introduction of the countermeasure to an environment.
+* **Mitigated Risk**: Risk that has been addressed by existing controls
 
 ### Threat modeling methodologies
 

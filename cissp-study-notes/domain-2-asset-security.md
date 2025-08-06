@@ -15,7 +15,7 @@ PII
 
 
 
-Labeling vs Marking
+## Labeling vs Marking
 
 | Labeling 💻                                                  | Marking 👨                        |
 | ------------------------------------------------------------ | --------------------------------- |
@@ -50,7 +50,7 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 4. **Baselines** guarantee every server is locked down to an agreed-upon floor of controls.
 5. **Guidelines** nudge users toward better-than-minimum behavior without forcing it.
 
-Classification Levels
+## Classification Levels
 
 | Military Sector            | Private Sector       |   |
 | -------------------------- | -------------------- | - |
