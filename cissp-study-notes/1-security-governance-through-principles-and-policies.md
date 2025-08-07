@@ -268,11 +268,11 @@ Three types of plans created by the security management planning team
 
 <figure><img src=".gitbook/assets/grafik.png" alt=""><figcaption></figcaption></figure>
 
-Strategic plan: long-term plan, fairly stable. Aligns to the goals, mission and objectives of the org, useful for about 5 years, maintained and update anually. Should include risk assessment
+**Strategic plan**: long-term plan, fairly stable. Aligns to the <mark style="color:$primary;">goals, mission and objectives of the organisation</mark>, useful for about <mark style="color:$primary;">5 years</mark>, maintained and update anually. Should include <mark style="color:$primary;">risk assessment</mark>
 
-Tactical plan: midtemr plan, morde details on accomplishing the goals set in the strateigc plan. Can be crafted ad hoc based. Typically usfeul for about a yar. Prescirbes and schedules the tasks ncessary. Examples: project plans, acquisition plans, hiring plans, budget plan, maintenance plan, support plan
+**Tactical plan**: midterm plan (\~1 year), more details on accomplishing the goals set in the strategic plan. Can be crafted ad hoc based. Typically useful for about a year. Prescribes and schedules the tasks necessary. Examples: project plans, acquisition plans, hiring plans, budget plan, maintenance plan, support plan
 
-Operational Plan: short-term, highly detailed. How to accomplish the various goals of the org. resouce allotments, budgetary requirements, staffic assignments, scheduling, step-by-step or implemnatation procedures.
+**Operational Plan**: short-term, <mark style="color:$primary;">highly detailed.</mark> How to accomplish the various goals of the org. resource allotments, budgetary requirements, staff assignments, scheduling, step-by-step or implementation procedures. day-to-day activities and tasks. regularly monitored
 
 
 

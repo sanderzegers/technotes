@@ -49,14 +49,15 @@ opposite of / failure of CIA = DAD:
 
 
 
-Security Roles
+## Security Roles
 
-|                       |            |                                                  |
-| --------------------- | ---------- | ------------------------------------------------ |
-| Security Architect    | Design     | responsible for enterprise security architecture |
-| Security Practitioner | Operation  | responsible for tactical and operation           |
-| Security Professional | Management | managerial oversight                             |
-|                       |            |                                                  |
+|                       |             |                                                                                                                                  |
+| --------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Senior Manager        | Owner       | ultimate authority on security, ensuring policy approval, resource allocation, and bearing final responsibility for its cusscess |
+| Security Professional | Implementer | technical export who design, implement, and enforce security solutions based on policy directives                                |
+| Asset Owner           | Classifier  | High-level manager who determine the appropriate level of protection for assets                                                  |
+| Custodian             | Enforcer    | carrying out the security measures outlined in the policy                                                                        |
+| User                  |             | accessing secure system. Responsible for following security protocols                                                            |
 
 
 
@@ -68,7 +69,11 @@ accountability vs responsibility
 
 
 
-Security Frameworks: NIST, ISO, COBIT, ITIL
+## Security Frameworks
+
+Set of best practices and standards that define security controls organizations cna implement to mitigate security risks.
+
+NIST, ISO, COBIT, ITIL
 
 COBIT: Control Objectives for Information and Related Technology.&#x20;
 
@@ -321,12 +326,12 @@ Software license types:
 
 ### Risk Frameworks
 
-|                                       |                                                      |   |
-| ------------------------------------- | ---------------------------------------------------- | - |
-| RMF defined by defined by NIST 800-37 | Mandatory security requirements for federal agencies |   |
-| ISO 31000                             |                                                      |   |
-| COSO                                  |                                                      |   |
-| ISACA Risk IT                         |                                                      |   |
+|                                      |                                                      |   |
+| ------------------------------------ | ---------------------------------------------------- | - |
+| NIST Risk Management Framework (RMF) | Mandatory security requirements for federal agencies |   |
+| ISO 31000                            |                                                      |   |
+| COSO                                 |                                                      |   |
+| ISACA Risk IT                        |                                                      |   |
 
 **RMF cycles** (NIST 800-37)
 
@@ -337,3 +342,17 @@ Software license types:
 * Assess
 * Authorize
 * Monitor
+
+
+
+AAA:
+
+* Identification
+* Authentication
+* Authorization
+* Accounting
+
+
+
+## Security Control Frameworks
+
