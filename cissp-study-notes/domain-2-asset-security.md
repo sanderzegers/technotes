@@ -17,7 +17,7 @@ PII
 
 ## Labeling vs Marking
 
-| Labeling 💻                                                  | Marking 👨                        |
+| Labeling 🔦                                                  | Marking 🖍️                       |
 | ------------------------------------------------------------ | --------------------------------- |
 | System-readable                                              | Human-readable                    |
 | subjects and objects represented by internal data structures | human-readable form               |
@@ -27,12 +27,12 @@ System-readabilty: QR codes, RF Tags, Barcodes, GPS Tages, Metadata
 
 ## Data Classification Policy
 
-|            |                                                                                                          |                                                                                                                                                                                                                                                                               |
-| ---------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| standards  | Establish mandatory, organization-wide **rules** that translate the policy into measurable requirements. | <p>• Definition of each classification label (e.g., <em>Public, Internal, Confidential, Restricted</em>).<br>• Handling requirements per label (encryption strength, access-control mechanisms, minimum logging).<br>• Approved cryptographic algorithms and key lengths.</p> |
-| procedures | Steps for carrying out tasks and policies                                                                | step-by-step instructions, workflows, very granular                                                                                                                                                                                                                           |
-| baselines  | minimum security configuration, that every asset in given class must meet                                | technical minimums                                                                                                                                                                                                                                                            |
-| guidelines | recommended best practice, non-compulsory                                                                | should and may statements                                                                                                                                                                                                                                                     |
+|            |                                                                                                                                                     | examples                                                                                                                                                                                                                                                                      |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| standards  | Establish <mark style="color:$primary;">mandatory</mark>, organization-wide **rules** that translate the policy into measurable requirements.       | <p>• Definition of each classification label (e.g., <em>Public, Internal, Confidential, Restricted</em>).<br>• Handling requirements per label (encryption strength, access-control mechanisms, minimum logging).<br>• Approved cryptographic algorithms and key lengths.</p> |
+| procedures | Steps for carrying out tasks and policies                                                                                                           | step-by-step instructions, workflows, very granular                                                                                                                                                                                                                           |
+| baselines  | <mark style="color:$primary;">minimum security configuration</mark>, that every asset in given class <mark style="color:$primary;">must</mark> meet | technical minimums                                                                                                                                                                                                                                                            |
+| guidelines | <mark style="color:$primary;">recommended</mark> best practice, non-compulsory                                                                      | should and may statements                                                                                                                                                                                                                                                     |
 
 
 
@@ -52,14 +52,14 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 
 ## Classification Levels
 
-| Military Sector            | Private Sector       |   |
-| -------------------------- | -------------------- | - |
-| Top Secret                 | Sensitive            |   |
-| Secret                     | Confidential         |   |
-| Confidential               | Private              |   |
-| Sensitive but unclassified | Company restricted   |   |
-| Sensitive but unclassified | Company confidential |   |
-| Unclassified               | Public               |   |
+| Military Sector            | Private Sector       |
+| -------------------------- | -------------------- |
+| Top Secret                 | Sensitive            |
+| Secret                     | Confidential         |
+| Confidential               | Private              |
+| Sensitive but unclassified | Company restricted   |
+| Sensitive but unclassified | Company confidential |
+| Unclassified               | Public               |
 
 ## Data roles
 

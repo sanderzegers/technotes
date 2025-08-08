@@ -54,7 +54,7 @@ opposite of / failure of CIA = DAD:
 |                       |             |                                                                                                                                  |
 | --------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | Senior Manager        | Owner       | ultimate authority on security, ensuring policy approval, resource allocation, and bearing final responsibility for its cusscess |
-| Security Professional | Implementer | technical export who design, implement, and enforce security solutions based on policy directives                                |
+| Security Professional | Implementer | technical expert who design, implement, and enforce security solutions based on policy directives                                |
 | Asset Owner           | Classifier  | High-level manager who determine the appropriate level of protection for assets                                                  |
 | Custodian             | Enforcer    | carrying out the security measures outlined in the policy                                                                        |
 | User                  |             | accessing secure system. Responsible for following security protocols                                                            |
@@ -69,28 +69,56 @@ accountability vs responsibility
 
 
 
-## Security Frameworks
+## Security Control Frameworks
 
-Set of best practices and standards that define security controls organizations cna implement to mitigate security risks.
+Set of <mark style="color:$primary;">best practices and standards</mark> that define <mark style="color:$primary;">security controls</mark> organizations can implement to mitigate security risks.
+
+**select, implement, assess, and improve** security controls to manage risk and meet business, legal, and compliance goals.
 
 NIST, ISO, COBIT, ITIL
 
-COBIT: Control Objectives for Information and Related Technology.&#x20;
+### ISO
 
-* documented set of best IT security practices crafted by <mark style="color:$primary;">ISACA</mark>
-* prescribes goals and requirements for security controls and encourage <mark style="color:$primary;">mapping of it security ideals to business objects.</mark>
+|           |                                                                                                                                                  |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ISO 27001 | <p>certifiable, standard that says what an org must have for an ISMS (policy, risk-based controls, governanace)<br>requirements + audit</p>      |
+| ISO 27002 | best-practice guide how to implement security controls                                                                                           |
+| ISO 22301 | certifiable, <mark style="color:$primary;">business continuity requirements</mark>. BIA, strategies, plans, RTO/RPO. -> continuity you can audit |
+| ISO 28000 | certifiable, supply chain security management.                                                                                                   |
+| ISO 31000 | enterprise risk management guidance. . high-level principles and process for managing risk across the enterprise                                 |
 
-
+### NIST
 
 NIST 800-53: Security and Privacy Controls for Information Systems and Organizations
 
 CIS: cisecurity. provides OS, apps, hardware security configurations
 
-NIST Risk Management Framework:
+NIST Risk Management Framework (RMF):
 
 * mandatory requirements for federal agencies.
 
 NIST Cybersecurity Framework (CSF)
+
+* voluntary
+
+### COBIT
+
+Control Objectives for Information and Related Technology.&#x20;
+
+* documented set of best IT security practices crafted by <mark style="color:$primary;">ISACA</mark>
+* prescribes <mark style="color:$primary;">goals and requirements for security controls</mark> and encourage <mark style="color:$primary;">mapping of it security ideals to business objects.</mark>
+* mainly intended for IT governance within large enterprises
+
+Cobit phases:
+
+1. Evaluate, Direct and Monitor
+   1. provides governance
+2. Align, Plan, and Organize
+3. Build, Acquire and Implement
+4. Deliver, Service, and Support
+5. Monitor, Evaluate and Assess
+
+
 
 
 
@@ -139,7 +167,7 @@ Policies (Overarching Security Policy)\
 ^- Baselines (minimal implementation methods/levels for security mechanisms and products)\
 ^- Guidelines (suggestions)
 
-Business impact analysis:
+## Business impact analysis
 
 **Quantitative Analysis**: Use monetary numbers $\
 **Qualitative Analysis**: Relative ranking systems (high, low)
@@ -150,15 +178,7 @@ Quantitative and Qualitative Analysis can be combined
 
 ALE = SLE (AV x EF) x ARO
 
-|      |                               |                                                             |                                                                                   |
-| ---- | ----------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| ALE  | Annualized Loss Expectancy    | annual cost of risk materializing                           | $200 \* 3 = $600                                                                  |
-| SLE  | Single Loss Expectancy        | how much it will cost if risk occurs once                   | 2000$ \* 10% = 200$                                                               |
-|   AV | Asset Value                   | cost of the asset                                           | CCTV System costs 2\`000$ \* 10% = 200$                                           |
-|   EF | Exposure Factor (0-100%)      | how much the asset loses on value when the incident happens | <p>three camers fail during voltage spike:<br>$200 dollar damage -> 10% of AV</p> |
-| ARO  | Annualized Rate of Occurrence | How many times each year risk occurs.                       | Happens 3 times per year                                                          |
-
-
+<table data-header-hidden><thead><tr><th width="108"></th><th></th><th></th><th></th></tr></thead><tbody><tr><td>ALE</td><td>Annualized Loss Expectancy</td><td>annual cost of risk materializing</td><td>$200 * 3 = $600</td></tr><tr><td>SLE</td><td>Single Loss Expectancy</td><td>how much it will cost if risk occurs once</td><td>2000$ * 10% = 200$</td></tr><tr><td>  AV</td><td>Asset Value</td><td>cost of the asset</td><td>CCTV System costs 2`000$ * 10% = 200$</td></tr><tr><td>  EF</td><td>Exposure Factor (0-100%)</td><td>how much the asset loses on value when the incident happens</td><td>three camers fail during voltage spike:<br>$200 dollar damage -> 10% of AV</td></tr><tr><td>ARO</td><td>Annualized Rate of Occurrence</td><td>How many times each year risk occurs.</td><td>Happens 3 times per year</td></tr></tbody></table>
 
 
 
@@ -174,14 +194,13 @@ Deming Cycle: Plan, Do, Check, Act
 * **Control Risk/Secondary risk**: risk that is introduced by the introduction of the countermeasure to an environment.
 * **Mitigated Risk**: Risk that has been addressed by existing controls
 
-### Threat modeling methodologies
+## Threat modeling methodologies
 
 STRIDE, PASTA, DREAD
 
 Identify Threats: STRIDE and PASTA
 
-\
-**STRIDE**&#x20;
+#### **STRIDE**&#x20;
 
 * <mark style="color:$primary;">**threat-focused**</mark> methodology, less strategic.
 * designed by Microsoft
@@ -196,8 +215,7 @@ Identify Threats: STRIDE and PASTA
 | **D**enial of Service      | Exhausting resources so legitimate users can’t get service               | _Availability_                      |
 | **E**levation of Privilege | Gaining capabilities beyond those intended (e.g., privilege escalation)  | _Authorization_                     |
 
-\
-**DREAD**
+#### **DREAD**
 
 * severity scoring of threats
 
@@ -215,14 +233,13 @@ Often used in combination with STRIDE model. STRIDE identifies the threads, DREA
 
 
 
-\
-**PASTA**&#x20;
+#### **PASTA**&#x20;
 
-* Process for Attack Simulation and Threat Analysis
+* Process for <mark style="color:$primary;">Attack Simulation and Threat Analysis</mark>
 * Is attacker-focused, **risk-centric** methodology. Strategic perspective.\
   Identify business objectives, technical requirements, compliance issues, business sensitive risks
 
-<table><thead><tr><th width="64">#</th><th>PASTA stage</th><th>One-liner</th></tr></thead><tbody><tr><td>1</td><td><strong>Define Objectives</strong></td><td>Business &#x26; security objectives, compliance drivers</td></tr><tr><td>2</td><td><strong>Define Technical Scope</strong></td><td>Diagram the system, boundaries, tech stack</td></tr><tr><td>3</td><td><strong>Application Decomposition</strong></td><td>Break down components, dataflows, trust boundaries</td></tr><tr><td>4</td><td><strong>Threat Analysis</strong></td><td>Identify realistic attacker goals &#x26; capabilities (STRIDE, CAPEC, etc.)</td></tr><tr><td>5</td><td><strong>Vulnerability &#x26; Weakness Analysis</strong></td><td>Map known vulns (CWE, CVE), abuse cases</td></tr><tr><td>6</td><td><strong>Attack Modelling / Simulation</strong></td><td>Build attack trees, run proofs-of-concept</td></tr><tr><td>7</td><td><strong>Risk &#x26; Impact Analysis</strong></td><td>Quantify likelihood × impact, propose mitigations</td></tr></tbody></table>
+<table><thead><tr><th width="42">#</th><th>PASTA stage</th><th>One-liner</th></tr></thead><tbody><tr><td>1</td><td><strong>Define Objectives</strong></td><td>Business &#x26; security objectives, compliance drivers</td></tr><tr><td>2</td><td><strong>Define Technical Scope</strong></td><td>Diagram the system, boundaries, tech stack</td></tr><tr><td>3</td><td><strong>Application Decomposition</strong></td><td>Break down components, dataflows, trust boundaries</td></tr><tr><td>4</td><td><strong>Threat Analysis</strong></td><td>Identify realistic attacker goals &#x26; capabilities (STRIDE, CAPEC, etc.)</td></tr><tr><td>5</td><td><strong>Vulnerability &#x26; Weakness Analysis</strong></td><td>Map known vulns (CWE, CVE), abuse cases</td></tr><tr><td>6</td><td><strong>Attack Modelling / Simulation</strong></td><td>Build attack trees, run proofs-of-concept</td></tr><tr><td>7</td><td><strong>Risk &#x26; Impact Analysis</strong></td><td>Quantify likelihood × impact, propose mitigations</td></tr></tbody></table>
 
 
 
@@ -233,11 +250,15 @@ The Wassenaar Arrangement is a voluntary pact where the world’s high-tech expo
 
 
 
-Security Control:\
-\- Functional: must do what it is designed to do\
-\- Assurance: control can be evaluated to confirm working correctly (testing, monitoring, logging,etc)
+## Security Control
 
-### Business continuity management
+\
+\- **Functional**: must do what it is designed to do\
+\- **Assurance**: control can be evaluated to confirm working correctly (testing, monitoring, logging,etc)
+
+
+
+## Business continuity management
 
 | Metric                                                        | What it measures                                                                                                                                                                                                 | Typical exam angle                                                |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -259,7 +280,7 @@ Security Control:\
 
 
 
-### Categories of Laws
+## Categories of Laws
 
 hints: individual vs. state vs. agency
 
@@ -277,7 +298,7 @@ hints: individual vs. state vs. agency
   * deals with the violation of government-imposed regulatory standards (US exchange act, HIPAA, FCC, Export control, etc)
   * regulatory fines
   * published in the Code of Federal Regulations
-  * executive orders, policies, procedures and regulations that govern the daily operations of the agency
+  * executive orders, <mark style="color:$primary;">policies</mark>, <mark style="color:$primary;">procedures</mark> and <mark style="color:$primary;">regulations</mark> that govern the daily operations of the agency
 
 Laws
 
@@ -306,7 +327,7 @@ The Fourth Amendment to the U.S. Constitution protects individuals from unreason
 
 ### Legal, Regulations & Compliance
 
-<table><thead><tr><th width="174">Name of Act / Regulation / Standard</th><th>Acronym</th><th>Year</th><th>Type / Category</th><th>Key CISSP Take-aways (scope, highlights, penalties)</th></tr></thead><tbody><tr><td><strong>Copyright Act (17 U.S.C.)</strong></td><td>–</td><td>1976</td><td>IP law</td><td>Automatic protection on fixation; fair-use; duration life + 70 (works-for-hire = 95/120).</td></tr><tr><td><strong>Digital Millennium Copyright Act</strong></td><td><strong>DMCA</strong></td><td>1998</td><td>IP / cyberlaw</td><td>Anti-circumvention; ISP safe-harbor &#x26; takedown; criminalizes DRM-bypass tools.</td></tr><tr><td>Lanham Act</td><td>–</td><td>1946</td><td>IP law</td><td>Trademark/service-mark registration, dilution, false advertising.</td></tr><tr><td><strong>Economic Espionage Act</strong></td><td><strong>EEA</strong></td><td>1996</td><td>IP / criminal</td><td><p>Felony theft of trade secrets </p><p><br>Adequate steps to ensure trade secrets are well protected must be taken</p></td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Computer Fraud &#x26; Abuse Act</strong></td><td><strong>CFAA</strong></td><td>1986</td><td>Cyber-crime</td><td>“Unauthorized access” to <em>protected computer</em> (federal or interstate); civil &#x26; criminal.</td></tr><tr><td><strong>Computer Security Act</strong></td><td>–</td><td>1987</td><td>Fed. security</td><td>First law requiring agency security plans &#x26; NIST guidance; forerunner of FISMA.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Privacy Act</strong></td><td>–</td><td>1974</td><td>Fed. privacy</td><td>Limits U.S. agencies’ PII collection; SORN; access &#x26; amendment rights.</td></tr><tr><td><strong>Electronic Communications Privacy Act</strong></td><td><strong>ECPA</strong></td><td>1986</td><td>Surveillance / privacy</td><td>Wiretap, Stored Comms, Pen-Register titles; governs interception &#x26; disclosure.</td></tr><tr><td><strong>Communications Assistance for Law Enforcement Act</strong></td><td><strong>CALEA</strong></td><td>1994</td><td>Surveillance compliance</td><td>Telcos/VoIP must design for lawful intercept; FCC oversight.</td></tr><tr><td><strong>Children’s Online Privacy Protection Act</strong></td><td><strong>COPPA</strong></td><td>1998</td><td>Privacy</td><td>Parental consent &#x26; notice for data on &#x3C; 13; FTC enforcement.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Health Insurance Portability &#x26; Accountability Act</strong></td><td><strong>HIPAA</strong></td><td>1996</td><td>Health privacy / security</td><td>Privacy, Security &#x26; Breach Rules; covered entities &#x26; BAs; “minimum necessary.”</td></tr><tr><td><strong>HITECH Act</strong></td><td><strong>HITECH</strong></td><td>2009</td><td>Health privacy</td><td>Extends HIPAA to BAs; mandatory breach notification; EHR incentives.</td></tr><tr><td><strong>Gramm-Leach-Bliley Act</strong></td><td><strong>GLBA</strong></td><td>1999</td><td>Financial privacy</td><td>Privacy, Safeguards &#x26; Pretexting Rules; info-security program.</td></tr><tr><td><strong>Glass-Steagall Act</strong></td><td>–</td><td>1933</td><td>Banking separation</td><td>Split commercial vs. investment banking; largely repealed by GLBA.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>USA PATRIOT Act</strong></td><td>–</td><td>2001</td><td>National-security</td><td>Expanded FISA, enhance national security by expanding surveillance powers</td></tr><tr><td><strong>Sarbanes-Oxley Act</strong></td><td><strong>SOX</strong></td><td>2002</td><td>Corp. governance</td><td>Sec 302 &#x26; 404 internal-control attestations; 7-yr audit-record retention.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Government Information Security Reform Act</strong></td><td><strong>GISRA</strong></td><td>2000</td><td>Gov’t security</td><td>Pilot predecessor to FISMA; NIST control framework.</td></tr><tr><td><strong>Federal Information Security Modernization Act</strong></td><td><strong>FISMA</strong></td><td>2002/14</td><td>Gov’t security</td><td>Requires NIST RMF; ATO; annual OMB reporting.<br>replaced Computer Security Act &#x26; Government Information Security Reform Act</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>General Data Protection Regulation (EU)</strong></td><td><strong>GDPR</strong></td><td>2018</td><td>Global privacy</td><td>Extra-territorial reach; 72-hr breach notice; DPO; fines up to €20 M / 4 % revenue.</td></tr><tr><td><strong>Safe Harbor (EU-US, invalidated)</strong></td><td>–</td><td>2000</td><td>Cross-border transfer</td><td>Original EU→US mechanism; struck down by <em>Schrems I</em> (2015).</td></tr><tr><td><strong>Privacy Shield (EU-US, invalidated)</strong></td><td>–</td><td>2016</td><td>Cross-border transfer</td><td>Replacement for Safe Harbor; struck down by <em>Schrems II</em> (2020).<br>Was declared invalid by EU. Orgs must either <mark style="color:$primary;">standard contractual clauses</mark> or <mark style="color:$primary;">binding corporate rules</mark><br>Both are GDPR templates</td></tr><tr><td><strong>CAN-SPAM Act</strong></td><td>–</td><td>2003</td><td>Consumer protection</td><td>Rules for commercial e-mail (opt-out, header honesty); FTC enforcement.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Family Educational Rights &#x26; Privacy Act</strong></td><td><strong>FERPA</strong></td><td>1974</td><td>Education privacy</td><td>Student record rights; limits disclosure without consent.</td></tr><tr><td><strong>Payment Card Industry Data Security Standard</strong></td><td><strong>PCI DSS</strong></td><td>2004</td><td>Industry standard</td><td>12 core requirements; SAQ &#x26; ROC; contractually enforced.</td></tr><tr><td><strong>SOC 2 (AICPA Trust Services Criteria)</strong></td><td><strong>SOC 2</strong></td><td>2010</td><td>Assurance report</td><td>Audit of Security, Availability, PI, Confidentiality, Privacy; Type I vs II.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>U.S. Patent &#x26; Trademark Office</strong></td><td><strong>USPTO</strong></td><td>–</td><td>Fed. agency</td><td>Registers patents &#x26; trademarks (often a distractor; not a statute).</td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td>International Traffic in Arms Regulations</td><td>ITAR</td><td></td><td>strictly <mark style="color:$primary;">military</mark> &#x26; space defense</td><td></td></tr><tr><td>Export Administration Regulations</td><td>EAR</td><td></td><td><mark style="color:$primary;">dual-use</mark> + purely commercial</td><td></td></tr></tbody></table>
+<table><thead><tr><th width="174">Name of Act / Regulation / Standard</th><th>Acronym</th><th>Year</th><th>Type / Category</th><th>Key CISSP Take-aways (scope, highlights, penalties)</th></tr></thead><tbody><tr><td><strong>Copyright Act (17 U.S.C.)</strong></td><td>–</td><td>1976</td><td>IP law</td><td>Automatic protection on fixation; fair-use; duration life + 70 (works-for-hire = 95/120).</td></tr><tr><td><strong>Digital Millennium Copyright Act</strong></td><td><strong>DMCA</strong></td><td>1998</td><td>IP / cyberlaw</td><td>Anti-circumvention; ISP safe-harbor &#x26; takedown; criminalizes DRM-bypass tools.</td></tr><tr><td>Lanham Act</td><td>–</td><td>1946</td><td>IP law</td><td>Trademark/service-mark registration, dilution, false advertising.</td></tr><tr><td><strong>Economic Espionage Act</strong></td><td><strong>EEA</strong></td><td>1996</td><td>IP / criminal</td><td><p>Felony theft of trade secrets </p><p><br>Adequate steps to ensure trade secrets are well protected must be taken</p></td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Computer Fraud &#x26; Abuse Act</strong></td><td><strong>CFAA</strong></td><td>1986</td><td>Cyber-crime</td><td>“Unauthorized access” to <em>protected computer</em> (federal or interstate); civil &#x26; criminal.</td></tr><tr><td><strong>Computer Security Act</strong></td><td>–</td><td>1987</td><td>Fed. security</td><td>First law requiring agency security plans &#x26; NIST guidance; forerunner of FISMA.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Privacy Act</strong></td><td>–</td><td>1974</td><td>Fed. privacy</td><td>Limits U.S. agencies’ PII collection; SORN; access &#x26; amendment rights.</td></tr><tr><td><strong>Electronic Communications Privacy Act</strong></td><td><strong>ECPA</strong></td><td>1986</td><td>Surveillance / privacy</td><td>Wiretap, Stored Comms, Pen-Register titles; governs interception &#x26; disclosure.</td></tr><tr><td><strong>Communications Assistance for Law Enforcement Act</strong></td><td><strong>CALEA</strong></td><td>1994</td><td>Surveillance compliance</td><td>Telcos/VoIP must design for lawful intercept; FCC oversight.</td></tr><tr><td><strong>Children’s Online Privacy Protection Act</strong></td><td><strong>COPPA</strong></td><td>1998</td><td>Privacy</td><td>Parental consent &#x26; notice for data on &#x3C; 13; FTC enforcement.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Health Insurance Portability &#x26; Accountability Act</strong></td><td><strong>HIPAA</strong></td><td>1996</td><td>Health privacy / security</td><td>Privacy, Security &#x26; Breach Rules; covered entities &#x26; BAs; “minimum necessary.”</td></tr><tr><td><strong>HITECH Act</strong></td><td><strong>HITECH</strong></td><td>2009</td><td>Health privacy</td><td>Extends HIPAA to BAs; mandatory breach notification; EHR incentives.</td></tr><tr><td><strong>Gramm-Leach-Bliley Act</strong></td><td><strong>GLBA</strong></td><td>1999</td><td><mark style="color:$primary;">Financial</mark> privacy</td><td>Require <mark style="color:$primary;">financial institutions</mark> to protect the <mark style="color:$primary;">security</mark> and confidentiality of<br><mark style="color:$primary;">customer information</mark></td></tr><tr><td><strong>Glass-Steagall Act</strong></td><td>–</td><td>1933</td><td>Banking separation</td><td>Split commercial vs. investment banking; largely repealed by GLBA.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>USA PATRIOT Act</strong></td><td>–</td><td>2001</td><td>National-security</td><td>Expanded FISA, enhance national security by expanding surveillance powers</td></tr><tr><td><strong>Sarbanes-Oxley Act</strong></td><td><strong>SOX</strong></td><td>2002</td><td>Corp. governance</td><td>Sec 302 &#x26; 404 internal-control attestations; 7-yr audit-record retention.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Government Information Security Reform Act</strong></td><td><strong>GISRA</strong></td><td>2000</td><td>Gov’t security</td><td>Pilot predecessor to FISMA; NIST control framework.</td></tr><tr><td><strong>Federal Information Security Modernization Act</strong></td><td><strong>FISMA</strong></td><td>2002/14</td><td>Gov’t security</td><td>Requires NIST RMF; ATO; annual OMB reporting.<br>replaced Computer Security Act &#x26; Government Information Security Reform Act</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>General Data Protection Regulation (EU)</strong></td><td><strong>GDPR</strong></td><td>2018</td><td>Global privacy</td><td>Extra-territorial reach; 72-hr breach notice; DPO; fines up to €20 M / 4 % revenue.</td></tr><tr><td><strong>Safe Harbor (EU-US, invalidated)</strong></td><td>–</td><td>2000</td><td>Cross-border transfer</td><td>Original EU→US mechanism; struck down by <em>Schrems I</em> (2015).</td></tr><tr><td><strong>Privacy Shield (EU-US, invalidated)</strong></td><td>–</td><td>2016</td><td>Cross-border transfer</td><td>Replacement for Safe Harbor; struck down by <em>Schrems II</em> (2020).<br>Was declared invalid by EU. Orgs must either <mark style="color:$primary;">standard contractual clauses (B2B)</mark> or <mark style="color:$primary;">binding corporate rules (internal company)</mark><br>Both are GDPR templates</td></tr><tr><td><strong>CAN-SPAM Act</strong></td><td>–</td><td>2003</td><td>Consumer protection</td><td>Rules for commercial e-mail (opt-out, header honesty); FTC enforcement.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>Family Educational Rights &#x26; Privacy Act</strong></td><td><strong>FERPA</strong></td><td>1974</td><td>Education privacy</td><td>Student record rights; limits disclosure without consent.</td></tr><tr><td><strong>Payment Card Industry Data Security Standard</strong></td><td><strong>PCI DSS</strong></td><td>2004</td><td>Industry standard</td><td>12 core requirements; SAQ &#x26; ROC; contractually enforced.</td></tr><tr><td><strong>SOC 2 (AICPA Trust Services Criteria)</strong></td><td><strong>SOC 2</strong></td><td>2010</td><td>Assurance report</td><td>Audit of Security, Availability, PI, Confidentiality, Privacy; Type I vs II.</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td></tr><tr><td><strong>U.S. Patent &#x26; Trademark Office</strong></td><td><strong>USPTO</strong></td><td>–</td><td>Fed. agency</td><td>Registers patents &#x26; trademarks (often a distractor; not a statute).</td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td>International Traffic in Arms Regulations</td><td>ITAR</td><td></td><td>strictly <mark style="color:$primary;">military</mark> &#x26; space defense</td><td></td></tr><tr><td>Export Administration Regulations</td><td>EAR</td><td></td><td><mark style="color:$primary;">dual-use</mark> + purely commercial</td><td></td></tr><tr><td>Bank Secrecy Act</td><td>BSA</td><td></td><td>bank, credit unions, casinos</td><td>Combat money laundering and fincancial crimes through record-keeping and reporting requirements</td></tr></tbody></table>
 
 
 
@@ -324,7 +345,7 @@ Software license types:
 
 
 
-### Risk Frameworks
+## Risk Frameworks
 
 |                                      |                                                      |   |
 | ------------------------------------ | ---------------------------------------------------- | - |
@@ -333,7 +354,7 @@ Software license types:
 | COSO                                 |                                                      |   |
 | ISACA Risk IT                        |                                                      |   |
 
-**RMF cycles** (NIST 800-37)
+### **RMF cycles** (NIST 800-37)
 
 * (Prepare)
 * Categorize
@@ -354,5 +375,27 @@ AAA:
 
 
 
-## Security Control Frameworks
+## Supply Chain Risk Management (SCRM)
 
+Process of identifying, accessing and mitigation risks associated with the acquisition of products and servicecs from suupliers and providers
+
+1. integegrates with other risk management functions
+2. reduces the frequency and severity of supply chain disruptions while improving overall resilence and adaptability
+3. ensuring product and service quality, maintaining regulatory compliance
+
+common risks:
+
+* product tampering
+* counterfeits
+* implants
+
+mitigations:
+
+* third-pary assessment and monitoring
+* minimum security requirements
+  * such as compliance with industry standards, seucrity controls and data protection regulations. Should be in vendor agreement
+* service level requirements
+  * define and agree upons service level requirements with suppliers and providers: incident response times, sdistarter recovery capabilities, etc
+* Silicon root of trust: TPM, HSM, secure boot, full disk encryption
+* Physically unclonable function. Hardware-based security primitives that exploit unique character of a device.
+* Software bill of materials.
