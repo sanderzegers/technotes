@@ -52,26 +52,20 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 
 ## Classification Levels
 
-| Military Sector            | Private Sector       |
-| -------------------------- | -------------------- |
-| Top Secret                 | Sensitive            |
-| Secret                     | Confidential         |
-| Confidential               | Private              |
-| Sensitive but unclassified | Company restricted   |
-| Sensitive but unclassified | Company confidential |
-| Unclassified               | Public               |
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 ## Data roles
 
 * Data Owner
   * person responsible for classifying, labeling and protecting data
+  * usually senior management
   * defines level of classification
   * defines controls for levels of classification
   * decide when to destroy
   * establishing rules for the appropriate used and protection of data
 * System Owner
-  * responsible for the systems that process data
-  * develop security plan, identifying and implementing security controls
+* responsible for the systems that process data
+* develop security plan, identifying and implementing security controls
 * Business and mission owner
   * own the processes and ensure that the systems provide values to the org
 * Data Controller
@@ -82,7 +76,7 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 * Administrators
   * grant access to data based on guidelines provided by data owner
 * Custodian
-  * day-to-day repsonsibilities for protecting and storing data
+  * <mark style="color:$primary;">day-to-day</mark> repsonsibilities for protecting and storing data
   * Grants permission on daily basis
   * ensures compliance with data policy and data ownership guidelines
   * ensure accessiblity, main and monitor
@@ -92,13 +86,13 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 
 
 
-Data Lifecycle
+## Data Lifecycle
 
 * Create
   * by systems
   * by users
 * Store
-  * classified asap
+  * classified before storage!
   * ideally encrypted at rest
 * Use
   * security controls based on classification
@@ -111,7 +105,18 @@ Data Lifecycle
   * neither readable nor recoverable
     * crypto-shredding
 
+## Data destruction Methods
 
+|                        |                                                                                      |                                    |
+| ---------------------- | ------------------------------------------------------------------------------------ | ---------------------------------- |
+| Erasing                | delete operation on file.                                                            | data is recoverable                |
+| Clearing (overwriting) | preparing media for reuse, data cannot be recovered using traditional recovery tools |                                    |
+| Purging                | more intense form of clearing                                                        | for use in less secure environment |
+| Degaussing             | create strong magnetic filed that erases data on some media                          |                                    |
+| Destruction            | final stage in the media lifecycle. most secure method                               | most secure method                 |
+|                        |                                                                                      |                                    |
+
+Don't keep data longer around than necessary -> Data retention. Can cause legal issues
 
 ## Scoping and Tailoring
 
@@ -142,3 +147,25 @@ Examples tailoring
 
 specify parameter values: org reviews all privileged accounts at least every 30 days.\
 select or drop control enhancements: Automated correlation/analysis is added for high-impact system, while AU-6(3) non-mandatory alerts is not selected because 24x7 SOC coverage isn't feasible
+
+
+
+## GPDR Terminalogy
+
+| Term                              | Simple definition                                                                                                                                                  |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Data processing**               | Any operation on personal data—collect, store, use, share, or delete (automated or not).                                                                           |
+| **Data controller**               | The entity that decides **why** and **how** personal data is processed.                                                                                            |
+| **Data transfer (international)** | Moving personal data outside the EEA (or to an international organization); permitted only if GDPR transfer rules are met (e.g., adequacy decision or safeguards). |
+
+Reducing GPDR exposure:
+
+* **Anonmyization**: removing all relevant data so that is impossible to identifiy original subject or person.
+  * GPDR is no longer relevant
+* **Pseudonymization**: use pseudonyms or aliases.
+  * less stringent requirements
+
+
+
+
+
