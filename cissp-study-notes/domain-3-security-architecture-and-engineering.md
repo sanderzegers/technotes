@@ -4,49 +4,49 @@ icon: lock-keyhole
 
 # Domain 3: Security Architecture and Engineering
 
-Security Design Principles:\
-\- Threat modeling\
-\- Least privilege\
-\- Defense in Depth\
-\- Secure defaults\
-\- Fail securely\
-\- Seperation of duties\
-\- Keep it simple and small\
-\- Zero trust or trust but verify\
-\- Privacy by Design\
-\- Share responsibility\
-\- Secure acces service edge
+## Security Design Principles
 
+* Threat modeling
+* Least privilege
+* Defense in depth&#x20;
+* Fail securely
+* Separation of duties
+* Keep it simple and small
+* Zero trust or trust but verify
+* Privacy by Design
+* Share responsibility
+  * cloud services
+* Secure access service edge
 
+### Principles for Zero Trust
 
-Principles for Zero Trust
-
-Know your architecture (users, devices and services)\
+Know your architecture of users, devices and services\
 Know your identities of users, services and devices\
 Know the health of your users, devices and services\
 Use policies to authorize requests\
 Authenticate everywhere\
 Focus your monitoring\
 Don't trust any network, incl. your own\
-Choose services designed for zero trust
+Choose services designed for zero trust\
+treats user identity as the control plane\
+assumes compromise / breach in verifying every request\
 
 
-
-Principle by design
+### Principle by design
 
 privacy should be embedded into every standard, protocol, and process that touches people
 
 * proactive
 * privacy as the default
-* embed privacy into desgin
-* full fuctionality
+* embed privacy into design
+* full functionality
 * end-to-end security
 * Visiblity and Transparency
 * Respect for User privacy
 
 
 
-Cyber kill chain
+## Cyber kill chain
 
 <figure><img src=".gitbook/assets/Cyber-Kill-chain-Diagram.webp" alt=""><figcaption></figcaption></figure>
 
@@ -54,7 +54,9 @@ Cyber kill chain
 
 Three of the most popular security architectures:
 
-Zachman, Sherwood Applied Business Security Architecture (SABSA), The Open Group Architecture Framework (TOGAF)
+* Zachman
+* Sherwood Applied Business Security Architecture (SABSA)
+* The Open Group Architecture Framework (TOGAF)
 
 
 
@@ -62,7 +64,7 @@ Zachman, Sherwood Applied Business Security Architecture (SABSA), The Open Group
 
 "Rules to be implemented to achieve security"
 
-They are a way to formalize security policy.
+They are a way to <mark style="color:$primary;">formalize</mark> security policy.
 
 typical implemented by enforcing integrity, confidentiality or other controls.
 
@@ -77,9 +79,45 @@ Three properties:
 
 
 
+State machine model
+
+* describe a system that is always secure, no matter what state it is in
+* based on computer science: finite state machine (FSM)
+* state: snapshot of a system at a specific moment in time. All state transistions must be evaluated
+* if each possible state transition results in another secure state, system can be called secure state machine
+
+Information flow model
+
+* focuses on controlling the flow of information
+* based on state machine model
+* Biba and Bell-LaPaDula
+
+
+
+non-interference model
+
+* loosely based on the information flow model
+* concernd how actions of a subject or a higher security level affect the system statet
+* subject a (high) should not affect or interfere with the actions of subject B (low)
+* form of protection against malicious programs such as backdoors and rootkits
+
+
+
+| Model                      | What it is (simple)                                                                                                          | What it enforces                                                                     | Quick example                                                                                                        |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| **State Machine Model**    | Treats a system as **states** and **transitions**. If you start secure and only do allowed transitions, you **stay secure**. | Every change must keep the system in a **secure state**.                             | Bell-LaPadula/Biba are built as state-machine models: each operation is checked so it can’t break policy.            |
+| **Information Flow Model** | Focuses on **where data is allowed to flow** (who/what can send or receive).                                                 | **Allow only permitted flows**, block illegal ones to prevent leakage/contamination. | “No read up / no write down” (Bell-LaPadula) and “No read down / no write up” (Biba) control info movement.          |
+| **Non-Interference Model** | Strong form of isolation: **high-level actions must not change anything a low-level user can observe**.                      | Prevents **signals/covert channels** from high → low.                                | In a multi-level system, admin (High) activity can’t cause timing/log/output changes visible to regular users (Low). |
+
+
+
 **lattice-based mode**l is like a ladder, layers going up and down. Requires layers of security.
 
 **rule-based model:** specific rules dictates how security operates
+
+
+
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 
@@ -91,22 +129,25 @@ Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 |                                                                                        | Graham-Denning             |
 |                                                                                        | Harrison-Ruzzo-Ullman      |
 
-Bell-LaPadula
+### Bell-LaPadula
 
 * state machine enforces confidentiality
 * mandatory access control
   * to enforce DoD multilevel security policy (Government!!)
 * simple security property
-  * no read up
+  * simple security property
+    * no read up
+  * start \* security property
+    * no write down
 
-| Aspect                   | Bell-LaPadula                                                                                                                           | Biba                                                                                                                                |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| _Primary Goal_           | **Confidentiality**—keep secrets from leaking                                                                                           | <p><strong>Integrity</strong>—keep trusted data from being corrupted.<br>prevents unauthorized subjects from making any changes</p> |
-| _Key Rule Mnemonics_     | **No-Read-Up / No-Write-Down**(“You can’t look at material above your clearance, and you can’t send classified data to a lower level.”) | **No-Write-Up / No-Read-Down**(“You can’t contaminate higher-integrity data, and you shouldn’t trust lower-quality data.”)          |
-| _Typical Labels_         | Unclassified → Confidential → Secret → Top Secret                                                                                       | Untrusted → User → Operator → System                                                                                                |
-| _Where You’ll See It_    | Military/Intel MLS networks, SELinux MLS, cross-domain guards                                                                           | Safety-critical systems, financial transaction ledgers, industrial control, medical records                                         |
-| _Ignored CIA Components_ | Integrity & Availability                                                                                                                | Confidentiality & Availability                                                                                                      |
-| Typical Scenario         | A Secret-cleared analyst saves her finished report as **Top Secret**.                                                                   | Operating-system kernel (high integrity) writes log entries to a user-readable “/var/log” file (low integrity).                     |
+| Aspect                   | Bell-LaPadula                                                                                                                                                                | Biba                                                                                                                                                                     |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| _Primary Goal_           | <mark style="color:$primary;">**Confidentiality**</mark>—keep secrets from leaking                                                                                           | <p><mark style="color:$primary;"><strong>Integrity</strong></mark>—keep trusted data from being corrupted.<br>prevents unauthorized subjects from making any changes</p> |
+| _Key Rule Mnemonics_     | <mark style="color:$primary;">**No-Read-Up / No-Write-Down**</mark>(“You can’t look at material above your clearance, and you can’t send classified data to a lower level.”) | <mark style="color:$primary;">**No-Write-Up / No-Read-Down**</mark>(“You can’t contaminate higher-integrity data, and you shouldn’t trust lower-quality data.”)          |
+| _Typical Labels_         | Unclassified → Confidential → Secret → Top Secret                                                                                                                            | Untrusted → User → Operator → System                                                                                                                                     |
+| _Where You’ll See It_    | Military/Intel MLS networks, SELinux MLS, cross-domain guards                                                                                                                | Safety-critical systems, financial transaction ledgers, industrial control, medical records                                                                              |
+| _Ignored CIA Components_ | Integrity & Availability                                                                                                                                                     | Confidentiality & Availability                                                                                                                                           |
+| Typical Scenario         | A Secret-cleared analyst saves her finished report as **Top Secret**.                                                                                                        | Operating-system kernel (high integrity) writes log entries to a user-readable “/var/log” file (low integrity).                                                          |
 
 **Lipner** is an implementation (not model) that combines the best features of Bell-LaPadula and Biba
 
@@ -121,7 +162,7 @@ Covert channels
 
 Focus on Integrity / Adds on to Biba model
 
-1. Prevent unauthorized subjects from making anyu changes (=Biba)
+1. Prevent unauthorized subjects from making any changes (=Biba)
 2. Prevent unauthorized subjects from making bad changes
 3. Maintain consistency of the system
 
@@ -130,6 +171,8 @@ Rules of integrity:
 | Well-Formed Transaction                                                                                   | Separation of Duties                                                                  | Access Triple                                                                                                                                        |
 | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Good, consistent data. Only perform operations in a manner that won't compromise the integrity of ojbects | One person shouldn't be allowed to poerform all tasks related to a critical function. | <p>Subject > Program > Object<br>Subject cannot directly access an object. Database access must go through a program that enforces access rules.</p> |
+
+<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -140,15 +183,9 @@ primary goal: Preventing conflict of interest.
 
 Example: Banking: Retail Investments and Merger & Acquisitions
 
-
-
 Other rule-based models (no details mentioned):\
 \- Graham-Denning Model\
 \- Harrison-Ruzzo-Ullman model
-
-
-
-
 
 
 
@@ -382,10 +419,18 @@ SPML
 
 
 
-Edge computing:
+### Edge computing
 
 * distributed computing approach that can reduce latency, increase bandwidth availability
 * process is done closer to the source of data
+  * locally, far from the cloud
+* IOT
+* process on the device (motion detection camera)
+
+### Fog computing
+
+* places gateway devices in the field to collect and correlate data centrally at the edge
+* iot gateway aggregates data run anomaly and sends summary to cloud
 
 
 
@@ -434,7 +479,7 @@ rubber hose attack: user of duress or torture
   2. Decrypt it with the stolen KRBTGT key, modify the **PAC** (add Domain-Admins SID, change username, etc.).
   3. Re-encrypt and reuse; because there _was_ an earlier AS-REQ/REP, log timelines line up and traditional “ticket appeared from nowhere” rules fail.
 
-Cryptographie
+## Cryptographie
 
 Goals:
 
@@ -448,23 +493,23 @@ Goals:
 
 
 
-Key clustering: two different keys generate same ciphertext for same plaintext.
+**Key clustering**: two different keys generate same ciphertext for same plaintext. Similar to collision in hashes
 
-Work Factor: estimated amount of time or effort required to break a cryptosystem
+**Work Factor**: estimated amount of time or effort required to break a **cryptosystem**
 
-Confusion: If one bit of the key is changed, about half of the bit in the ciphertext should change (key - ciphertext)
+**Confusion:** If one bit of the key is changed, about half of the bit in the ciphertext should change (key - ciphertext)
 
-Diffusion: If one bit of the plaintext is changed, approx half of the bits in ciphertext should change. (plaintext - ciphertext)
+**Diffusion:** (shannon propert). each plaintext bit's influence is spread over many chiphertext bits
 
-Avalanche: determine security and effectiveness of an algo. Looks at the degree of confusion and diffusion the algo provides. Ideal case: Single bit -> at least 50 percent change in cipher text!
+**Avalanche**: determine security and effectiveness of an algo. Looks at the degree of confusion and diffusion the algo provides. Ideal case: Single bit -> at least 50 percent change in cipher text!
 
-Substitution: Replace characters with different characters
+**Substitution:** Replace characters with different characters (Ceasar cipher)
 
-Diffusion: Rearrange order of characters
+**Transposition:** rearrange the letters of a plaintext message
 
 Rail Fence (ZigZag)&#x20;
 
-Block Cipher Modes:
+### Block Cipher Modes
 
 
 
@@ -488,14 +533,14 @@ Null Cipher: Plaintext ist mixed with a large amount of non-ciphertext. For exam
 
 ### Symmetric encryption
 
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
 Advantages: Fast, Strong\
 Disadvantages: Key distribution, Scalability, no authentication, integrity or nonrepudation.
 
 total keys for n users: n \* (n-1) / 2
 
 RC4 = Stream cipher, RC5 and RC6 = Block ciphers!
-
-
 
 DES: 56 key length, 64 block length\
 2-DES: 2 \* 56 key length\
@@ -523,12 +568,18 @@ AEAD: Authenticated Encryption with Associated Data
 
 AES-GCM and ChaCha2020-Poly1305 when confidentiality + integrtiy is needed in a single pass. No separate MAC required
 
+### Hash algorithms
 
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+SHA-1 = obsolete; SHA-2 = today’s default; SHA-3 = different design (sponge) + SHAKE options.
 
 ### Asymmetric Crypto
 
-RSA based on factoring (5 x 3 = 15)\
-Elliptic Curve based on discrete logarithms (DH, ECC) 2^3 = 8
+**RSA** based on factoring (5 x 3 = 15)\
+**Elliptic Curve** based on discrete logarithms (DH, ECC) 2^3 = 8\
+**Diffie-Hellman**\
+**El Gamals:** extension of DH key exchange algorithm. Depends on modular arthmetic.&#x20;
 
 Knapsack algo was cracked and considered unsafe
 
@@ -551,9 +602,14 @@ MIC uses hashes (instead of Parity checks, Checksums or CRC)
 Accidentail changes: Parity, CRC, Checksums\
 Intentional changes: keyed hash, digital signatures
 
+DSS: Digital Signature Standard:
 
+* NIST standards FIPS 186-5 defines how to create and verify digital signtures to ensure integrity, authentication and non-repudations
+* approved algos: RSA, ECDSA and edDSA
+* DSA no longer approved
+* SHA-1, SHA-2 and SHA-3 message digest
 
-PKI:
+PKI
 
 RA: Registration Authority (proofs Identity for new Certifcate requests)
 
@@ -598,9 +654,20 @@ Crypto shedding good variant to verify data is removed from the cloud
 
 
 
+### Quantum computing
 
+**Grover algorithm** shows that a quantum computer speeds up these attacks to effectively halve the **symmmetric** key length. 256-bit key becomes a 128-bit **key.**
 
-### Physical security
+**Shor's algortihm** can easily break all of the commonly based-key algo based on both factoring and the discrete logarithm problem
+
+* RSA is vulnerable
+* Elliptic Curve is vulnerable
+
+**Lattice** based crypto offers some resistance!
+
+Lattice based on shortest vector problem and closest vector problem
+
+## Physical security
 
 | Logical security controls | Physical Security |
 | ------------------------- | ----------------- |
@@ -707,4 +774,27 @@ Fire extinguishers
 | **C**                         | **Energized electrical equipmen**t: panels, motors, servers, wiring runs                                    | Gas, CO2, dry chemicals                                        |
 | **D**                         | **Combustible metals**: magnesium, sodium, potassium, titanium, zirconium, lithium-ion battery anodes, etc. | Dry powders                                                    |
 | **K** (U.S.) / **F** (Europe) | Commercial **cooking** oils & fats: deep-fat fryers, salad-oil, lard                                        | Wet chemicals                                                  |
+|                               |                                                                                                             |                                                                |
+
+Etc
+
+(domain 8 material)
+
+SIEM: Security Information Event Manager
+
+* real-time monitoring, traffic analysis & notification
+
+SOAR: Security Orchestration Automation & Response
+
+* alert and response automation with threat-specific playbooks
+
+| Concept                                 | What it is                                                    |
+| --------------------------------------- | ------------------------------------------------------------- |
+| **SOA (Service-Oriented Architecture)** | Build systems as **enterprise services** that many apps share |
+| **Microservices**                       | Build one app as many **small, independent services**         |
+
+CASB: Cloud access security broker
+
+* security policy enforcement solution that may be installed on-prem or in the cloud
+* shadow it prevention
 

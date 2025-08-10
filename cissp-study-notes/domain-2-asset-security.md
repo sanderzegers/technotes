@@ -52,7 +52,7 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 
 ## Classification Levels
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ## Data roles
 
