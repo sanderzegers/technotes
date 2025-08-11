@@ -41,7 +41,7 @@ privacy should be embedded into every standard, protocol, and process that touch
 * embed privacy into design
 * full functionality
 * end-to-end security
-* Visiblity and Transparency
+* Visibility and Transparency
 * Respect for User privacy
 
 
@@ -62,44 +62,65 @@ Three of the most popular security architectures:
 
 ## Security Models
 
+... are used to determine how security will be implemented, what subjects can access the system, and what objects they will have access to.
+
 "Rules to be implemented to achieve security"
 
-They are a way to <mark style="color:$primary;">formalize</mark> security policy.
+They are a way to <mark style="color:$primary;">formalize</mark> security policy:
+
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 typical implemented by enforcing integrity, confidentiality or other controls.
 
+Provides Broad guidelines only.
+
+
+
 Three properties:
 
-* simple security property
+* **simple security** property
   * describe rules for <mark style="color:$primary;">read</mark>
-* Star security property
+* **star \* security** property
   * describes rules for <mark style="color:$primary;">write</mark>
-* Invocation property
-  * Rules around invocations (calls), such as to subjects
+* **invocation** property
+  * Rules around <mark style="color:$primary;">invocations (calls)</mark>, such as to subjects
 
 
 
-State machine model
+### State machine model
 
-* describe a system that is always secure, no matter what state it is in
+* describe a system that is <mark style="color:$primary;">always secure</mark>, no matter what state it is in
 * based on computer science: finite state machine (FSM)
-* state: snapshot of a system at a specific moment in time. All state transistions must be evaluated
+* state: snapshot of a system at a specific moment in time. All state transitions must be evaluated
 * if each possible state transition results in another secure state, system can be called secure state machine
 
-Information flow model
+### Information flow model
 
-* focuses on controlling the flow of information
+* focuses on controlling the <mark style="color:$primary;">flow of information</mark>
 * based on state machine model
 * Biba and Bell-LaPaDula
 
-
-
-non-interference model
+### Non-interference model
 
 * loosely based on the information flow model
-* concernd how actions of a subject or a higher security level affect the system statet
-* subject a (high) should not affect or interfere with the actions of subject B (low)
+* concerned how actions of a subject or a higher security level affect the system state
+* subject a (high) should not be seen, affect or interfere with the actions of subject B (low)
 * form of protection against malicious programs such as backdoors and rootkits
+
+### **lattice-based mode**l&#x20;
+
+* ... are used to define the levels of security that an object may have and that a subject may have access to
+* based on the interaction between any
+  * objects and subjects
+* is like a ladder, layers going up and down. Requires layers of security.
+
+
+
+### **rule-based model**
+
+specific rules dictates how security operates
+
+All other models listed in CISSP study without Biba and Bell-LaPaDula
 
 
 
@@ -111,13 +132,7 @@ non-interference model
 
 
 
-**lattice-based mode**l is like a ladder, layers going up and down. Requires layers of security.
-
-**rule-based model:** specific rules dictates how security operates
-
-
-
-<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 
@@ -131,14 +146,25 @@ Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 
 ### Bell-LaPadula
 
-* state machine enforces confidentiality
-* mandatory access control
-  * to enforce DoD multilevel security policy (Government!!)
+* state machine <mark style="color:$primary;">enforces confidentiality</mark>
+* m<mark style="color:$primary;">andatory access control</mark>
+  * to enforce DoD multilevel security policy (<mark style="color:$primary;">Government</mark>!!)
 * simple security property
-  * simple security property
-    * no read up
-  * start \* security property
-    * no write down
+  * no read up
+* start \* security property
+  * no write down
+
+### Biba
+
+* lattice-based model to address integrity
+* simple integrity property
+  * no read down
+* start integrity property
+  * no write up
+* invocation property
+  * prohibits subject invoking a subject at a higher level
+
+
 
 | Aspect                   | Bell-LaPadula                                                                                                                                                                | Biba                                                                                                                                                                     |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -155,31 +181,66 @@ Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 
 Covert channels
 
-* Storage (senstive data remains in RAM after process finished)
+* Storage (sensitive data remains in RAM after process finished)
 * Timing (pizza delivery to Pentagon)
 
 ### Clark-Wilson
 
-Focus on Integrity / Adds on to Biba model
+Uses security label to grant access
+
+rule-based model focuses only on integrity
+
+
+
+* constrained data item (CDI)
+  * any data item whose integrity is protected by the security model
+* unconstrained data item (UDI)
+  * any data item that is not controlled by the security model
+    * can be manipulated by users
+* integrity verification procedure (IVP)
+  * procedure that scans data items and confirms their integrity
+* Transformation procedures (TPs)
+  * abstract operations such as read, write and modify
+  * are the only procedures that are allowed to modify a CDI
+
+
+
+Focus on Integrity / Adds on to <mark style="color:$primary;">Biba model</mark>
 
 1. Prevent unauthorized subjects from making any changes (=Biba)
-2. Prevent unauthorized subjects from making bad changes
-3. Maintain consistency of the system
+2. Prevent <mark style="color:$primary;">authorized</mark> subjects from making bad changes
+3. Maintain <mark style="color:$primary;">consistency</mark> of the system
 
 Rules of integrity:
 
-| Well-Formed Transaction                                                                                   | Separation of Duties                                                                  | Access Triple                                                                                                                                        |
-| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Good, consistent data. Only perform operations in a manner that won't compromise the integrity of ojbects | One person shouldn't be allowed to poerform all tasks related to a critical function. | <p>Subject > Program > Object<br>Subject cannot directly access an object. Database access must go through a program that enforces access rules.</p> |
+* Wel-formed transactions:
+  * Good, consistent data. Only perform operations in a manner that won't compromise the integrity of objects
+* separation of duties
+  * One person shouldn't be allowed to perform all tasks related to a critical function.
+* access triple
+  * Subject > Program > Object\
+    Subject cannot directly access an object. Database access must go through a program that enforces access rules.
 
-<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+**Access control triplet**\
+Subject has no longer direct access to the object:
 
+<figure><img src=".gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
+### Take Grant Model
 
-Brewer-Nash (Chinese Wall)
+confidentiality-based model
+
+Four basic operations:
+
+* take
+* grant
+* create
+* revoke
+
+### Brewer-Nash (Chinese Wall)
 
 flow model\
-primary goal: Preventing conflict of interest.
+primary goal: Prevent conflict of interest.
 
 Example: Banking: Retail Investments and Merger & Acquisitions
 
@@ -187,14 +248,24 @@ Other rule-based models (no details mentioned):\
 \- Graham-Denning Model\
 \- Harrison-Ruzzo-Ullman model
 
+Certification: Comprehensive technical analysis of a solution or a product to ensure it meets the desired needs\
+Accreditation: Official management sign-off of certification for a set period of time on a solution
+
+### Graham-Denning model
+
+formal set of protection rules for which each object has an owner and controller
+
+focused on secure creation and deletion both subject and objects
+
+eight primary protection rules:
+
+* securely create & delete an object
+* securely create & delete an subject
+* securely provide read, grant, delete and transfer access right
 
 
-Certification: Comprehensive technical analysis of a solution or a product to ensure it meets the disered needs\
-Accreditation: Official management signoff of certification for a set period of time on a solution
 
-
-
-Evaluation Criteria
+## Evaluation Criteria
 
 TCSEC: Trusted Computer System Valuation Criteria
 
@@ -259,14 +330,14 @@ Value of asset drives the selection of controls
 
 
 
-Trusted computing base (TCB) & Reference Monitor Concept (RMC)
+## Trusted computing base (TCB) & Reference Monitor Concept (RMC)
 
 Security kernel should consist of three properties or characteristics: \
 \- completeness (impossible to bypass RMC)\
 \- isolation (rules are tamper-proof)\
 \- verifiability (verifiy RMC works correclty through logging and monitoring)
 
-RMC: Subject access Object through a set of rules. This activiy is logged and monitored
+RMC: Subject access Object through a set of rules. This activity is logged and monitored
 
 RMC is a concept. RMC implemented is called security kernel
 
@@ -276,9 +347,9 @@ TCB (Trusted Computing Based) is totality of protection mechanism within an arch
 
 TCB contains, cpu, memory, storage, firmware, os, system kernel, etc.
 
+[https://youtu.be/\_nyZhYnCNLA?list=PL7XJSuT7Dq\_XPK\_qmYMqfiBjbtHJRWigD\&t=10923](https://youtu.be/_nyZhYnCNLA?list=PL7XJSuT7Dq_XPK_qmYMqfiBjbtHJRWigD\&t=10923)
 
-
-Processor state
+### Processor state
 
 Supervisor state (Privilege mode)\
 Problem state (User mode)
@@ -310,17 +381,15 @@ decrypts only by the presence of certain software or user authentication.\
 examples: bitlocker\
 Ties the data to the device AND its known-good boot state.
 
-_Binding locks data to **the chip**; sealing locks data to **the chip + a specific, uncompromised system state.**_
+_Binding locks data to **the chip**; sealing locks data to **the chip + a specific, un-compromised system state.**_
 
 
 
-Emanations
-
-unseen things leaking out of systems like radio waves, light, sound and so on
+Emanations: unseen things leaking out of systems like radio waves, light, sound and so on
 
 Emanations protection
 
-Schielding (TEMPEST): Walls, Faraday cages
+Shielding (TEMPEST): Walls, Faraday cages
 
 White Noise: Strong single of random noise to hide data transfer
 
@@ -332,7 +401,7 @@ CIS hardening guides: Best practice for hardening
 
 
 
-Datewarehouse vs Big Data
+Data warehouse vs Big Data
 
 * Data warehouse = polished, schema-on-write store for trusted, repeatable business reporting.
 * Big-data platform = massive, schema-on-read playground for ingesting raw, varied data and running exploratory analytics at scale.
@@ -533,7 +602,7 @@ Null Cipher: Plaintext ist mixed with a large amount of non-ciphertext. For exam
 
 ### Symmetric encryption
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 Advantages: Fast, Strong\
 Disadvantages: Key distribution, Scalability, no authentication, integrity or nonrepudation.
@@ -570,7 +639,7 @@ AES-GCM and ChaCha2020-Poly1305 when confidentiality + integrtiy is needed in a 
 
 ### Hash algorithms
 
-<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 SHA-1 = obsolete; SHA-2 = today’s default; SHA-3 = different design (sponge) + SHAKE options.
 
@@ -714,37 +783,33 @@ Power, Ping and Pipe
 
 HVAC: temp and humidty control for sake of people equipment and areas of a build that may require specific temperature and humidity
 
-Datacenters optimal
+### Data centers optimal
 
 |             |     |     |
 | ----------- | --- | --- |
 | Temperature | 18C | 27C |
 | Humidity    | 40% | 60% |
 
-*
+
 
 Fire needs 3 parts: Fuel, Oxygen, heat
 
-
-
-Flame detectors. Detected infrared and UV light. Not good for early detection.\
+Flame detectors: Detected infrared and UV light. Not good for early detection.\
 Smoke Ionization: radioactive material, ionizes particles that flow bbetween two metal plates. smoke ionization process will be disrupted. Responds quick to flaming/fast fires\
-Smoke Photoelectronic / Optical: ligh source and a sensor. off-angle light will berefracted more direclty into sensor. responds more quickly to smoldering fires.\
+Smoke Photoelectronic / Optical: ligh source and a sensor. off-angle light will be refracted more directly into sensor. responds more quickly to smoldering fires.\
 Smoke Dual: Most sensor today incorperate both ionization and optical sensor.\
 Smoke Veda: Best known. Most expensive, but the best. Very Ealry Smoke Detection Apparatus. for very-high value equipment or assets.
 
-Heat detector. Slow, very ineffective early detection tools.
+Heat detector: Slow, very ineffective early detection tools.
 
 
 
-Fire Surpression:
+Fire Suppression: wet pipe, dry pipe, pre-action and deluge.
 
-wet pipe, dry pipe, pre-acetion and deluge.
-
-Wet pipe: Filled with pressurized water. Cheapest solution. Risk of leaks. Freezing risks.\
-Dry pipe: Filled with some type of pressured gas. Allows the fill the pipes very fast with water.\
-Pre-action: Will active only on floor where theres actually a fire. Additionally, each sprinkler is actived by heat.\
-Deluge: Flows out every sprinkler head. High risk environments like fireworks or explosives factory.
+**Wet pipe**: Filled with pressurized water. Cheapest solution. Risk of leaks. Freezing risks.\
+**Dry pipe**: Filled with some type of pressured gas. Allows the fill the pipes very fast with water.\
+**Pre-action**: Will active only on floor where theres actually a fire. Additionally, each sprinkler is activated by heat.\
+**Deluge:** Flows out every sprinkler head. High risk environments like fireworks or explosives factory.
 
 Gas based fire suppression systems:
 
