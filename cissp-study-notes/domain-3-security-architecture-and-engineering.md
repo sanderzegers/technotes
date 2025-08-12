@@ -185,7 +185,7 @@ demonstrating how to blend confidentiality & integrity constraints
 
 ### Clark-Wilson
 
-Uses security label to grant access
+well-formed transactions, separation of duties, and the subject-TP-object ‘triple’ with CDIs/UDIs
 
 rule-based model focuses only on integrity
 
@@ -267,11 +267,11 @@ formal standards used to measure and compare the security strength of computer s
 
 <figure><img src=".gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
-### TCSEC: Trusted Computer System Valuation Criteria
+### TCSEC: Trusted Computer System Evaluation Criteria
 
 * aka Orange book
 * published by DoD
-* Functional level D1,C1,C2,B1,B2,B3,A1 (A1 = verified design, D1 = failed or not tested)
+* Functional level D,C1,C2,B1,B2,B3,A1 (A1 = verified design, D1 = failed or not tested)
 * Most rated at B1, or C2
 * measures ONLY confidentiality
 
@@ -308,7 +308,7 @@ Components:
 | **EAL 1** | _<mark style="color:$primary;">Functionally Tested</mark>_                      | <p>• Basic functional &#x26; interface spec review</p><p>• Black-box testing by lab</p>                                                                   | <p>• “Quick look” confidence for COTS software or pilot deployments.</p><p>• Lowest cost; mutually recognized worldwide.</p>                                                                                                                                                                                                                                                                                                                                               |
 | **EAL 2** | _<mark style="color:$primary;">Structurally Tested</mark>_                      | <p>• Developer supplies design description</p><p>• Independent vulnerability analysis</p><p>• Configuration management baseline</p>                       | • Often chosen when vendor can’t change architecture but needs more assurance for public-sector bids.                                                                                                                                                                                                                                                                                                                                                                      |
 | **EAL 3** | _<mark style="color:$primary;">Methodically Tested & Checked</mark>_            | <p>• Systematic functional testing</p><p>• Development environment controls</p><p>• Production version uniquely identified</p>                            | • Common ceiling for IoT devices, routers sold into regulated markets. • Still globally recognized.                                                                                                                                                                                                                                                                                                                                                                        |
-| **EAL 4** | _<mark style="color:$primary;">Methodically Designed, Tested & Reviewed</mark>_ | <p>• Low-level design &#x26; source code samples</p><p>• Positive &#x26; negative (fault-injection) tests</p><p>• Independent penetration testing</p>     | <p>• <strong>Most popular “high watermark” for commercial gear</strong> because cost/time are still manageable.</p><p>• Last level automatically recognised under the CCRA outside a few specialist domains. </p>                                                                                                                                                                                                                                                          |
+| **EAL 4** | _<mark style="color:$primary;">Methodically Designed, Tested & Reviewed</mark>_ | <p>• Low-level design &#x26; source code samples</p><p>• Positive &#x26; negative (fault-injection) tests</p><p>• Independent penetration testing</p>     | <p>• <strong>Most popular “high watermark” for commercial gear</strong> because cost/time are still manageable.</p><p></p>                                                                                                                                                                                                                                                                                                                                                 |
 | **EAL 5** | _<mark style="color:$primary;">Semi-Formally Designed & Tested</mark>_          | <p>• Formal model of security architecture</p><p>• Rigorous covert-channel analysis</p><p>• Advanced penetration testing</p>                              | • Used for smart-card chips, crypto modules, safety PLC kernels—small code bases, long life-cycles. • Mutual recognition limited to SOGIS (EU) & sponsoring nation.                                                                                                                                                                                                                                                                                                        |
 | **EAL 6** | _<mark style="color:$primary;">Semi-Formally Verified Design & Tested</mark>_   | <p>• Mathematically supported design proof</p><p>• Depth and coverage metrics for testing</p><p>• Structured life-cycle &#x26; tool-chain controls</p>    | <p>• Niche—nuclear-command kernels, avionics micro-kernels.</p><p>• Very high cost; any patch can trigger recertification. </p>                                                                                                                                                                                                                                                                                                                                            |
 | **EAL 7** | _<mark style="color:$primary;">Formally Verified Design & Tested</mark>_        | <p>• Full formal specification down to source</p><p>• Proof that implementation matches model</p><p>• Exhaustive vulnerability search &#x26; analysis</p> | <p>• Practically feasible only for tiny, static TCBs (e.g., one-purpose crypto coprocessors).</p><p>• Not mutually recognised; cost, schedule &#x26; road-map freeze make it risky for most vendors. (<a href="https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com">Common Criteria Portal</a>, <a href="https://www.commoncriteriaportal.org/files/ccfiles/ccpart3v21.pdf?utm_source=chatgpt.com">Common Criteria Portal</a>)</p> |
@@ -326,7 +326,7 @@ Value of asset drives the selection of controls
 * pass information over a path normally not used for communication
 * may not be protected by security tools
 * two types
-  * Covert Storage (sensitive data remains in RAM after process finished)
+  * Covert Storage (Process A creates or deletes a specific dummy file to send a 1 or 0; Process B checks if the file exists.)
   * Covert Timing (pizza delivery to Pentagon)
 
 ## Access control types
@@ -433,7 +433,7 @@ System kernel vs security kernel
 * system kernel drives OS
 * security kernel is implementation of RMC
 
-**TOCTOU** = Time-Of-Check Time of User ⇒ Race condition
+**TOCTOU** = Time-Of-Check Time of Use ⇒ Race condition
 
 TPM:
 
@@ -442,11 +442,15 @@ TPM:
 * platform integrity
 * every tpm has unique and secret endorsement key burned in
 
-**binding**: encrypt encryption keys by using the endorsement key.\
+**binding**: \
+Locked to _this device’s TPM_.\
+Encrypting data so it can only be accessed on _that_ specific TPM-equipped system.\
+encrypt encryption keys by using the endorsement key.\
 endorsement key is only known by TPM\
 examples: software license key, password vault (data is tied to device)
 
-**sealing**: sealing is not tied to TPM state or config.\
+**sealing**: \
+Locked to _this device’s TPM_ **and** the exact system state.\
 decrypts only by the presence of certain software or user authentication.\
 examples: bitlocker\
 Ties the data to the device AND its known-good boot state.
@@ -592,7 +596,7 @@ XSS reflected/non-persistent: Malicious URL containing XSS&#x20;
 CSRF: Forged attack. Attacker sends action (fund transfer) as hyperlink to victim
 
 Salt: append unique password by random string for each user individually\
-Pepper: append same unique password for all users
+Pepper: **single secret** (shared across users) stored separately from the hashes
 
 purchase key attack: bribe someone to get the key\
 rubber hose attack: user of duress or torture
@@ -693,9 +697,9 @@ DES: 56 key length, 64 block length\
 AES keys sizes: 128bit, 192 or 256. Block size ALWAYS: 128bit.\
 Technically block sizes of 192 and 256 supported, but not adopted by US gov
 
-ChaCha: variant of Salsa Family.&#x20;
+ChaCha: variant of Salsa20.&#x20;
 
-ChaCha8: 256-bit stream cipher based on 8 round Salsa20/8 algo.\
+ChaCha8 is the 8-round variant of ChaCha\
 ChaCha12 and ChaCha20 with 12 and 20 rounds.\
 ChaCha20 generally faster than AES-GCM on CPU that lack AES-NI\
 
@@ -705,7 +709,7 @@ Combines ChaCha20 with the Poly1305 hash famliy. Results in authenticated encryp
 
 AEAD: Authenticated Encryption with Associated Data
 
-AES-GCM and ChaCha2020-Poly1305 when confidentiality + integrtiy is needed in a single pass. No separate MAC required
+AES-GCM and ChaCha20-Poly1305 when confidentiality + integrtiy is needed in a single pass. No separate MAC required
 
 ### Hash algorithms
 
@@ -934,7 +938,7 @@ Gas based fire suppression systems:
 | Aero-K   | ultrafine, potassium-based aerosol can quickly supress fire.                                                                      |
 | CO2      | <p>Not corrosive to expensive equipment. Too much is used could kill people, because it removes oxygen.<br>Not commonly used.</p> |
 
-NFPA 12 therefore mandates **pre-discharge horns, voice messages, and a 30–60 s time delay** so occupants can escape before the gas dumps
+NFPA 12 therefore mandates **pre-discharge horns, voice messages, and a 20–60 s time delay** so occupants can escape before the gas dumps
 
 ### Fire extinguishers
 
@@ -950,7 +954,7 @@ NFPA 12 therefore mandates **pre-discharge horns, voice messages, and a 30–60 
 ### Electromagnetic interference
 
 * <mark style="color:$primary;">common</mark> mode noise: generated by difference in power between hot and ground wires
-* <mark style="color:$primary;">traverse</mark> mode noise: generated by difference in power between hot and neutral wires
+* <mark style="color:$primary;">differential-mode (aka traverse</mark> mode) noise generated by difference in power between hot and neutral wires
 
 
 
