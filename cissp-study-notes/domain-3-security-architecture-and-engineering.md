@@ -162,7 +162,7 @@ Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 * start integrity property
   * no write up
 * invocation property
-  * prohibits subject invoking a subject at a higher level
+  * <mark style="color:$primary;">prohibits</mark> subject invoking a subject at a <mark style="color:$primary;">higher level</mark>
 
 
 
@@ -175,14 +175,13 @@ Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 | _Ignored CIA Components_ | Integrity & Availability                                                                                                                                                     | Confidentiality & Availability                                                                                                                                           |
 | Typical Scenario         | A Secret-cleared analyst saves her finished report as **Top Secret**.                                                                                                        | Operating-system kernel (high integrity) writes log entries to a user-readable “/var/log” file (low integrity).                                                          |
 
-**Lipner** is an implementation (not model) that combines the best features of Bell-LaPadula and Biba
+### **Lipner**&#x20;
+
+... is an implementation (not model) that combines the best features of Bell-LaPadula and Biba
+
+demonstrating how to blend confidentiality & integrity constraints
 
 
-
-Covert channels
-
-* Storage (sensitive data remains in RAM after process finished)
-* Timing (pizza delivery to Pentagon)
 
 ### Clark-Wilson
 
@@ -248,8 +247,7 @@ Other rule-based models (no details mentioned):\
 \- Graham-Denning Model\
 \- Harrison-Ruzzo-Ullman model
 
-Certification: Comprehensive technical analysis of a solution or a product to ensure it meets the desired needs\
-Accreditation: Official management sign-off of certification for a set period of time on a solution
+
 
 ### Graham-Denning model
 
@@ -263,11 +261,13 @@ eight primary protection rules:
 * securely create & delete an subject
 * securely provide read, grant, delete and transfer access right
 
-
-
 ## Evaluation Criteria
 
-TCSEC: Trusted Computer System Valuation Criteria
+formal standards used to measure and compare the security strength of computer systems or products
+
+<figure><img src=".gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+### TCSEC: Trusted Computer System Valuation Criteria
 
 * aka Orange book
 * published by DoD
@@ -275,50 +275,43 @@ TCSEC: Trusted Computer System Valuation Criteria
 * Most rated at B1, or C2
 * measures ONLY confidentiality
 
-
-
-ITSEC: Information Technology Security Evaluation Criteria
+### ITSEC: Information Technology Security Evaluation Criteria
 
 * works well in a network environment
+* Europe
 * F level rating (functionality) = Orange Book
 * E level rating (Assurance level)
 * E0 - E6
 
+### Common Criteria (ISO-IEC 15408)
 
-
-Common Criteria (ISO 15408)
-
-* best and well known system
+* best and well known system / gold standard
+  * has basically replaced TCSEC and ITSEC
 * EAL rating levels
 
 Components:
 
-* PP: Protection profile
+* **PP**: Protection profile
   * list of security capabilities that a type or category of security products should pass
-* TOE: Target of Evaluation
+* **TOE**: Target of Evaluation
   * Vendor product that's being rated
-* ST: Security Target
+* **ST**: Security Target
   * Written statement by vendor explaining how functional and assurance specs of the product meet the PP
     * Security Functional Requirements
       * What features exist and how well they work
     * Security Assurance Requirements
       * vendor claimed security functionality and the CC evaluation process align
-* Evaluate
 * Assign EAL (1-7)
 
-| EAL       | Official CC label                          | What’s added vs. the level below (key assurance activities)                                                                       | Typical fit / things to remember                                                                                                                                                                                                                                                                                                                                                                                                      |
-| --------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **EAL 1** | _Functionally Tested_                      | • Basic functional & interface spec review • Black-box testing by lab                                                             | • “Quick look” confidence for COTS software or pilot deployments. • Lowest cost; mutually recognised worldwide. ([Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com))                                                                                                                                                                                               |
-| **EAL 2** | _Structurally Tested_                      | • Developer supplies design description • Independent vulnerability analysis • Configuration management baseline                  | • Often chosen when vendor can’t change architecture but needs more assurance for public-sector bids. ([Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com))                                                                                                                                                                                                         |
-| **EAL 3** | _Methodically Tested & Checked_            | • Systematic functional testing • Development environment controls • Production version uniquely identified                       | • Common ceiling for IoT devices, routers sold into regulated markets. • Still globally recognised. ([Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com))                                                                                                                                                                                                           |
-| **EAL 4** | _Methodically Designed, Tested & Reviewed_ | • Low-level design & source code samples • Positive & negative (fault-injection) tests • Independent penetration testing          | • **Most popular “high watermark” for commercial gear** because cost/time are still manageable. • Last level automatically recognised under the CCRA outside a few specialist domains. ([Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com), [Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/CCPART3V3.1R4.pdf?utm_source=chatgpt.com)) |
-| **EAL 5** | _Semi-Formally Designed & Tested_          | • Formal model of security architecture • Rigorous covert-channel analysis • Advanced penetration testing                         | • Used for smart-card chips, crypto modules, safety PLC kernels—small code bases, long life-cycles. • Mutual recognition limited to SOGIS (EU) & sponsoring nation. ([Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com), [Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/ccpart3v21.pdf?utm_source=chatgpt.com))                       |
-| **EAL 6** | _Semi-Formally Verified Design & Tested_   | • Mathematically supported design proof • Depth and coverage metrics for testing • Structured life-cycle & tool-chain controls    | • Niche—nuclear-command kernels, avionics micro-kernels. • Very high cost; any patch can trigger recertification. ([Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com), [Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/ccpart3v21.pdf?utm_source=chatgpt.com))                                                                         |
-| **EAL 7** | _Formally Verified Design & Tested_        | • Full formal specification down to source • Proof that implementation matches model • Exhaustive vulnerability search & analysis | • Practically feasible only for tiny, static TCBs (e.g., one-purpose crypto coprocessors). • Not mutually recognised; cost, schedule & road-map freeze make it risky for most vendors. ([Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com), [Common Criteria Portal](https://www.commoncriteriaportal.org/files/ccfiles/ccpart3v21.pdf?utm_source=chatgpt.com))    |
-
-
-
-
+| EAL       | Official CC label                                                               | What’s added vs. the level below (key assurance activities)                                                                                               | Typical fit / things to remember                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **EAL 1** | _<mark style="color:$primary;">Functionally Tested</mark>_                      | <p>• Basic functional &#x26; interface spec review</p><p>• Black-box testing by lab</p>                                                                   | <p>• “Quick look” confidence for COTS software or pilot deployments.</p><p>• Lowest cost; mutually recognized worldwide.</p>                                                                                                                                                                                                                                                                                                                                               |
+| **EAL 2** | _<mark style="color:$primary;">Structurally Tested</mark>_                      | <p>• Developer supplies design description</p><p>• Independent vulnerability analysis</p><p>• Configuration management baseline</p>                       | • Often chosen when vendor can’t change architecture but needs more assurance for public-sector bids.                                                                                                                                                                                                                                                                                                                                                                      |
+| **EAL 3** | _<mark style="color:$primary;">Methodically Tested & Checked</mark>_            | <p>• Systematic functional testing</p><p>• Development environment controls</p><p>• Production version uniquely identified</p>                            | • Common ceiling for IoT devices, routers sold into regulated markets. • Still globally recognized.                                                                                                                                                                                                                                                                                                                                                                        |
+| **EAL 4** | _<mark style="color:$primary;">Methodically Designed, Tested & Reviewed</mark>_ | <p>• Low-level design &#x26; source code samples</p><p>• Positive &#x26; negative (fault-injection) tests</p><p>• Independent penetration testing</p>     | <p>• <strong>Most popular “high watermark” for commercial gear</strong> because cost/time are still manageable.</p><p>• Last level automatically recognised under the CCRA outside a few specialist domains. </p>                                                                                                                                                                                                                                                          |
+| **EAL 5** | _<mark style="color:$primary;">Semi-Formally Designed & Tested</mark>_          | <p>• Formal model of security architecture</p><p>• Rigorous covert-channel analysis</p><p>• Advanced penetration testing</p>                              | • Used for smart-card chips, crypto modules, safety PLC kernels—small code bases, long life-cycles. • Mutual recognition limited to SOGIS (EU) & sponsoring nation.                                                                                                                                                                                                                                                                                                        |
+| **EAL 6** | _<mark style="color:$primary;">Semi-Formally Verified Design & Tested</mark>_   | <p>• Mathematically supported design proof</p><p>• Depth and coverage metrics for testing</p><p>• Structured life-cycle &#x26; tool-chain controls</p>    | <p>• Niche—nuclear-command kernels, avionics micro-kernels.</p><p>• Very high cost; any patch can trigger recertification. </p>                                                                                                                                                                                                                                                                                                                                            |
+| **EAL 7** | _<mark style="color:$primary;">Formally Verified Design & Tested</mark>_        | <p>• Full formal specification down to source</p><p>• Proof that implementation matches model</p><p>• Exhaustive vulnerability search &#x26; analysis</p> | <p>• Practically feasible only for tiny, static TCBs (e.g., one-purpose crypto coprocessors).</p><p>• Not mutually recognised; cost, schedule &#x26; road-map freeze make it risky for most vendors. (<a href="https://www.commoncriteriaportal.org/files/ccfiles/CC2022PART5R1.pdf?utm_source=chatgpt.com">Common Criteria Portal</a>, <a href="https://www.commoncriteriaportal.org/files/ccfiles/ccpart3v21.pdf?utm_source=chatgpt.com">Common Criteria Portal</a>)</p> |
 
 ### Security Control Frames
 
@@ -328,7 +321,88 @@ Components:
 
 Value of asset drives the selection of controls
 
+## Covert channels
 
+* pass information over a path normally not used for communication
+* may not be protected by security tools
+* two types
+  * Covert Storage (sensitive data remains in RAM after process finished)
+  * Covert Timing (pizza delivery to Pentagon)
+
+## Access control types
+
+### Mandatory Access Control
+
+* access policy determined by <mark style="color:$primary;">systems</mark> (not object owner)
+* relies on classification labels
+* each object and subject can have <mark style="color:$primary;">multiple labels</mark> (secret, projectx)
+
+mac model classification:
+
+* hierarchical environment
+  * ordererd structure, from low security to high security
+  * allows objects in higher level to access lower level
+* compartmentalized environment
+  * no relationship between one security domain and another
+  * each domain = seperate isolated compartment
+* hybrid environment
+  * combines both hierarchical and compartmentalized environments
+
+### Discretionary Access Control
+
+* permits <mark style="color:$primary;">owner</mark> or creator of an object to control and define its accessibility.
+* owner has full control by default
+
+### Non-discretionary Access control
+
+* enables the enforcement of system-wide restrictions that override object-specific access control
+
+### Rule-based access Control
+
+* defines specific functions for access to requested objects
+* example Firewall policy set
+
+### Role-based access control
+
+* well-defined collection of named job roles
+
+## Certification and Accreditation
+
+You assess a specific system as built and operated in _your_ environment, then a senior official accepts (or rejects) the residual risk and authorizes it to run.
+
+* Two phases. Related but different.
+* used to assess the effectiveness of application security as well as operating system and hardware security
+
+Current DoD standards for C\&A: Risk MAnagement Framework (RMF) which replaced (DIACAP and  DITSCAP).
+
+Other US gov branches: CNSSP (Committee on National Security Systems) (replaces NIACAP)
+
+### **Certification**
+
+* product or system is tested to see whether it meets the documented requirements
+* evaluation criteria must be chosen at the beginning
+* technical evaluation of each part of a computer system to access its concordance with security standards
+* test system's hardware, software and configuration in a  production-like environment\
+
+
+### **Accreditation**&#x20;
+
+* official management decision to use a solution
+* usually just for a period of time
+
+### Recertification
+
+* when time period elapses or when significant config changes are made
+
+
+
+## Techniques for ensuring CIA
+
+|             |                                                                     |   |
+| ----------- | ------------------------------------------------------------------- | - |
+| confinement | restrict process to read from and write to certain memory locations |   |
+| bounds      | limits of memory a process cannot exceed when reading and writing   |   |
+| isolation   | process mode when it is confined through the use of memory bounds   |   |
 
 ## Trusted computing base (TCB) & Reference Monitor Concept (RMC)
 
@@ -359,11 +433,7 @@ System kernel vs security kernel
 * system kernel drives OS
 * security kernel is implementation of RMC
 
-
-
-TOCTOU = Time-Of-Check Time of User ⇒ Race condition
-
-
+**TOCTOU** = Time-Of-Check Time of User ⇒ Race condition
 
 TPM:
 
@@ -413,7 +483,7 @@ Data warehouse vs Big Data
 | **Primary mission** | <p><em>Consistent, trusted reporting</em><br>— KPIs, regulatory &#x26; financial statements, dashboards</p> | <p><em>Exploratory &#x26; large-scale analytics</em><br>— data science, real-time stream processing, AI/ML</p> |
 | **Typical data**    | Highly structured, relational, cleaned & conformed (star/snowflake schemas)                                 | Multi-structured: logs, click-streams, images, IoT sensor feeds, text, plus RDBMS extracts                     |
 
-Two import insights:
+Two important insights:
 
 Inference: deducing information from evidence and reasoning rather than from explicit statements\
 Aggregation: Pulls data into one one location
@@ -507,15 +577,15 @@ SPML
 
 XSS&#x20;
 
-Stored/presistent and reflected. Target is client
+Stored/persistent and reflected. Target is client
 
 CSRF persistence facilitated by cookies in browsers. Target is web server
 
 
 
-XSS Stored: Store JS in comment. Send senstive cookie data to attacker
+XSS Stored: Store javascript in comment. Send sensitive cookie data to attacker
 
-XSS reflected/nonpersistent: Malicious URL containg XSS&#x20;
+XSS reflected/non-persistent: Malicious URL containing XSS&#x20;
 
 
 
@@ -656,9 +726,7 @@ RSA: 1970
 
 ECC: introduced in 2000s. Same secyrity for shorter keys. Faster and more efficient
 
-
-
-Hybrid Cryptographie: Use of assymmetric crypto to send key for symmetric crypto.
+Hybrid Cryptography: Use of assymmetric crypto to send key for symmetric crypto.
 
 
 
@@ -738,6 +806,32 @@ Lattice based on shortest vector problem and closest vector problem
 
 ## Physical security
 
+Three groups:
+
+* administrative
+  * management controls (<mark style="color:$primary;">policies and procedures</mark>)
+    * site management
+    * facitility construction/selection
+    * personnel controls
+    * awareness training
+    * emergency response and procedures
+* logical (technical)
+  * implemented through technology
+    * access controls
+    * ids
+    * alarms
+    * cctv
+    * hvac
+    * power supplies
+    * fire detection and surpression
+* physical
+  * protect objects
+    * fencing
+    * lightning
+    * locks
+    * mantraps
+    * dogs
+
 | Logical security controls | Physical Security |
 | ------------------------- | ----------------- |
 | preventive                | deter             |
@@ -755,15 +849,15 @@ CPTED: Crime Prevention Through Environmental Design
 
 
 
-Grading: refers to the slope of the ground. Slope away form building for water.
+**Grading**: refers to the slope of the ground. Slope away form building for water.
 
-Bollards: Pfosten
+**Bollards**: Pfosten
 
-Mantrap: double set of doors or turnstile
+**Mantrap**: double set of doors or turnstile
 
 * prevent tailgaiting
 
-Locks: are delay controls! Do not prevent access
+**Locks**: are <mark style="color:$primary;">delay controls</mark>! Do not prevent access
 
 Windows:
 
@@ -772,44 +866,56 @@ Windows:
 
 
 
-Power, Ping and Pipe
+## Power, Ping and Pipe
 
-|                                | Short period (millisec) | Longer periods (sec+) |
-| ------------------------------ | ----------------------- | --------------------- |
-| No Power                       | Fault                   | Blackout              |
-| low voltage (not enough power) | Sag / Dip               | Brownout              |
-| high voltage (too much power)  | Spike                   | Surge                 |
-|                                |                         |                       |
+|                                    | Short period (millisec)                        | Longer periods (sec+)                         |
+| ---------------------------------- | ---------------------------------------------- | --------------------------------------------- |
+| **No Power**                       | <mark style="color:$primary;">Fault</mark>     | <mark style="color:$primary;">Blackout</mark> |
+| **low voltage** (not enough power) | <mark style="color:$primary;">Sag / Dip</mark> | <mark style="color:$primary;">Brownout</mark> |
+| **high voltage** (too much power)  | <mark style="color:$primary;">Spike</mark>     | <mark style="color:$primary;">Surge</mark>    |
+|                                    |                                                |                                               |
 
-HVAC: temp and humidty control for sake of people equipment and areas of a build that may require specific temperature and humidity
+HVAC: temp and humidity control for sake of people equipment and areas of a build that may require specific temperature and humidity
 
-### Data centers optimal
+## Fence
 
-|             |     |     |
-| ----------- | --- | --- |
+3-4 feet - \~1m deter casual trespasser\
+6-7 feet -  \~1.8m hard to climb easily\
+8 feet (w/ barbed wire) - 2.4m - will deter intruders
+
+Lights
+
+8 feet high / 2 feet candle power
+
+## Data centers optimal
+
 | Temperature | 18C | 27C |
+| ----------- | --- | --- |
 | Humidity    | 40% | 60% |
 
+Too much humidty: corrosion. \
+Too little humidty: static electricity
 
+## Fire
 
 Fire needs 3 parts: Fuel, Oxygen, heat
 
-Flame detectors: Detected infrared and UV light. Not good for early detection.\
-Smoke Ionization: radioactive material, ionizes particles that flow bbetween two metal plates. smoke ionization process will be disrupted. Responds quick to flaming/fast fires\
-Smoke Photoelectronic / Optical: ligh source and a sensor. off-angle light will be refracted more directly into sensor. responds more quickly to smoldering fires.\
-Smoke Dual: Most sensor today incorperate both ionization and optical sensor.\
+### Fire detection
+
+**Flame detectors**: Detected infrared and UV light. Not good for early detection.\
+**Smoke Ionization**: radioactive material, ionizes particles that flow bbetween two metal plates. smoke ionization process will be disrupted. Responds quick to flaming/fast fires\
+**Smoke Photoelectronic / Optical**: ligh source and a sensor. off-angle light will be refracted more directly into sensor. responds more quickly to smoldering fires.\
+**Smoke Dual:** Most sensor today incorperate both ionization and optical sensor.\
 Smoke Veda: Best known. Most expensive, but the best. Very Ealry Smoke Detection Apparatus. for very-high value equipment or assets.
 
 Heat detector: Slow, very ineffective early detection tools.
 
-
-
-Fire Suppression: wet pipe, dry pipe, pre-action and deluge.
+### Fire surpression
 
 **Wet pipe**: Filled with pressurized water. Cheapest solution. Risk of leaks. Freezing risks.\
 **Dry pipe**: Filled with some type of pressured gas. Allows the fill the pipes very fast with water.\
-**Pre-action**: Will active only on floor where theres actually a fire. Additionally, each sprinkler is activated by heat.\
-**Deluge:** Flows out every sprinkler head. High risk environments like fireworks or explosives factory.
+**Pre-action**: Will active only on floor where theres actually a fire. Additionally, each sprinkler is activated by heat. Good for people and computers. charged with compressed air.\
+**Deluge:** Flows out every sprinkler head. High risk environments like fireworks or explosives factory. sprinklers are open, pipes are empty, water is hold back by a deluge valve
 
 Gas based fire suppression systems:
 
@@ -817,33 +923,46 @@ Gas based fire suppression systems:
 * typically no damage to equipment
 * remove oxygen or interrypt the chemical process.
 * can kill everybody in a room!
-* commonly used gases: INERGEN, Argonite, FM200 and Aero-K
-* Halon gas was popular no illegal (environmental damage)
+* commonly used gases: <mark style="color:$primary;">INERGEN, Argonite, FM200 and Aero-K</mark>
+* <mark style="color:$primary;">Halon</mark> gas was popular now illegal (environmental damage)
 
-|          |                                                                                                                                   |   |
-| -------- | --------------------------------------------------------------------------------------------------------------------------------- | - |
-| INERGEN  | replacement for Halogen. reduces oxygen concentraion. Same time allows breathable atmosphere.                                     |   |
-| Argonite | mixture of argon and nitrogen. Does not endanger human life.                                                                      |   |
-| FM-200   | clean agent. Does not endanger human life. Does not leave residue (typically found in DC)                                         |   |
-| Aero-K   | ultrafine, potassium-based aerosol can quickly supress fire.                                                                      |   |
-| CO2      | <p>Not corrosive to expensive equipment. Too much is used could kill people, because it removes oxygen.<br>Not commonly used.</p> |   |
+|          |                                                                                                                                   |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| INERGEN  | replacement for Halogen. reduces oxygen concentraion. Same time allows breathable atmosphere.                                     |
+| Argonite | mixture of argon and nitrogen. Does not endanger human life.                                                                      |
+| FM-200   | clean agent. Does not endanger human life. Does not leave residue (typically found in DC)                                         |
+| Aero-K   | ultrafine, potassium-based aerosol can quickly supress fire.                                                                      |
+| CO2      | <p>Not corrosive to expensive equipment. Too much is used could kill people, because it removes oxygen.<br>Not commonly used.</p> |
 
 NFPA 12 therefore mandates **pre-discharge horns, voice messages, and a 30–60 s time delay** so occupants can escape before the gas dumps
 
-Fire extinguishers
+### Fire extinguishers
 
-| Class                         | Typical fuel involved                                                                                       | Primary suppression agents you’ll find inside the extinguisher |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| **A**                         | **Ordinary combustibles**: wood, paper, cloth, trash, many plastics                                         | Water, foam, dry chemicals                                     |
-| **B**                         | **Flammable liquids & gases**: gasoline, oil, solvents, alcohol, grease, propane                            | Gas, CO2, foam, dry chemicals                                  |
-| **C**                         | **Energized electrical equipmen**t: panels, motors, servers, wiring runs                                    | Gas, CO2, dry chemicals                                        |
-| **D**                         | **Combustible metals**: magnesium, sodium, potassium, titanium, zirconium, lithium-ion battery anodes, etc. | Dry powders                                                    |
-| **K** (U.S.) / **F** (Europe) | Commercial **cooking** oils & fats: deep-fat fryers, salad-oil, lard                                        | Wet chemicals                                                  |
-|                               |                                                                                                             |                                                                |
+| Class                                                                       | Typical fuel involved                                                                                       | Primary suppression agents you’ll find inside the extinguisher |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| **A (Ash)**                                                                 | **Ordinary combustibles**: wood, paper, cloth, trash, many plastics                                         | Water, foam, dry chemicals                                     |
+| **B (Boil)**                                                                | **Flammable liquids & gases**: gasoline, oil, solvents, alcohol, grease, propane                            | Gas, soda acid, CO2, foam, dry chemicals                       |
+| **C (Conductive)**                                                          | **Energized electrical equipmen**t: panels, motors, servers, wiring runs                                    | Gas, CO2, dry chemicals                                        |
+| **D (Dilythium)**                                                           | **Combustible metals**: magnesium, sodium, potassium, titanium, zirconium, lithium-ion battery anodes, etc. | Dry powders                                                    |
+| <p><strong>K</strong> (U.S.) / <strong>F</strong> (Europe)<br>(Kitchen)</p> | Commercial **cooking** oils & fats: deep-fat fryers, salad-oil, lard                                        | Wet chemicals                                                  |
+|                                                                             |                                                                                                             |                                                                |
 
-Etc
+### Electromagnetic interference
 
-(domain 8 material)
+* <mark style="color:$primary;">common</mark> mode noise: generated by difference in power between hot and ground wires
+* <mark style="color:$primary;">traverse</mark> mode noise: generated by difference in power between hot and neutral wires
+
+
+
+
+
+
+
+
+
+## Other
+
+
 
 SIEM: Security Information Event Manager
 
@@ -862,4 +981,30 @@ CASB: Cloud access security broker
 
 * security policy enforcement solution that may be installed on-prem or in the cloud
 * shadow it prevention
+
+
+
+**Multiprogramming**: multitasking but takes place on mainframe systems
+
+**single state processing**: processors are capable of operating at only one security level at a time
+
+multistate processing: can operate at multiple security levels at once. less common
+
+user mode: limited instruction set
+
+privileged mode: aka system mode, kernel mode, supervisory mode. Controlled system operations.
+
+primary storage: ram
+
+secondary storage: magnetic, flash, optical media
+
+Layering: different realms of security <mark style="color:$primary;">within a process</mark> and limits communication between them
+
+Type 1 hypervisor: native or bare-metal hypervisor. no host os
+
+Type 2 hypervisor: regular os is present, installed as another software application.
+
+CASB: cloud access security broker (CASB). Shadow it. installed on-prem or in the cloud.
+
+
 
