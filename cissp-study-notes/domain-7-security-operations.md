@@ -7,7 +7,7 @@ icon: user-helmet-safety
 Securing the scene
 
 * sealing off access
-* taking phots
+* taking photos
 * documenting location of evidence
 * avoid touching anything
 
@@ -17,9 +17,9 @@ once evidence has been contaminated, it can't be decontaminated
 
 
 
-Evidence collecting
+## Evidence collecting
 
-Evidence Sources:
+### Evidence Sources
 
 |                         |                                                                    |   |
 | ----------------------- | ------------------------------------------------------------------ | - |
@@ -28,7 +28,7 @@ Evidence Sources:
 | Computer systems        | Whole system, including peripherals                                |   |
 | Visual/Audio            | phtos, videos, surveillance footage                                |   |
 
-Type of evidence
+### Type of evidence
 
 |                         |                                                                                                                                         |   |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | - |
@@ -42,21 +42,21 @@ Type of evidence
 
 
 
-MOM: Motive Opportunity Means
+### MOM: Motive Opportunity Means
 
-serves as a guide when conducitn g an investigation.&#x20;
+serves as a guide when conducting an investigation.&#x20;
 
 * What might have motivated the suspect?
-* Did supect have the opportunity to perpetrate the crime
+* Did suspect have the opportunity to perpetrate the crime
 * Did the suspect have means (die Mittel)
 
 
 
-Locard's Exchange Principle:
+## Locard's Exchange Principle
 
 with every crime, something is taken and left behind
 
-fingerprints, dna,&#x20;
+fingerprints, dna
 
 
 
@@ -68,26 +68,27 @@ forensic copy: bit-for-bit copy of a digital media source
 
 
 
-Mobile device forenciscs is hard:
+## Mobile device forensics
 
-* manufacturers frequently change OS strucutre, file structure, sr5evices
+* is hard!
+* manufacturers frequently change OS structure, file structure, services
 * No single method or tool
-* hibernation and supsension of apps
+* hibernation and suspension of apps
 * extensive new training for examiners
 
 
 
-Reporting and Documentation
+## Reporting and Documentation
 
 * document every step
-* most relevant evidence should be documentated for the sake of use by all relevant stakeholders:
+* most relevant evidence should be documented for the sake of use by all relevant stakeholders:
   * Prosecution/Defense
   * Judge/Jury
   * Regulators
   * Investors
   * Insurers
 
-Artifacts
+## Artifacts
 
 * remnants of a breach or attempted breach
 * breadcrumbs can potentially lead back to an intruder
@@ -148,11 +149,11 @@ Types of investigations
 
 
 
-Logging and monitoring
+## Logging and monitoring
 
 SIEM: Security Information and Event Management
 
-Siem capabilities:
+SIEM capabilities:
 
 * Aggregation
 * Normalization
@@ -163,16 +164,19 @@ Siem capabilities:
 
 
 
-Threat intelligence:&#x20;
+## Threat intelligence / Threat feeds
 
 * subscription
 * threat research and analysis and emerging threat trends
 
-UEBA: User and Entity Behavior Analytics
 
+
+**UEBA**: User and Entity Behavior Analytics
+
+* entity behavior is collected and input into a threat model
 * typically included with SIEM solutions
-* monitors the behvior and patterns of users and entities, logs and corelates the underlying data, tiggers alerts
-* Baseline
+* monitors the behavior and patterns of users and entities, logs and correlates the underlying data, triggers alerts
+* <mark style="color:$primary;">Baseline</mark>
 * Machine learning
 * behavioral shifts and anomalies
 
@@ -182,7 +186,7 @@ continues monitoring
 
 * Define
 * Establish
-* IMplment
+* Implement
 * Analyze/Report
 * Respond
 * Review/update
@@ -201,32 +205,32 @@ Reasons:
 
 
 
-Security Orchestration, Automation and Response (SOAR)
+## Security Orchestration, Automation and Response (SOAR)
 
-0take input from SIEM, user submission, manual input and apply rules and workflows
+* take input from SIEM, user submission, manual input and apply rules and workflows
 
 three key areas:
 
 * Threat and vulnerability management
-* Incident reponse
+* Incident response
 * Security operations automation
 
 
 
-Configuration management
+## Configuration management
 
 asset management lifecycle:
 
 * plan
 * request
 * procure
-* recieve
+* receive
 * manage
 * retire
 
 
 
-Configuration management:
+## Configuration management
 
 integral part of secure provisioning
 
@@ -242,29 +246,33 @@ automated provisioning tools can help to ensure consistency
 
 Device configuration should be documented and reviewed on a periodic basis.
 
-* identify assets to kepp under conrol
+* identify assets to keep under control
 * configure assets
 * document config
 * verify config
 
 
 
-Foundational security operations concepts
+## Foundational security operations concepts
 
 * need to know
-  * restrict users knowledge (acces to data) required to perform their role
+  * restrict users knowledge (access to data) required to perform their role
 * least privilege
   * restrict user's actions/privileges to only those required
+  * limit the scope if account gets compromised
 * separations of duties and responsibilities (sod)
-* privileged account management
+  * prevents collusion
 * job rotation
+  * employees rotate to different jobs
+  * prevents collusion
+* privileged account management
 * SLAs
 
 
 
-Protecting media
+## Protecting media
 
-MTBF important criterion when avaluating storage media, especially for valuable or sensitive information
+MTBF important criterion when evaluating storage media, especially for valuable or sensitive information
 
 Data is one of the most important assets
 
@@ -424,7 +432,7 @@ Fail-Soft / Fail-Open
 
 Fail-Secure / Fail-Close
 
-* fail into state of same or greate security.
+* fail into state of same or greater security.
 
 Fail-Safe
 
@@ -447,8 +455,8 @@ Backup Storage Strategies
 
 Archive Bit:&#x20;
 
-* Stored in the metada of a file. (Windows FS). Cleared when File was archived/backed up.
-* Reset everytime a file is written
+* Stored in the metadata of a file. (Windows FS). Cleared when File was archived/backed up.
+* Reset every time a file is written
 
 
 
@@ -464,11 +472,11 @@ Redundancy: primary and secondary standby system.
 
 Recovery Site Strategies
 
-paramters: people, data, infrastructure and cost
+parameters: people, data, infrastructure and cost
 
 Geographically remote and geographic disparity
 
-Cold Site < Warm Site < Hot Site < Redundand site
+Cold Site < Warm Site < Hot Site < Redundant site
 
 cold site
 
@@ -687,7 +695,7 @@ BCP and DRP
 
 
 
-Goals of BCM
+## Goals of BCM
 
 three goals:
 
@@ -697,13 +705,37 @@ three goals:
 
 
 
-Employee under Duress: threats violence, constrains to do something agains their will or better judgment.
+Employee under Duress: threats violence, constrains to do something against their will or better judgment.
 
-* use of codewords
-
-
+* use of code words
 
 
+
+## Information lifecycle
+
+Creation
+
+* can be created by users or systems
+
+Classification
+
+* to ensure it's handled properly
+
+Storage
+
+* protected by adequate security controls based on classification
+
+Usage
+
+* data is in use, or transferred over the network
+
+Archive
+
+* comply with laws or regulations
+
+Destruction
+
+* destroy in a way it's not readable
 
 
 
