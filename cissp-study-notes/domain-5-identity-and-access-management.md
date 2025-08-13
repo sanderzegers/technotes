@@ -4,6 +4,10 @@ icon: fingerprint
 
 # Domain 5: Identity & Access Management
 
+Network access server: is a <mark style="color:$primary;">client</mark> to a radius server
+
+pass-the-hash: NTLM!
+
 Access control is the collection of mechanism that work together to protect the assets of an organization and, at the same time, allow controlled access to authorized subjects
 
 * specify which **users** can access the system
@@ -13,13 +17,16 @@ Access control is the collection of mechanism that work together to protect the 
 
 
 
-Fundamental access control principles
+## Fundamental access control principles
 
 * Need to know
 * Least privilege
 * Separation of Duties (prevent error and fraud)
 
+More granular approach to least privilege:
 
+* Just-in-time
+  * temporary elevation of privilege (usually time-limited)
 
 Access control concerns ALL assets:\
 Facilities, Systems/Devices, Information, Personnel, Applications
@@ -45,7 +52,9 @@ Logical Access Modes: Action permissions that can be applied to an object:
 
 
 
-Groups vs Roles: two different approaches
+## Groups vs Roles
+
+two different approaches
 
 Role: set of permissions that is usally associated with a specific job.\
 focused around the function of the job.
@@ -76,12 +85,14 @@ Kim Cameron’s **Seven Laws of Identity** (2005)
 
 
 
-Access control service: identification, authentication, authorization, accountability (IAAA)
+Access control service:&#x20;
+
+identification, authentication, authorization, accountability (IAAA)
 
 User identification needs to be:
 
 * unique
-* nondescriptive of rule (admin)
+* non-descriptive of rule (admin)
 * issued and used securely (password manager)
 
 3FA: you know, you have, you are
@@ -92,12 +103,12 @@ Asynchronous not very common. Server sends challenge. (synchronization makes thi
 
 Synchronous: Without challenge user sends tokens (TOTP)
 
+## Biometrics
 
+CER (**Crossover Error Rate**) measures accuracy of biometric system. Intersection between type 1 error (false reject) and type 2 error (false acceptance)
 
-CER (Crossover Error Rate) measures accuracy of biometric system. Intersection between type 1 (false reject) and type 2 (false acceptance)
-
-FFR (false rejection rate)\
-FAR (false acceptance rate) in percentage
+**FFR:** (false rejection rate)\
+**FAR:** (false acceptance rate) in percentage
 
 good biometric systems will use one-wy mathematical functions to create a represention: template.\
 biometric data should never be stored.
@@ -105,12 +116,26 @@ biometric data should never be stored.
 1:N for identification. Looks up fingerprint in DB\
 1:1 for authentication. Compares fingerprint with already partial logged in user
 
-Iris scanner scans colored ring around an eye\
-Retina scanner scans vein pattern at the back of the eye. Most accurate biometric auth system. scanning is rather unpleasent. Rubber eye cup & Flashlight.  Can reveal medical issues.
+**Iris scanner** scans <mark style="color:$primary;">colored</mark> ring around an eye\
+**Retina scanner** scans <mark style="color:$primary;">vein</mark> pattern at the back of the eye. Most accurate biometric auth system. scanning is rather unpleasent. Rubber eye cup & Flashlight.  Can reveal medical issues.
 
 Behavioral: Voice, Signature (writing), Keystroke, Gait (how person walks)
 
+## Single Sign-on
 
+Common SSO methods:
+
+* SAML
+  * XML based
+  * common in federation scenarios
+* OAuth 2.0
+  * open standard
+* OpenID
+  * decentralized authentication
+* KryptoKnight
+* SESAME
+
+## Kerberos
 
 SESAME is Kerberos successor&#x20;
 
@@ -191,7 +216,7 @@ Common capabilities:
 
 
 
-Identity types
+## Identity types
 
 |                    | Account stored in                      | Authenticated against |
 | ------------------ | -------------------------------------- | --------------------- |
@@ -218,27 +243,27 @@ Three different philosophies and methodologies:
 
 
 
-Access Control Summary:
+## Access Control Summary
 
-|                                                          |                                                                                     |   |
-| -------------------------------------------------------- | ----------------------------------------------------------------------------------- | - |
-| Discretionary Access Control (DAC)                       | Owner determines access rules                                                       |   |
-| <ul><li>Role-Based Access Control (RABC)</li></ul>       | Access to resources is based on user roles (firewall admin, accounts payable clerk) |   |
-| <ul><li>Rule-Based Access Control (ABAC)</li></ul>       | Access to resources is based on a set of rules (ACL)                                |   |
-| <ul><li>Attribute-Based Access Controls (ABAC)</li></ul> | Access is based on attributes (OS browser, IP address)                              |   |
-| Mandatory Access Control (MAC)                           | Systems determines access rules based on **labels.**                                |   |
-| Risk-Based Access Control                                | Risk profil based on (ip address, time of access, type of access request)           |   |
+|                                        |                                                                                                                       |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Discretionary Access Control (DAC)     | Owner determines access rules                                                                                         |
+| Role-Based Access Control (RABC)       | Access to resources is based on user roles (firewall admin, accounts payable clerk)                                   |
+| Rule-Based Access Control (ABAC)       | Access to resources is based on a set of rules (ACL)                                                                  |
+| Attribute-Based Access Controls (ABAC) | <p>Access is based on multiple attributes (OS browser, IP address)<br>often used by software-defined networks</p>     |
+| Mandatory Access Control (MAC)         | <p>Systems determines access rules based on <strong>labels.</strong> <br>aka <strong>lattice-based</strong> model</p> |
+| Risk-Based Access Control              | Risk profil based on (ip address, time of access, type of access request)                                             |
 
 
 
-Rule-Based Access Control
+## Rule-Based Access Control
 
 A single rule for every user and single asset.\
 Very granular control but very high admin effort
 
 
 
-Role-Based Acccess
+## Role-Based Acccess
 
 Assign users to roles/groups
 
@@ -286,13 +311,45 @@ Access policy enforcement:
 
 Vendor provisioning might include a security review component.
 
+## Security Controls
 
+can be implemented <mark style="color:$primary;">administratively</mark>, <mark style="color:$primary;">logically/technically</mark> or <mark style="color:$primary;">physically</mark>
 
-Identity life cycle:
+types:
+
+* **preventative**
+* **detective**
+* **corrective**
+* deterrent
+* compensating
+* directive
+* recovery
+
+Examples:
+
+|                   |                                                                     |                                                                                                       |
+| ----------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| logical/technical | hardware or software mechanisms                                     | encryption, smartcards, passwords, constrained interaces, ACLS, firewsalls, IDS, clipping levels      |
+| physical          | provide protection to facility and real-world objects               | guards, fences, lights, motion detectors, locked doors                                                |
+| administrative    | policies and procedures. two areas: personnel and business practice | hiring practices, background checks, data classification, security training, vacation history, review |
+
+clipping level: ignore some user errors but take action after reaching a threshold. ex. , lock account after 4 wrong passwords
+
+|              |                                                                                                         |                                                                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| preventative | stop unwanted and unauthorized activity from occurring                                                  | fences, locks, biometrics, mantraps, alarm systems, job rotation, data classification, pen testing, access control                 |
+| detective    | discover unwanted or unauthorized activity                                                              | security guards, guard dogs, motion detectors, job rotation, mandatory vacations, audit trials, ids, violation reports, honey pots |
+| corrective   | restore system to normal after unwanted or unauthorized activity                                        | ids, antivirus, alarms, mantraps, bcp, security policies                                                                           |
+| compensating | provide options to other existing controls to aid in the enforcement and support of a security policy   | disaster recovery plan with an alternative office                                                                                  |
+| directive    | direct, confine, or control the action of subject to force or encourage compliance with security policy | security guards, guard dogs, security policy, posted notifications, escape route exit signs, supervising, awareness training       |
+| recovery     | repair or restore resources, functions                                                                  | backups and restore, raid, clustering, av, database shadow                                                                         |
+| deterrent    | discourage the violation of security policy                                                             | locks, fences, security badges, mantraps, cameras                                                                                  |
+
+## Identity life cycle
 
 Provision
 
-* backgorund check, conirming skill, id proof
+* background check, confirming skill, id proof
 
 Review
 
@@ -308,4 +365,9 @@ Revocation
 
 Service Account Management
 
-* limit to signle purpose, reduce privileges
+* limit to single purpose, reduce privileges
+
+
+
+Tempest: allows to read from electronic emanations that every monitor procedures (CRT Monitors)
+

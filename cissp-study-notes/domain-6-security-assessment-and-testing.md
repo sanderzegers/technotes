@@ -4,7 +4,19 @@ icon: stethoscope
 
 # Domain 6: Security Assessment & Testing
 
-The purpose of security assessment and testing is to ensure that security requirements/controls are defined, tested and operating effectively.
+The purpose of security assessment and testing is to ensure that security requirements/controls are defined, tested and operating effectively.\
+ongoing process!
+
+* vulnerability assessments
+  * search for known vulnerabilities
+* penetration tests, software testing
+  * same tools but supplements them with attack techniques, and vulnerability exploitation
+* audits
+* security management tasks
+
+Every organization should have a security assessment and testing program defined and operational
+
+
 
 **Validation**: Are we building the right product?
 
@@ -24,9 +36,9 @@ The 3 Cs: (co-co-co)
 
 
 
-Security assessment and testing: provide assurance regarding the architecture, aplication or system beign tested
+Security assessment and testing: provide assurance regarding the architecture, application or system being tested
 
-Effort to invest in testing should be proprionate to the value the application or system represents to the org
+Effort to invest in testing should be proportionate to the value the application or system represents to the org
 
 
 
@@ -45,7 +57,7 @@ Role of security professional:
 
 
 
-Security Control Testing
+## Security Control Testing
 
 Software Testing: unit testing, interface testing, integration testing, system testing
 
@@ -62,24 +74,24 @@ Software Testing Stages
 | Operate           | Config management review. Vulnerability management and log analysis                                                                                        |
 | Retire            | Test data has been migrated to new system. safely disposing from old one                                                                                   |
 
+## Static vs dynamic testing
 
-
-SAST: Static Application Security Testing.
+**SAST**: Static Application Security Testing.
 
 * Source Code analysis
 
-DAST: Dynamic Application Security Testing
+**DAST**: Dynamic Application Security Testing
 
 * App is running
 * black box testing, code not visible
 
-Fuzz Testing
+## Fuzzer
+
+**Fuzz Testing**
 
 * chaos, randomness
 
 
-
-Fuzzer:
 
 * mutation (dumb fuzzers)
   * fliping bits or appending/replacing additional random input
@@ -88,7 +100,7 @@ Fuzzer:
 
 
 
-Test Types:
+## Test Types
 
 * positive testing
   * normal user input
@@ -146,7 +158,7 @@ State-based Analysis
 
 
 
-Vulnerabillity testing: automatic\
+Vulnerability testing: automatic\
 Pentesting: manual, can take several days
 
 
@@ -177,11 +189,11 @@ Effective vulnerability management:
 * asset inventory
   * value of each asset
   * identified owner for each asset
-  * assigned classificaiton and categorization for each asset
-* vulnerability for each asset and remdiation plans
+  * assigned classification and categorization for each asset
+* vulnerability for each asset and remediation plans
 * ongoing review and assessment
 
-
+## CVS & CVSS
 
 CVE: Common vulnerability & Exposure
 
@@ -196,7 +208,17 @@ CVSS: Common Vulnerability Scoring System
 
 
 
-Log Review and Analysis
+## Security Management Oversight
+
+Security Managers must perform activities to retain oversight over the infosec program
+
+* log review
+* account management review
+* backup verification
+* key performance and risk indicators
+  * high-level view of security program effectiveness
+
+## Log Review and Analysis
 
 Log should:
 
@@ -228,7 +250,7 @@ Operational testing:
 
 Regression Testing:
 
-* &#x20;process of verifying that previously tested and functional software still works after updates
+* process of verifying that previously tested and functional software still works after updates
 * perform after enhancements or patches
 
 Reports depends on reader (ceo, app team)
@@ -304,21 +326,31 @@ Security Assement and testing report should include steps related to:
 | Exception Handling | Exceptions should be documented and reasoned. (ex. too much cost)                                                                                       |   |
 | Ethical disclosure | it's important that newly discovered vulnerabilities be shared to the extent necessary to protect anybody who may be exposed the the same vulnerability |   |
 
-
+## Internal and External Audit
 
 Audit:
 
 * internal
+  * performed by an org internal staff
+  * intended for management use
 * external
-* 3rd party
+  * performed by 3rd party (big 4)
+  * generally intended for the organization's governing body and investors
+*   3rd party
 
-Internal audits involve employees focused on organizational processes
+    * audits conducted by or on behalf of another organization
+
+
+
+Internal audits involve internal employees focused on organizational processes
 
 External Audits involve employees focusing on vendor processes
 
 3rd party audits involve independent auditors focusing on vendor processes
 
 Often times a hybrid approach is applied
+
+Test tip: Assume audit is 3rd party unless question says otherwise
 
 
 
@@ -385,7 +417,7 @@ Startups normally start with type 1 to identifiy missing controls, gaps, etc. Th
 
 
 
-Audit Roles and Responsibilities
+## Audit Roles and Responsibilities
 
 Audit roles:
 
