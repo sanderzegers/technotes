@@ -16,15 +16,18 @@ ongoing process!
 
 Every organization should have a security assessment and testing program defined and operational
 
+## Verification vs Validation
+
+The focus of this phase is to confirm the system meets intended requirements (**verification**)\
+and addresses the overall business/stakeholder needs (**validation**)
 
 
-**Validation**: Are we building the right product?
 
-**Verification** follow validation: Are we building the product correctly
+**Verification** = **"Right process?"** → Engineering and specification focus.
 
+**Validation** = **"Right product?"** → User/business/security need focus.
 
-
-Validation happens prior to an application or product being built.
+Verification happens prior to an application or product being built.
 
 The 3 Cs: (co-co-co)
 
@@ -159,7 +162,7 @@ State-based Analysis
 
 
 Vulnerability testing: automatic\
-Pentesting: manual, can take several days
+Pentesting: can take several days, combine automated tools _and_ manual exploitation with different objectives (prove impact, chaining, post-exploitation)
 
 
 
@@ -172,6 +175,8 @@ Threat modeling methodologies:
 
 Penetration test steps:
 
+* authorization & ROE
+* scoping
 * Reconnaissance (gather public info)
 * Enumeration (enumerate through target (IPs, ports, etc)
 * Vulnerability Analysis (Identify potential vulnerabilities)
@@ -182,7 +187,7 @@ Penetration test steps:
 
 Blind testing: assessor is given little to no information.
 
-Double-Blind testing: assessor is given little to no information + SECOPS Teams are informed about upcoming test. Usually only senior-management
+Double-Blind testing: assessor is given little to no information + defenders are not informed. Usually only senior-management
 
 Effective vulnerability management:
 
@@ -193,18 +198,19 @@ Effective vulnerability management:
 * vulnerability for each asset and remediation plans
 * ongoing review and assessment
 
-## CVS & CVSS
+## CVE & CVSS
 
 CVE: Common vulnerability & Exposure
 
-* ensures that each vulnerability is only identified and recorded one time
+* CVE’s mission is to **assign a unique ID** for publicly disclosed vulnerability
 
 CVSS: Common Vulnerability Scoring System
 
-* Framework that uses mertric and characteristics to provide an average score of how severe a vulnerability is.
+* Framework that uses metric and characteristics to provide an **calculated severity score** from defined metrics
 * 0 - 10
-* CVSS rating added by Vendor, or added 1 hour after CVE gets published
-  * Nist NVD always calculates own CVSS rating
+* CVSS rating added by Vendor, after CVE gets published
+  * Nist NVD calculates own CVSS rating
+* CVSS 4.0 is the current spec
 
 
 
@@ -331,14 +337,14 @@ Security Assement and testing report should include steps related to:
 Audit:
 
 * internal
-  * performed by an org internal staff
+  * by or on behalf of the organization itself.
   * intended for management use
 * external
   * performed by 3rd party (big 4)
   * generally intended for the organization's governing body and investors
 *   3rd party
 
-    * audits conducted by or on behalf of another organization
+    * a **customer** (or someone on their behalf) audits a **supplier/vendor**.
 
 
 
@@ -396,7 +402,7 @@ Type 2 report
 * **control effectiveness over a period of time**
 * Checks entries in change requests for example.
 
-SOC 2, Type 2 most desirable report for security professionals!!
+SOC 2, Type 2 most commonly requested report for security professionals!!
 
 Startups normally start with type 1 to identifiy missing controls, gaps, etc. The years after it will be Type 2 report.
 
