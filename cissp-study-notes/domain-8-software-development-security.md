@@ -19,7 +19,7 @@ Testing should include:
 
 Certification and accreditation should be performed prior to release/deployment/implementation
 
-|                         |                                   |                                                |
+| SDLC phases             |                                   |                                                |
 | ----------------------- | --------------------------------- | ---------------------------------------------- |
 | Initiation              | Initiation (plan + mgmt approval) |                                                |
 |                         | Requirements                      | Risk Analysis                                  |
@@ -34,7 +34,7 @@ SDLC = Initiation + Development + Implementation
 
 SLC = SDLC + Operation + Disposal
 
-## Systems development modules
+## Systems development models
 
 |                                    |                                                                                                                                                                                                                                           |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -63,17 +63,19 @@ SLC = SDLC + Operation + Disposal
 * CMMI (Capability Maturity Model Integration)
   * one of most popular
 
-
-
 CMMI:
 
 * set of best practices focus on building key capabilities and benchmarking
 
 5-step model for measuring software development in organizations:
 
-<table><thead><tr><th width="176">Maturity Level</th><th></th><th></th><th>Processes are</th></tr></thead><tbody><tr><td>0: Incomplete</td><td></td><td>phase is unkown and ad hoc, work may not be getting completed</td><td>unknown and adhoc</td></tr><tr><td>1: Initial</td><td>No plan</td><td>reactive and unpredictable stage. Work is getting finished, often coming over budge and late</td><td>reactive and unpredictable</td></tr><tr><td>2: Repeatable</td><td>Basic lifecycle management</td><td>projects are managed and planned. Task are performed, key metric are taken</td><td>managed at the project level</td></tr><tr><td>3: Defined</td><td>formal, documented SW development process</td><td>Org is pro-active. Standard across the org that guide programs, portfolios and projects</td><td>proactive, not reactive</td></tr><tr><td>4: Managed</td><td>Quantitatively Managed</td><td>Controlled and measured stage. Org is driven by data, us it to measure performance improvement objectives. Objectives meet the needs of stake holders</td><td>controlled and measured</td></tr><tr><td>5: Optimizing</td><td>continous development process, w/ feedback loops . CI/CD</td><td>stage is flexible and stable. Org is focused on continually improving. Able to pivot when change and opportunity presents themselves</td><td>stable and flexibel</td></tr></tbody></table>
+### <mark style="color:$primary;">SW-CCM Stages (level 1 - 5)</mark>
 
-## IDEAL model
+sw-ccm = cmm = scm
+
+<table><thead><tr><th width="176">Maturity Level</th><th width="182"></th><th></th><th>Processes are</th></tr></thead><tbody><tr><td>0: Incomplete</td><td></td><td>phase is unkown and ad hoc, work may not be getting completed</td><td>unknown and adhoc</td></tr><tr><td>1: <strong>Initial</strong></td><td>No plan</td><td>reactive and unpredictable stage. Work is getting finished, often coming over budge and late</td><td>reactive and unpredictable</td></tr><tr><td>2: <strong>Repeatable</strong></td><td>Basic lifecycle management</td><td>projects are managed and planned. Task are performed, key metric are taken</td><td>managed at the project level</td></tr><tr><td>3: <strong>Defined</strong></td><td>formal, documented SW development process</td><td>Org is pro-active. Standard across the org that guide programs, portfolios and projects</td><td>proactive, not reactive</td></tr><tr><td>4: <strong>Managed</strong></td><td>Quantitatively Managed</td><td>Controlled and measured stage. Org is driven by data, us it to measure performance improvement objectives. Objectives meet the needs of stake holders</td><td>controlled and measured</td></tr><tr><td>5: <strong>Optimizing</strong></td><td>continous development process, w/ feedback loops . CI/CD</td><td>stage is flexible and stable. Org is focused on continually improving. Able to pivot when change and opportunity presents themselves</td><td>stable and flexibel</td></tr></tbody></table>
+
+## <mark style="color:$primary;">IDEAL model</mark>
 
 guides organizations through continuous improvement—perfect for rolling out or maturing a security program
 
@@ -84,6 +86,8 @@ guides organizations through continuous improvement—perfect for rolling out or
 | **E**stablishing | Org takes recommendations & <mark style="color:$primary;">develops plan</mark> to achieve those changes                          |   |
 | **A**cting       | <mark style="color:$primary;">Plan put into action</mark>. Org develops solutions, tests, refines & implements                   |   |
 | **L**earning     | Org <mark style="color:$primary;">continuously analyzes efforts and results</mark>, proposes new actions to drive better results |   |
+
+### SAMM Model
 
 OWASP's Software Assurance Model (SAMM):
 
@@ -156,11 +160,11 @@ Integrated Product Team
 
 Fancy word for DevOps.
 
-Goal: create a more agile and repsonsive environment
+Goal: create a more agile and responsive environment
 
-improve colaboration,&#x20;
+improve collaboration,&#x20;
 
-Incorporate security into devops:
+Incorporate security into DevOps:
 
 * plan for security
 * strong engagement between developers, operations and security
@@ -223,15 +227,28 @@ Hide or obscure code to protect it from unauthorized viewing
 
 
 
-| ... obfuscation |                                                                                                         |                                                                                                      |
-| --------------- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Lexical         | modifies the look of the code                                                                           | <ul><li>change comments</li><li>removeing debugging info</li><li>change format of the code</li></ul> |
-| data            | modifies the data structure                                                                             |                                                                                                      |
-| control flow    | modify flow of control (reordering statements, methods, loops, create irrelevant conditional statements |                                                                                                      |
+| ... obfuscation |                                                                                                         |                                                                                                     |
+| --------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Lexical         | modifies the look of the code                                                                           | <ul><li>change comments</li><li>removing debugging info</li><li>change format of the code</li></ul> |
+| Data            | modifies the data structure                                                                             |                                                                                                     |
+| Control flow    | modify flow of control (reordering statements, methods, loops, create irrelevant conditional statements |                                                                                                     |
 
 
 
+## OOP Terminology
 
+|              |                                                                                                                                                                                             |   |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | - |
+| Message      | communication or input to or from an object                                                                                                                                                 |   |
+| Method       | interal code that defines the actions an object performs in response to a message                                                                                                           |   |
+| Behavior     | Result or output by an object                                                                                                                                                               |   |
+| Class        | Collection of common methods form a set of objects                                                                                                                                          |   |
+| instance     | objects are instances of a class                                                                                                                                                            |   |
+| inheritance  | methos from a class are inherited by another subclass                                                                                                                                       |   |
+| delegation   | forward of a request by an object to another object or delegate                                                                                                                             |   |
+| Polymorphism | characteristic of an ojbect that allows it to respond with different behaviors to the same message or method                                                                                |   |
+| Cohesion     | <p>strength of the relationship between the purposes of the methods within the same class. When all the methods have similar purposes, there is high cohesion.<br>good software design!</p> |   |
+| Coupling     | level of interaction between objects. Lower coupling = better software design. easier to update and troubleshoot                                                                            |   |
 
 ## Database
 
