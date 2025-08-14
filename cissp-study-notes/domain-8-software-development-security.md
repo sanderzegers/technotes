@@ -79,17 +79,19 @@ sw-ccm = cmm = scm
 
 guides organizations through continuous improvement—perfect for rolling out or maturing a security program
 
-|                  |                                                                                                                                  |   |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------- | - |
-| **I**nitiating   | <mark style="color:$primary;">business reasons outlined,</mark> support & infrastructure for initiate put place                  |   |
-| **D**iagnosing   | Engineers <mark style="color:$primary;">analyze current state</mark> of org & make recommendations for change                    |   |
-| **E**stablishing | Org takes recommendations & <mark style="color:$primary;">develops plan</mark> to achieve those changes                          |   |
-| **A**cting       | <mark style="color:$primary;">Plan put into action</mark>. Org develops solutions, tests, refines & implements                   |   |
-| **L**earning     | Org <mark style="color:$primary;">continuously analyzes efforts and results</mark>, proposes new actions to drive better results |   |
+developed by The Software Engineering Institute.
+
+|                  |                                                                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **I**nitiating   | <mark style="color:$primary;">business reasons outlined,</mark> support & infrastructure for initiate put place                  |
+| **D**iagnosing   | Engineers <mark style="color:$primary;">analyze current state</mark> of org & make recommendations for change                    |
+| **E**stablishing | Org takes recommendations & <mark style="color:$primary;">develops plan</mark> to achieve those changes                          |
+| **A**cting       | <mark style="color:$primary;">Plan put into action</mark>. Org develops solutions, tests, refines & implements                   |
+| **L**earning     | Org <mark style="color:$primary;">continuously analyzes efforts and results</mark>, proposes new actions to drive better results |
 
 ### SAMM Model
 
-OWASP's Software Assurance Model (SAMM):
+<mark style="color:$primary;">OWASP's Software Assurance Mode</mark>l (SAMM):
 
 three maturity levels:
 
@@ -103,11 +105,15 @@ Level 3: Optimized Operation
 
 SAMM looks at software assurance from the high-level perspective of five business functions:
 
-* Governance
-* Design
-* Implementation
-* Verification
-* Operations
+|                |                                                                                                                                    |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Governance     | organization activities to manage software development process: practices for strategy, metric, policy, compliance, education      |
+| Design         | define software requirements and create software. Threat modeling, threat assessment, security requirements, security architecture |
+| Implementation | building and deploying software components and managing flaws. Secure build, secure deployment                                     |
+| Verification   | code meets business and security requirements. architecture assessment, requirements-driven testing,                               |
+| Operations     |                                                                                                                                    |
+
+
 
 
 
@@ -237,18 +243,18 @@ Hide or obscure code to protect it from unauthorized viewing
 
 ## OOP Terminology
 
-|              |                                                                                                                                                                                             |   |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | - |
-| Message      | communication or input to or from an object                                                                                                                                                 |   |
-| Method       | interal code that defines the actions an object performs in response to a message                                                                                                           |   |
-| Behavior     | Result or output by an object                                                                                                                                                               |   |
-| Class        | Collection of common methods form a set of objects                                                                                                                                          |   |
-| instance     | objects are instances of a class                                                                                                                                                            |   |
-| inheritance  | methos from a class are inherited by another subclass                                                                                                                                       |   |
-| delegation   | forward of a request by an object to another object or delegate                                                                                                                             |   |
-| Polymorphism | characteristic of an ojbect that allows it to respond with different behaviors to the same message or method                                                                                |   |
-| Cohesion     | <p>strength of the relationship between the purposes of the methods within the same class. When all the methods have similar purposes, there is high cohesion.<br>good software design!</p> |   |
-| Coupling     | level of interaction between objects. Lower coupling = better software design. easier to update and troubleshoot                                                                            |   |
+|                                               |                                                                                                                                                   |   |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | - |
+| Message                                       | communication or input to or from an object                                                                                                       |   |
+| Method                                        | interal code that defines the actions an object performs in response to a message                                                                 |   |
+| Behavior                                      | Result or output by an object                                                                                                                     |   |
+| Class                                         | Collection of common methods form a set of objects                                                                                                |   |
+| instance                                      | objects are instances of a class                                                                                                                  |   |
+| inheritance                                   | methods from a class are inherited by another subclass                                                                                            |   |
+| delegation                                    | forward of a request by an object to another object or delegate                                                                                   |   |
+| Polymorphism                                  | characteristic of an object that allows it to respond with different behaviors to the same message or method                                      |   |
+| <mark style="color:$primary;">Cohesion</mark> | How closely related the responsibilities within a single class are. **High cohesion** = focused, single purpose → easier to maintain and secure.  |   |
+| <mark style="color:$primary;">Coupling</mark> | How interdependent different classes/objects are. **Low coupling** = minimal knowledge of others’ internals → easier to change, test, and secure. |   |
 
 ## Database
 
