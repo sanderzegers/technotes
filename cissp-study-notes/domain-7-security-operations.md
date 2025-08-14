@@ -4,6 +4,8 @@ icon: user-helmet-safety
 
 # Domain 7: Security Operations
 
+## Investigations
+
 Securing the scene
 
 * sealing off access
@@ -17,9 +19,9 @@ once evidence has been contaminated, it can't be decontaminated
 
 
 
-## Evidence collecting
+### Evidence collecting
 
-### Evidence Sources
+#### Evidence Sources
 
 |                         |                                                                    |   |
 | ----------------------- | ------------------------------------------------------------------ | - |
@@ -28,19 +30,32 @@ once evidence has been contaminated, it can't be decontaminated
 | Computer systems        | Whole system, including peripherals                                |   |
 | Visual/Audio            | phtos, videos, surveillance footage                                |   |
 
-### Type of evidence
+#### Type of evidence
 
 |                         |                                                                                                                                         |   |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | - |
-| Real evidence           | tangible physical objects (hard disks, usb drives, etc)                                                                                 |   |
+| Real evidence           | tangible physical objects (hard disks, USB drives, etc)                                                                                 |   |
 | Direct evidence         | requires no inference. proves a fact being discussed: eyewitness, confessions                                                           |   |
 | Circumstantial evidence | aka indirect evidence. ex. witness testifying that the defendant was near the computer storage area after it was broken into            |   |
 | Corroborative evidence  | supports facts or elements of the case, not a fact on its own. Confirming and strengthening other facts                                 |   |
 | Hearsay evidence        | testimony from witnesses who were not present.                                                                                          |   |
 | Best evidence rule      | original evidence rather than a copy or duplicate should be entered                                                                     |   |
 | Secondary evidence      | reproduction or substitute of an orignal document or item of proof. In cases where original evidence no longer exist, it may be allowed |   |
+| Opinions                | Expert and non-expert                                                                                                                   |   |
 
+### Evidence admissibility
 
+|                      |                                                                    |   |
+| -------------------- | ------------------------------------------------------------------ | - |
+| real evidence        | consists of actual objects, that can be brought into the courtroom |   |
+| documentary evidence | consists of written documents                                      |   |
+| testimonial evidence | verbal or written statements by witnesses                          |   |
+
+### Evidence admissible in a court or law
+
+* evidence msut be relevant
+* fact must be material to the case
+* evidence must be competent or legally collected
 
 ### MOM: Motive Opportunity Means
 
@@ -52,7 +67,7 @@ serves as a guide when conducting an investigation.&#x20;
 
 
 
-## Locard's Exchange Principle
+### Locard's Exchange Principle
 
 with every crime, something is taken and left behind
 
@@ -331,7 +346,7 @@ DRMRRRL (Drumroll)
 * Mitigation (containment)
   * containing the incident and taking steps to limit its impact
 * Reporting
-  * notifying appropriate parties internal and external to the Org
+  * notifying appropriate parties internal and external (law, vendors, customers)
 * Recovery
   * restoring affected systems and services to normal operations
 * Remediation (=prevention)
@@ -470,7 +485,7 @@ Redundancy: primary and secondary standby system.
 
 
 
-Recovery Site Strategies
+## Recovery Site Strategies
 
 parameters: people, data, infrastructure and cost
 
@@ -478,34 +493,39 @@ Geographically remote and geographic disparity
 
 Cold Site < Warm Site < Hot Site < Redundant site
 
-cold site
+**Cold site**
 
 * shell of a building. heating ventilation cooling&#x20;
 
-Warm Site
+**Warm Site**
 
 * basic equipment is installed; rack, cables are run.
 
-Hot Site
+**Hot Site**
 
 * everything is ready to go except people and data.
 * Servers, networks, all in place. Waiting for data to be restored and people move over
 
-mobile site
+**Mobile site**
 
 * form of hot site
 * site on wheels
-* mini datacenter
+* mini data center
 * government for hurricanes or other disasters
 
-redundant site
+**Redundant** site
 
 * everything is in place and working
 * same cost as primary site.
 
+**Service Bureau**&#x20;
+
+* company that leases computer time.&#x20;
+* Owns large server farms and often fields of workstation. May be onsite or remote
 
 
-Geographically remote / geographically disparity
+
+### Geographically remote / geographically disparity
 
 internal sites belong to company, external sites to 3rd party
 
@@ -524,14 +544,14 @@ multiple processing sites
 
 
 
-Disaster Recovery Solutions
+## Disaster Recovery Solutions
 
-RPO: Recovery Point Objective
+**RPO**: Recovery <mark style="color:$primary;">Point</mark> Objective
 
 * maximum amount of **data** you can afford to lose
 * expressed as length of time between last good copy of your data
 
-RTO: Recovery Time Objective
+**RTO**: Recovery <mark style="color:$primary;">Time</mark> Objective
 
 * maximum tolerable **downtime**
 * how long it takes to move from time of disaster to the time of operating at a defined service level
@@ -539,7 +559,9 @@ RTO: Recovery Time Objective
 
 
 
-BIA: Business Impact Analyses process that helps an org identify its most critical functions, services assets systems and processes&#x20;
+**BIA**: Business Impact Analyses&#x20;
+
+* process that helps an org identify its most critical functions, services assets systems and processes&#x20;
 
 
 
@@ -547,7 +569,7 @@ Todo: Read more about BCM, BCP and DRP
 
 BCM, BCP,  and DRP
 
-BCM: Business continuity management
+**BCM**: Business continuity management
 
 * provides structure for BCP and DRP
 * management system
@@ -555,53 +577,41 @@ BCM: Business continuity management
 
 
 
-BCP: Business Continuity Planning
+**BCP**: Business Continuity Planning
 
 * documented, executable plan
 * keep critical business process running
   * often tied with SLA
 * survival of the business. Effective response, strategic
 
+**COOP**: Continuity of Operations Plan
 
+* plan for continuing to do business until the IT infrastructure can be restored
 
-DRP: Disaster Recovery Plan
+**DRP**: Disaster Recovery Plan
 
 * plan for recovering IT infrastructure and data
 
+**BRP**: Business Resumption Plan
 
+* plan to move from disaster recovery site back to normal business
 
+## Time measurements
 
+**MTD**: Maximum tolerable Downtime\
+**MAD**: Maximum allowed Downtime
 
-Time measurements
-
-MTD: Maximum tolerable Downtime\
-MAD: Maximum allowed Downtime
-
-* after this time window, operations might ceas  to operate
+* after this time window, operations might cease to operate
 * RTO should never exceed MTD
 
-
-
-RTO: Recovery Time Objective
-
-* amount of time expected to restore services or operations to a defined service level
-
-
-
-RPO: Recovery Point Objective
-
-* maximum amount of data that can be lost in terms of time
-
-
-
-WRT; Work Recovery Time
+**WRT**; Work Recovery Time
 
 * time needed to verify the intergrity of stems and data
 * also component of MTD
 
 
 
-BIA: Business Impact Analysis
+## BIA: Business Impact Analysis
 
 BIA process:
 
@@ -623,7 +633,7 @@ The BIA Process
 
 
 
-Disaster Response Process
+## Disaster Response Process
 
 * disaster is declared when MTD is going to be exceeded
 * should include all personnel and resources necessary to quickly respond to the situation and restore normal operation
@@ -667,31 +677,57 @@ Dependency chart:
 
 
 
-Test DRP
+## Test DRP
 
 BCP and DRP
 
 * testing is critical component&#x20;
-* DRP test include: read-through/checklist, walkthrough, simulation, parallel, full-interruption/full-scale
+* DRP test include: read-through/checklist, walk through, simulation, parallel, full-interruption/full-scale
 * full-interruption test should only be performed after management approval and other tests were successful
 
 
 
-* read-through test
-* walkthrough test
+5 types of disaster recovery plans:
+
+* **read-through test**
+* **structured walk through test**
   * all of key stakeholders convene in a conference room
-  * walkthrough DRP together
+  * walk through DRP together
   * paper-based
-* simulation test
+  * aka table-top exercise
+* **simulation test**
   * paper-based
-  * facilator moderates a scenario that requires the stakeholder to respond
-  * facilitator can throw curveballs in the situation
-* parallel test
+  * facilitator moderates a scenario that requires the stakeholder to respond
+  * facilitator can throw curve balls in the situation
+* **parallel test**
   * use of backup systems, not anything in production
-* full-interruptin or full-scale test
+  * relocating personnel to the alternate recovery site
+* **full-interruption or full-scale test**
   * production systems are impacted
 
 
+
+### Related Terms
+
+Recovery Team
+
+* get critical business functions running at the alternate site
+
+Salvage Team
+
+* return the primary site to normal processing conditions
+
+Electronic Vaulting
+
+* transfer database backup to a remote site
+
+Remote journal
+
+* only journal or transaction logs are copied
+
+mirroring
+
+* mirror db to other site
 
 
 
@@ -739,5 +775,23 @@ Destruction
 
 
 
+## Audit trail
 
+
+
+## Auditing & Due Care
+
+Security audits and effectiveness reviews are key elements in displaying due care.
+
+
+
+Alternatives to confiscating evidence
+
+* Voluntary surrender
+* subpoena
+  * compel the subject to surrender the evidence
+* search warrant
+  * confiscate evidence without giving the subject an opportunity to alter it
+
+data retention should be defined in security policies
 

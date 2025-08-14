@@ -19,8 +19,6 @@ Testing should include:
 
 Certification and accreditation should be performed prior to release/deployment/implementation
 
-
-
 |                         |                                   |                                                |
 | ----------------------- | --------------------------------- | ---------------------------------------------- |
 | Initiation              | Initiation (plan + mgmt approval) |                                                |
@@ -36,20 +34,30 @@ SDLC = Initiation + Development + Implementation
 
 SLC = SDLC + Operation + Disposal
 
+## Systems development modules
+
+|                                    |                                                                                                                                                                                                                                           |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Waterfall                          | <ul><li>complete each  phase of development</li><li>7 stages</li><li>does not allow a previous phase to be revisited</li><li>sequential</li></ul>                                                                                         |
+| Structured Programming Development | <ul><li>said to be foundational to OOP</li><li>heavy emphasis on structured control flow</li></ul>                                                                                                                                        |
+| Agile                              | <ul><li>Divide the development into multiple, rapid <mark style="color:$primary;">iterations</mark> of defining, developing, and deploying</li><li>heavy customer interaction</li></ul>                                                   |
+| Scaled Agile framework             | <ul><li>adapted version for large organizations with many teams</li></ul>                                                                                                                                                                 |
+| Spiral Method                      | <ul><li>risk-driven development process that follows an <mark style="color:$primary;">iterative</mark> model</li><li>includes elements of waterfall</li><li>allows developers to returning to planing stages as demands changes</li></ul> |
+| Cleanroom                          | <ul><li>focus on defect prevention</li></ul>                                                                                                                                                                                              |
+
+### Waterfall
+
+* system requirements
+* software requirements
+* preliminary design
+* detailed design
+* code and debug
+* testing
+* ops & maintenance
 
 
-|                                    |                                                                                                                                                           |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Waterfall                          | <ul><li>complete each  phase of development</li><li>does not allow a previous phase to be revisited</li></ul>                                             |
-| Structured Programming Development | <ul><li>said to be foundational to oop</li><li>heavy emphasis on structred control flow</li></ul><p></p>                                                  |
-| Agile                              | <ul><li>Divide the development into multiple, rapid iterations of defining, developing, and deploying</li><li>heavy customer interaction</li></ul><p></p> |
-| Scaled Agile framework             | <ul><li>adapted version for large organizaations with many teams</li></ul><p></p>                                                                         |
-| Spiral Method                      | <ul><li>risk-driven development process that follows an interative model</li><li>includes elements of waterfall</li></ul><p></p>                          |
-| Cleanroom                          | <ul><li>focus on defect prevention</li></ul><p></p>                                                                                                       |
 
-
-
-Maturity Models
+## Maturity Models
 
 * help improve the development process
 * CMMI (Capability Maturity Model Integration)
@@ -61,18 +69,21 @@ CMMI:
 
 * set of best practices focus on building key capabilities and benchmarking
 
+5-step model for measuring software development in organizations:
 
+<table><thead><tr><th width="176">Maturity Level</th><th></th><th></th><th>Processes are</th></tr></thead><tbody><tr><td>0: Incomplete</td><td></td><td>phase is unkown and ad hoc, work may not be getting completed</td><td>unknown and adhoc</td></tr><tr><td>1: Initial</td><td>No plan</td><td>reactive and unpredictable stage. Work is getting finished, often coming over budge and late</td><td>reactive and unpredictable</td></tr><tr><td>2: Repeatable</td><td>Basic lifecycle management</td><td>projects are managed and planned. Task are performed, key metric are taken</td><td>managed at the project level</td></tr><tr><td>3: Defined</td><td>formal, documented SW development process</td><td>Org is pro-active. Standard across the org that guide programs, portfolios and projects</td><td>proactive, not reactive</td></tr><tr><td>4: Managed</td><td>Quantitatively Managed</td><td>Controlled and measured stage. Org is driven by data, us it to measure performance improvement objectives. Objectives meet the needs of stake holders</td><td>controlled and measured</td></tr><tr><td>5: Optimizing</td><td>continous development process, w/ feedback loops . CI/CD</td><td>stage is flexible and stable. Org is focused on continually improving. Able to pivot when change and opportunity presents themselves</td><td>stable and flexibel</td></tr></tbody></table>
 
-| Maturity Level            |                                                                                                                                                       | Processes are                |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| 0: Incomplete             | phase is unkown and ad hoc, work may not be getting completed                                                                                         | unknown and adhoc            |
-| 1: Initial                | reactive and unpredictable stage. Work is getting finished, often coming over budge and late                                                          | reactive and unpredictable   |
-| 2: Managed                | projects are managed and planned. Task are performed, key metric are taken                                                                            | managed at the project level |
-| 3: Defined                | Org is pro-active. Standard across the org that guide programs, portfolios and projects                                                               | proactive, not reactive      |
-| 4: Quantitatively Managed | Controlled and measured stage. Org is driven by data, us it to measure performance improvement objectives. Objectives meet the needs of stake holders | controlled and measured      |
-| 5: Optimizing             | stage is flexible and stable. Org is focused on continually improving. Able to pivot when change and opportunity presents themselves                  | stable and flexibel          |
+## IDEAL model
 
+guides organizations through continuous improvement—perfect for rolling out or maturing a security program
 
+|                  |                                                                                                                                  |   |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------- | - |
+| **I**nitiating   | <mark style="color:$primary;">business reasons outlined,</mark> support & infrastructure for initiate put place                  |   |
+| **D**iagnosing   | Engineers <mark style="color:$primary;">analyze current state</mark> of org & make recommendations for change                    |   |
+| **E**stablishing | Org takes recommendations & <mark style="color:$primary;">develops plan</mark> to achieve those changes                          |   |
+| **A**cting       | <mark style="color:$primary;">Plan put into action</mark>. Org develops solutions, tests, refines & implements                   |   |
+| **L**earning     | Org <mark style="color:$primary;">continuously analyzes efforts and results</mark>, proposes new actions to drive better results |   |
 
 OWASP's Software Assurance Model (SAMM):
 
@@ -96,8 +107,6 @@ SAMM looks at software assurance from the high-level perspective of five busines
 
 
 
-
-
 Operations and Management:
 
 * monitoring, periodic evaluation and patching
@@ -112,7 +121,7 @@ Request for change:
 
 
 
-Change Management
+## Change Management
 
 * request
 * security impact analysis
@@ -125,7 +134,13 @@ Change Management
 
 
 
-Devops
+Request control
+
+Change control
+
+Release control
+
+## Devops
 
 * software development
 * operations
@@ -135,7 +150,7 @@ ideally include security as well: DevSecOps
 
 
 
-IPT
+## IPT
 
 Integrated Product Team
 
@@ -155,35 +170,29 @@ Incorporate security into devops:
 
 
 
-
-
-Canary testing
+**Canary testing**
 
 * push changes to small test group
 
-
-
-Smoke Testing
+**Smoke Testing**
 
 * quick preliminary testing after a change is made to identify any simple failures
 
+## CI/CD
 
-
-
-
-CI/CD
-
-Continuous Integration, Delivery and Deployment
+Continuous Integration, Delivery and Deployment (or delivery)
 
 * automating, committing code to repo, compile and test automatically
 * releases code changes into production without further human intervention
 
+automate vulnerability scanning in your ci/cd pipeline
 
-
-Application Security Testing
+## Application Security Testing
 
 SAST: Static application security testing\
 DAST: Dynamic application security testing
+
+Best to combine both
 
 |      |         |                                                                    |
 | ---- | ------- | ------------------------------------------------------------------ |
@@ -191,7 +200,7 @@ DAST: Dynamic application security testing
 | DAST | Dynamic | <ul><li>Black Box</li><li>Examines app itself</li></ul>            |
 |      | Fuzzing | <ul><li>form of dynamic testing</li><li>premise is chaos</li></ul> |
 
-Secure Programming
+## Secure Programming
 
 | Term                  | Mnemonic                                                                                                                                                                  |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -202,7 +211,7 @@ Secure Programming
 
 
 
-Code Obfuscation
+## Code Obfuscation
 
 Hide or obscure code to protect it from unauthorized viewing
 
@@ -224,19 +233,18 @@ Hide or obscure code to protect it from unauthorized viewing
 
 
 
-Database
-
-
+## Database
 
 ACID: atomicity, consistency, isolation, durability
 
 |   |             |                                                          |
 | - | ----------- | -------------------------------------------------------- |
 | A | Atomicity   | All changes take effect or none at all!                  |
-| C | Consistency | Constisten with the Rules                                |
+| C | Consistency | Consistent with the Rules                                |
 | I | Isolation   | Transactions are invisible to other users until complete |
 | D | Durability  | Completed changes will not be lost                       |
 
+tables = relations\
 column/fields = attributes\
 rows/records = tuples
 
@@ -252,15 +260,24 @@ SCM
 
 Software escrow: A three-party legal arrangement in which the vendor/developer deposits source code — plus build scripts, libraries, keys, and documentation — with a neutral escrow agent. If pre-defined “release conditions” occur, the agent hands the materials to the customer/licensee.
 
+## RDBMS threats
+
+* aggregation attack
+  * create sensitive information by combining non-sensitive data from separate sources
+    * single transfer / entry of soldiers in military base
+* inference
+  * deduce or assume senstive information from observing non-sensitive pieces of information
+    * total salary and information when employees enter company
 
 
-Acquiring Software:
+
+## Acquiring Software
 
 * should be taken as seriously as developing software
 * phases
   * planning/requirements
   * contracting
-  * accxeptance
+  * acceptance
   * monitoring
   * follow-on
 
@@ -283,9 +300,7 @@ Cons:
 
 
 
-
-
-Secure code guidelines
+## Secure code guidelines
 
 |                        |                                                                                |                |
 | ---------------------- | ------------------------------------------------------------------------------ | -------------- |
@@ -295,6 +310,30 @@ Secure code guidelines
 | Executable Mobile Code | code that is downloaded to system and then run                                 |                |
 | TOCTOU                 | time-of-check time-of-use                                                      | race condition |
 | Backdoors/Trapdoors    | maintenance hooks forgotten to be removed                                      |                |
-| Malformed iNput        | Web Apps                                                                       |                |
+| Malformed input        | Web Apps                                                                       |                |
 | Citizen Developers     | normal users have access to powerful tools with security skills. (SQL Queries) |                |
+
+## ML and neural networks
+
+**Expert systems**
+
+* consist of two main components
+* a knowledge base. contains a series of if/then rules
+* a inference engines. uses that information to draw conslusions about other data
+
+**Machine learning**
+
+* algorithmically discover knowledge from datasets
+
+**Neural Networks**
+
+* simulate function of the human mind
+* require extensive training
+
+
+
+## Concentric Circle Security
+
+* **Layered & independent rings**: multiple controls around the asset so no single failure exposes it&#x20;
+* true defense-in-depth
 
