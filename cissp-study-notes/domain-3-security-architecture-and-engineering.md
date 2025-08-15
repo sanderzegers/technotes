@@ -1012,3 +1012,73 @@ CASB: cloud access security broker (CASB). Shadow it. installed on-prem or in th
 
 
 
+
+
+## 2024 Update
+
+Secure Access Service: SASE
+
+brings together networking and security functions
+
+* Firewall services
+* Secure web gateway
+* Anti-malware services
+* IPS
+* CASB
+
+
+
+### Cryptographic life cycle
+
+FIPS 140-2: Federal Information Processing standard
+
+* aid in protection of digitally stored unclassified, yet sensitve information
+* non-military
+
+Level 1: lowest level of security\
+Level 2: specifies the security requirements for cryptographic modules that protect sensitive information\
+Level 3: Requires physical protections to ensure a high degree of confidence that any attempts to tamper are evident and detectable
+
+FIPS 140-3: released 2202, supersedes FISP 140-2
+
+Level 1: externally tested algorithms\
+Level 2: adds requirements for physical tamper-evidence and role-based authentication\
+Level 3: adds requirements for physical tamper-resistance, seperation between interfaces\
+Level 4: makes the physical security requiements more stringet, tamper-active: erasing content of the device if it detects various forms of environmental attacks
+
+cryptographic modules
+
+Type
+
+|          |                                                                                                                     |   |
+| -------- | ------------------------------------------------------------------------------------------------------------------- | - |
+| Hardware | SafeNet Luna HSM (Thales0                                                                                           |   |
+| Software | <p>OpenSSL FIPS Object modules<br>Microsoft windows Crypto modules</p>                                              |   |
+| Cloud    | <p>Microsoft Azure Key Vault<br>Amazon Key Management Service (KMS)<br>Google Cloud Key Mangament Service (KMS)</p> |   |
+
+Other key management terms and concepts
+
+Level protection:
+
+* crypto keys must be secure at the same level of control or higher as the data they protect
+
+Key Recovery:
+
+* recover a key for a particular users, without that user's cooperation
+
+Key Escrow:
+
+* keys are held by a trusted third party in a secure environment
+
+
+
+Quantum key Distribution
+
+* enables two parties to generate a shared random secret key known only to them
+* ability to detect eavesdropping by any third party
+* relies on having an authenticated classical channel of communication
+
+
+
+
+

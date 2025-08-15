@@ -20,16 +20,16 @@ icon: ethernet
 
 Firewalls active on Network, Session, Application
 
-| OSI Layer(# — Name) | Corresponding TCP/IP Layer | Typical Protocols & Technologies (examples)                   |
-| ------------------- | -------------------------- | ------------------------------------------------------------- |
-| 7 — Application     | **Application**            | HTTP, HTTPS, SMTP, DNS, FTP, SSH                              |
-| 6 — Presentation    | **Application**            | TLS/SSL, X.509, JPEG, MPEG, ASCII/UTF-8                       |
-| 5 — Session         | **Application**            | NetBIOS, RPC, SIP, PPTP                                       |
-| 4 — Transport       | **Transport**              | TCP, UDP, SCTP                                                |
-| 3 — Network         | **Internet**               | IP, ICMP, IGMP, IPv6, IPSec                                   |
-| 2 — Data Link       | **Network Access (Link)**  | Ethernet, PPP, 802.11 Wi-Fi, ARP                              |
-| 1 — Physical        | **Network Access (Link)**  | UTP/STP cabling, fiber optic, radio (802.11), hubs, repeaters |
-|                     |                            |                                                               |
+| OSI Layer(# — Name) | Corresponding TCP/IP Layer                        | Typical Protocols & Technologies (examples)                   |
+| ------------------- | ------------------------------------------------- | ------------------------------------------------------------- |
+| 7 — Application     | **Application**                                   | HTTP, HTTPS, SMTP, DNS, FTP, SSH                              |
+| 6 — Presentation    | **Application**                                   | TLS/SSL, X.509, JPEG, MPEG, ASCII/UTF-8                       |
+| 5 — Session         | **Application**                                   | NetBIOS, RPC, SIP, PPTP                                       |
+| 4 — Transport       | **Transport**                                     | TCP, UDP, SCTP                                                |
+| 3 — Network         | <mark style="color:$primary;">**Internet**</mark> | IP, ICMP, IGMP, IPv6, IPSec                                   |
+| 2 — Data Link       | **Network Access (Link)**                         | Ethernet, PPP, 802.11 Wi-Fi, ARP                              |
+| 1 — Physical        | **Network Access (Link)**                         | UTP/STP cabling, fiber optic, radio (802.11), hubs, repeaters |
+|                     |                                                   |                                                               |
 
 * **Data plane = “packets on the wire.”** Anything that touches every user packet/bit belongs here.
 * **Control plane = “brains of the box.”** It decides _where_ those packets should go.
@@ -220,4 +220,31 @@ Attributes are:
 * mode (transport/tunnel)
 * sequence number
 * Expirty of SA
+
+
+
+## 2024 Update
+
+IPv6: 128-bit address / IPv4: 32-bit
+
+Converged protocols:
+
+Infiband over ethernet: RDMA over ethernet
+
+Compute Express Link: open standard, CPU-to-Device and CPU-to-Memory connections
+
+
+
+Management plane: configuration, monitoring, software updates, security management
+
+Control Plane: managing ntework routing protocols
+
+Data Plan: forwarding packets
+
+* cut-through: forward decision as soon as frame receives -> speed
+* store-and-forward: wait for entire frame -> reliability
+
+
+
+
 
