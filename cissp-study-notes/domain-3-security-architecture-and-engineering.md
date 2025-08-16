@@ -438,7 +438,7 @@ System kernel vs security kernel
 
 **TOCTOU** = Time-Of-Check Time of Use ⇒ Race condition
 
-TPM:
+## TPM
 
 * key generation
 * storage
@@ -447,7 +447,7 @@ TPM:
 
 **binding**: \
 Locked to _this device’s TPM_.\
-Encrypting data so it can only be accessed on _that_ specific TPM-equipped system.\
+<mark style="color:$primary;">Encrypting data</mark> so it can only be accessed on _that_ specific TPM-equipped system.\
 encrypt encryption keys by using the endorsement key.\
 endorsement key is only known by TPM\
 examples: software license key, password vault (data is tied to device)
@@ -459,6 +459,8 @@ examples: bitlocker\
 Ties the data to the device AND its known-good boot state.
 
 _Binding locks data to **the chip**; sealing locks data to **the chip + a specific, un-compromised system state.**_
+
+Remote Attestation: enables a remote entity to verify the trustworthiness of a system
 
 
 

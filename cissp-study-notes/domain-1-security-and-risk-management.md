@@ -216,6 +216,12 @@ ALE1: ALE before safeguard\
 ALE2: ALE after safeguard\
 ACS: Annual Cost of safeguard
 
+## Control Assessments
+
+* ensure effectiveness of individual security mechanisms
+* assess quality of the organizations risk management process to identify potential gaps or improvements
+* generate a report that highlights strengths and weaknesses of de the deployed security infrastructure
+
 ## Threat modeling methodologies
 
 STRIDE, PASTA, DREAD
