@@ -55,7 +55,7 @@ SLC = SDLC + Operation + Disposal
 * testing
 * ops & maintenance
 
-
+You can return one stage back max
 
 ## Maturity Models
 
@@ -359,4 +359,87 @@ Cons:
 
 * **Layered & independent rings**: multiple controls around the asset so no single failure exposes it&#x20;
 * true defense-in-depth
+
+
+
+## 2024 Update
+
+Agile
+
+4 principles
+
+* individuals and iterations over processes and tools
+* working software over comprehensive documentation
+* customer collaboration over contract negotiation
+* responding to change over following a plan
+
+Scrum: agile methodology
+
+* primarly used by sofware devs
+* provides a specific set of rules, practices and roles to put Agile principles into action
+
+Scaled Agile Framework (SAFe)
+
+* set of organizational and workflow patterns for implementing agile practices at an enterprise scale
+* structured guidance on roles and responsibilities
+* promotes alignment, collaboration
+* large number of agile teams
+
+
+
+SAFe add necessary layers to make Agile work in a large, enterprise-level context
+
+
+
+
+
+Application security testing
+
+Static testing
+
+* without executing
+* source code analysis
+* access to frameowrk, design and implementation
+
+Dynamic
+
+* no knowledge about technology used
+* no source code access
+* black-box testing
+
+**IAST**: Interactive Application Security Testing
+
+* analyzes code for vulnerabilities while it's being used
+* focuses on real time reporting to optimize testing and analysis process
+* often built into CI/CD automated release testing
+* analyzes the internal functions of the application while it's running
+
+
+
+**SCA**: Software Composition Analysis
+
+* track the components of a software package or application
+* special concern for apps with opensource components
+* automated, combines application security and patch management
+* identify flaws/vulnerabilities, ensures latest version are in use
+
+
+
+### Cloud Services
+
+Top 10 considerations
+
+* data security and privacy
+* shared responsibility
+* CSP security practices
+* Multi-tenancy & isolation
+* Identity & Access management
+* Monitoring, Logging and Auditing
+* Incident Response & Notification
+* Compliance and Regulatory
+* Data Portability and Exit Strategy
+  * avoid vendor lock-in
+* Supply Chain Security
+
+
 

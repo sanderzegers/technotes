@@ -795,3 +795,39 @@ Alternatives to confiscating evidence
 
 data retention should be defined in security policies
 
+
+
+Disaster Recovery Stakeholders
+
+Disaster recovery team
+
+* reliable real-time channels
+
+Management
+
+* periodic updates on progress and potential impacts on normal operation
+
+Wider company
+
+* general awareness, ahead of scheduled tests, pre- and post announcements
+
+Customers/Clients
+
+* proactive controlled communications
+* ETA for resolutions
+
+Partners
+
+* inform parnters with relevant timeles
+* agree on coordination channels
+
+Regulators
+
+* certain industries have reporting requirements
+* advance notification or post-test reports
+* include compliance experts in plan creation and testing
+
+
+
+
+

@@ -629,7 +629,7 @@ Goals:
 * Confidentiality
 * Integrity
 * Authenticity (instead of Availability)
-* Nonrepudiation
+* Non-repudiation
   * of Origin: Cannot deny sender sent message
   * of Delivery: Receiver cannot deny received message
 * Access Control
@@ -640,17 +640,17 @@ Goals:
 
 **Work Factor**: estimated amount of time or effort required to break a **cryptosystem**
 
+**Substitution:** <mark style="color:$primary;">Replace</mark> characters with different characters (Caesar cipher)
+
+**Transposition:** <mark style="color:$primary;">rearrange</mark> the letters of a plaintext message
+
 **Confusion:** If one bit of the key is changed, about half of the bit in the ciphertext should change (key - ciphertext)
 
-**Diffusion:** (shannon propert). each plaintext bit's influence is spread over many chiphertext bits
+**Diffusion:** (shannon property). each plaintext bit's influence is spread over many ciphertext bits
 
-**Avalanche**: determine security and effectiveness of an algo. Looks at the degree of confusion and diffusion the algo provides. Ideal case: Single bit -> at least 50 percent change in cipher text!
+**Avalanche**: determine security and effectiveness of a crypto algorithm. Looks at the degree of confusion and diffusion the a crypto algorithm provides. Ideal case: Single bit -> at least 50 percent change in cipher text!
 
-**Substitution:** Replace characters with different characters (Ceasar cipher)
-
-**Transposition:** rearrange the letters of a plaintext message
-
-Rail Fence (ZigZag)&#x20;
+Rail Fence (ZigZag): simple <mark style="color:$primary;">transposition</mark> cipher. Not secure by modern standard.&#x20;
 
 ### Block Cipher Modes
 
@@ -670,6 +670,35 @@ Rail Fence (ZigZag)&#x20;
 | **Hardware / real-time friendliness** | Good for bulk files                               | Good for byte-wise streams                              | Great for noisy channels, satellite           | Excellent for high-speed & multi-core                  |
 | **Typical uses**                      | TLS/SSH pre-2013, IPsec ESP(now mostly GCM)       | Legacy real-time (old SSH, modems)                      | Satellite links, payment terminals            | TLS 1.3, IPsec GCM/CCM, disk encryption, CPUs (AES-NI) |
 
+Summary to learn:
+
+* **ECB**: Electronic Codebook Mode:
+  * 64-bit blocks
+  * simple & least secure
+  * same plaintext block, creates same encrypted block (pinguin)
+* **CBC**: Cipher Block Chaining
+  * each block of encrypted text is XORed with the block of ciphertext immediately preceding
+  * Errors propagate
+* **CFB**: Cipher Feedback
+  * streaming version of CBC
+  * use memory buffers of same block size
+  * errors propagate
+* **OFB**: Output Feedback:
+  * Similar to CFB, but XOR <mark style="color:$primary;">plain text with a seed value</mark>
+  * no chaining
+*   **CTR**: Counter
+
+    * incrementing counter instead of seed
+
+
+* **GCM**: Galois/Counter mode:
+  * counter mode: efficient and parallelizable
+  * includes data <mark style="color:$primary;">authenticity</mark>
+* **CCM**: Counter with Cipher block Chaining Messaged Authenticaton Code mode:
+  * counter mode
+  * cipher block chaining message authentication code (CBC-MAC) for <mark style="color:$primary;">authentication</mark>
+  * simpler to implement, but slightly lower performance than GCM
+
 Null Cipher: Plaintext ist mixed with a large amount of non-ciphertext. For example first letter of each word in a sentence.
 
 
@@ -679,18 +708,23 @@ Null Cipher: Plaintext ist mixed with a large amount of non-ciphertext. For exam
 <figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 Advantages: Fast, Strong\
-Disadvantages: Key distribution, Scalability, no authentication, integrity or nonrepudation.
+Disadvantages: Key distribution, Scalability, no authentication, integrity or non-repudation.
 
 total keys for n users: n \* (n-1) / 2
 
-RC4 = Stream cipher, RC5 and RC6 = Block ciphers!
+RC4 = Stream cipher\
+RC5 and RC6 = Block ciphers!
 
 DES: 56 key length, 64 block length\
 2-DES: 2 \* 56 key length\
 3DES: two or three keys, three iterations of the algorithm
 
-2-DES is susceptible to meet-in-the-middle attack. Key size reduced to 56 bit again.\
+2-DES is susceptible to **meet-in-the-middle** attack. Key size reduced to 56 bit again.\
 3DES key size reduced to 112 bits.
+
+**meet-in-the-middle** attack: exploits protocol that use two rounds of encryption
+
+**birthday attack**: attempt to find collision in hash functions.
 
 3DES deprecated by NIST
 
@@ -724,17 +758,17 @@ SHA-1 = obsolete; SHA-2 = today’s default; SHA-3 = different design (sponge) +
 **Diffie-Hellman**\
 **El Gamals:** extension of DH key exchange algorithm. Depends on modular arthmetic.&#x20;
 
-Knapsack algo was cracked and considered unsafe
+**Knapsack** algo was cracked and considered <mark style="color:$primary;">unsafe</mark>
 
 RSA: 1970
 
 ECC: introduced in 2000s. Same secyrity for shorter keys. Faster and more efficient
 
-Hybrid Cryptography: Use of assymmetric crypto to send key for symmetric crypto.
+**Hybrid Cryptography**: Use of assymmetric crypto to send key for symmetric crypto.
 
 
 
-MIC: Message Integrity Controls
+**MIC**: Message Integrity Controls
 
 MIC checks are designed to ensure that messages remain unchanged from the time of creation to the time they're read
 
@@ -743,27 +777,26 @@ MIC uses hashes (instead of Parity checks, Checksums or CRC)
 Accidentail changes: Parity, CRC, Checksums\
 Intentional changes: keyed hash, digital signatures
 
-DSS: Digital Signature Standard:
+**DSS**: Digital Signature Standard:
 
 * NIST standards FIPS 186-5 defines how to create and verify digital signtures to ensure integrity, authentication and non-repudations
-* approved algos: RSA, ECDSA and edDSA
-* DSA no longer approved
-* SHA-1, SHA-2 and SHA-3 message digest
+* approved algos: RSA, ECDSA and DSA
+* **SHA-1, SHA-2 and SHA-3 message digest**
 
-PKI
+
 
 RA: Registration Authority (proofs Identity for new Certifcate requests)
 
-Kerckhoff's Principle: a cryptosystem should be secure even if everything about the system, except the key, is public knowledge
+**Kerckhoff's Principle**: a cryptosystem should be secure even if everything about the system, except the key, is public knowledge
 
-Key Wrapping / Key encryption keys:\
+**Key Wrapping / Key encryption keys:**\
 Wrap key with another key for safe key transferal (DH for AES key)
 
-Key recovery methods
+### Key recovery methods
 
-* Split knowledge: split parts of keys to different people
-* Dual Control: two individuals needed to unlock vault for security key
-* Key Escrow: Keys are stored with a trusted thrid party. Cloud computing. Some countries must share with government
+* **Split knowledge**: split parts of keys to different people
+* **Dual Control**: two individuals needed to unlock vault for security key
+* **Key Escrow:** Keys are stored with a trusted thrid party. Cloud computing. Some countries must share with government
 
 
 
@@ -845,13 +878,9 @@ Three groups:
 
 always consider safety and protection of people first
 
-CPTED: Crime Prevention Through Environmental Design
+**CPTED**: Crime Prevention Through Environmental Design
 
 * outlines guidelines and best practices regarding the design of buildings and surrounding structures
-
-1. identify most valuable assets and their associated risks
-
-
 
 **Grading**: refers to the slope of the ground. Slope away form building for water.
 

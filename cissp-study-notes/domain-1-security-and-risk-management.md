@@ -185,7 +185,7 @@ DPIA: Data Protection Impact Assessments&#x20;
 
 Quantitative and Qualitative Analysis can be combined
 
-
+### Quantitative Risk Analysis
 
 ALE = SLE (AV x EF) x ARO
 
@@ -202,10 +202,19 @@ Deming Cycle: Plan, Do, Check, Act
 
 * **Inherent Risk**: level of natural, native or default risk prior to any risk management efforts
 * **Residual risk**: Risk after safeguards, security controls and countermeasures are implemented
+* **Control Gap:** Difference between the current state of a system’s controls and the desired or necessary state
 * **Control Risk/Secondary risk**: risk that is introduced by the introduction of the countermeasure to an environment.
 * **Mitigated Risk**: Risk that has been addressed by existing controls
 * **Total risk**: without any security controls for all risk
   * Threats \* Vulnerabilities \* Asset value
+
+total risk - control gap = residual risk
+
+ALE1 - ALE2 - ACS = value of safeguard
+
+ALE1: ALE before safeguard\
+ALE2: ALE after safeguard\
+ACS: Annual Cost of safeguard
 
 ## Threat modeling methodologies
 
