@@ -445,3 +445,51 @@ Audit roles:
 | Internal auditors    | company employees who provide assurance that corporate internal controls are operating effectively  |
 | External Auditors    | Provide an unbiased and indepdent audit report as they are independent of the entitty being audited |
 
+
+
+## 2024 Update
+
+Cloud audit standards
+
+**SSAE**: Statements on Standards for Attestation Engagements
+
+* SSAE 18 is a set of standards defined by AICPA (American Institute of CPAs)
+* Designed to enhance the quality and usefulness of System and Organization Control (SOC) reports
+* Includes audit standards and suggested report formats to guide and assist auditors
+* SOC 1
+  * mainly financial controls
+* SOC 2 Type 1
+  * design of security processes and controls at a specific point in time
+* SOC 2 Type 2
+  * assesses how effective those controls are over time by observing operations for at least six months
+  * often requires NDA
+* SOC 3
+  * contain only auditor's general opinions and non-sensitive date
+  * publicly shareable
+
+
+
+**ISAE**: International Standard on Assurance Engagements&#x20;
+
+* International Auditing and Assurance Standards Board
+* similar to the AICPA and it's SSAE standard
+* ISAE 3402 roughly equivalant to the SOC 2 reports
+
+
+
+**CSA**: Cloud Security Alliance
+
+* Security Trust Assurance and Risk (STAR) certification program
+* can be used by cloud service providers, cloud customer, or auditors and consultants
+* demonstrate compliance to desired level of assurance
+* consists of two levels of certification
+  * Level1: self-assessment
+    * complimentary offering that documents the security controls
+  *   Level2: third-party audit
+
+
+
+
+
+
+

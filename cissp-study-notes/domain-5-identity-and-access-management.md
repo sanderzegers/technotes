@@ -300,12 +300,15 @@ example: IT admin assigns permissions
 
 
 
-Access policy enforcement:
+## Access policy enforcement
 
-* PEP: policy enforcement point
+* PEP: **policy enforcement point**
   * Gatekeep/application that enforces and requests permissions (from PDP)
-* PDP: policy decision point
+  * enabling, monitoring, and terminating connections between a subject and a resource
+* PDP: **policy decision point**
   * makes decisions on the authorization request sent by PEP
+  * evaluates the context of an access request and decides whether it should be allowed, denied or subjected to additional controls
+  * 5W (who, what when, where and why)
 
 
 
@@ -370,4 +373,40 @@ Service Account Management
 
 
 Tempest: allows to read from electronic emanations that every monitor procedures (CRT Monitors)
+
+
+
+2024 Update
+
+FIDO2:
+
+* public-key crypto
+* physical device
+
+
+
+### Zero Trust Network Architecture
+
+Control Plane
+
+* adaptive Identity
+  * changes the way user need to authenticate based on context (location, app, device)
+* Threat Scope Reduction
+* Policy-Driven Access Control
+  * based on user identity
+* Policy Administrator (PA)
+* Policy Engine
+
+Data Plane
+
+* Implicit Trust Zones
+  * traditional security approach (firewalls)
+* Subject/System
+* Policy Enforcement Point
+
+
+
+
+
+
 

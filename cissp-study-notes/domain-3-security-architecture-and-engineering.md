@@ -20,6 +20,10 @@ icon: lock-keyhole
 
 ### Principles for Zero Trust
 
+assumes compromise / breach in verifying every request\
+verify explicitly\
+least privilege access\
+\
 Know your architecture of users, devices and services\
 Know your identities of users, services and devices\
 Know the health of your users, devices and services\
@@ -29,7 +33,6 @@ Focus your monitoring\
 Don't trust any network, incl. your own\
 Choose services designed for zero trust\
 treats user identity as the control plane\
-assumes compromise / breach in verifying every request\
 
 
 ### Principle by design
@@ -735,7 +738,8 @@ ChaCha: variant of Salsa20.&#x20;
 
 ChaCha8 is the 8-round variant of ChaCha\
 ChaCha12 and ChaCha20 with 12 and 20 rounds.\
-ChaCha20 generally faster than AES-GCM on CPU that lack AES-NI\
+ChaCha20 generally faster than AES-GCM on CPU that lack AES-NI
+
 
 
 ChaCha20-Poly1305 AEAD:\
@@ -987,33 +991,37 @@ NFPA 12 therefore mandates **pre-discharge horns, voice messages, and a 20–60 
 
 
 
-
-
-
-
-
-
 ## Other
 
-
-
-SIEM: Security Information Event Manager
+**SIEM**: Security Information Event Manager
 
 * real-time monitoring, traffic analysis & notification
 
-SOAR: Security Orchestration Automation & Response
+**SOAR**: Security Orchestration Automation & Response
 
 * alert and response automation with threat-specific playbooks
+
+
 
 | Concept                                 | What it is                                                    |
 | --------------------------------------- | ------------------------------------------------------------- |
 | **SOA (Service-Oriented Architecture)** | Build systems as **enterprise services** that many apps share |
 | **Microservices**                       | Build one app as many **small, independent services**         |
 
-CASB: Cloud access security broker
+**CASB**: Cloud access security broker
 
 * security policy enforcement solution that may be installed on-prem or in the cloud
 * shadow it prevention
+
+**Playbook**:
+
+* document or checklist that defines how to verify an incident
+* <mark style="color:$primary;">paperwork</mark>
+
+**Runbook**:
+
+* implements that playbook data into an automated tool
+* <mark style="color:$primary;">technology</mark>
 
 
 
@@ -1021,23 +1029,21 @@ CASB: Cloud access security broker
 
 **single state processing**: processors are capable of operating at only one security level at a time
 
-multistate processing: can operate at multiple security levels at once. less common
+**multistate processing**: can operate at multiple security levels at once. less common
 
-user mode: limited instruction set
+**user mode**: limited instruction set
 
-privileged mode: aka system mode, kernel mode, supervisory mode. Controlled system operations.
+**privileged mode**: aka system mode, kernel mode, supervisory mode. Controlled system operations.
 
-primary storage: ram
+**primary storage**: ram
 
-secondary storage: magnetic, flash, optical media
+**secondary storage:** magnetic, flash, optical media
 
-Layering: different realms of security <mark style="color:$primary;">within a process</mark> and limits communication between them
+**Layering**: different realms of security <mark style="color:$primary;">within a process</mark> and limits communication between them
 
-Type 1 hypervisor: native or bare-metal hypervisor. no host os
+**Type 1 hyperviso**r: native or bare-metal hypervisor. no host os
 
-Type 2 hypervisor: regular os is present, installed as another software application.
-
-CASB: cloud access security broker (CASB). Shadow it. installed on-prem or in the cloud.
+**Type 2 hypervisor:** regular os is present, installed as another software application.
 
 
 
