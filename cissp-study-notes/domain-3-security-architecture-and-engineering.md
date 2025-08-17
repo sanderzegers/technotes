@@ -584,13 +584,11 @@ SPML
 
 
 
-XSS&#x20;
+## XSS&#x20;
 
 Stored/persistent and reflected. Target is client
 
 CSRF persistence facilitated by cookies in browsers. Target is web server
-
-
 
 XSS Stored: Store javascript in comment. Send sensitive cookie data to attacker
 
@@ -598,13 +596,13 @@ XSS reflected/non-persistent: Malicious URL containing XSS&#x20;
 
 
 
-CSRF: Forged attack. Attacker sends action (fund transfer) as hyperlink to victim
+CSRF: Forged attack. Attacker sends action (fund transfer) as <mark style="color:$primary;">hyperlink</mark> to victim
 
-Salt: append unique password by random string for each user individually\
-Pepper: **single secret** (shared across users) stored separately from the hashes
+**Salt**: append unique password by random string for each user individually\
+**Pepper**: **single secret** (shared across users) stored separately from the hashes
 
-purchase key attack: bribe someone to get the key\
-rubber hose attack: user of duress or torture
+**purchase key attack**: bribe someone to get the key\
+**rubber hose attack**: use of duress or torture
 
 | Ticket attack      | What’s forged                                                        | Secret you must steal                                                                     | Scope of what you can impersonate                                                           | Contact with Domain Controller (DC) when the fake ticket is used                                                        | Why it’s valuable / typical OPSEC goal                                                                                                                                                                                                                                                                          |
 | ------------------ | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -942,14 +940,14 @@ Fire needs 3 parts: Fuel, Oxygen, heat
 ### Fire detection
 
 **Flame detectors**: Detected infrared and UV light. Not good for early detection.\
-**Smoke Ionization**: radioactive material, ionizes particles that flow bbetween two metal plates. smoke ionization process will be disrupted. Responds quick to flaming/fast fires\
-**Smoke Photoelectronic / Optical**: ligh source and a sensor. off-angle light will be refracted more directly into sensor. responds more quickly to smoldering fires.\
-**Smoke Dual:** Most sensor today incorperate both ionization and optical sensor.\
-Smoke Veda: Best known. Most expensive, but the best. Very Ealry Smoke Detection Apparatus. for very-high value equipment or assets.
+**Smoke Ionization**: radioactive material, ionizes particles that flow between two metal plates. smoke ionization process will be disrupted. Responds quick to flaming/fast fires\
+**Smoke Photo electronic / Optical**: light source and a sensor. off-angle light will be refracted more directly into sensor. responds more quickly to smoldering fires.\
+**Smoke Dual:** Most sensor today incorporate both ionization and optical sensor.\
+**Smoke Veda**: Best known. Most expensive, but the best. Very Early Smoke Detection Apparatus. for very-high value equipment or assets.
 
-Heat detector: Slow, very ineffective early detection tools.
+**Heat detector**: Slow, very ineffective early detection tools.
 
-### Fire surpression
+### Fire suppression
 
 **Wet pipe**: Filled with pressurized water. Cheapest solution. Risk of leaks. Freezing risks.\
 **Dry pipe**: Filled with some type of pressured gas. Allows the fill the pipes very fast with water.\
@@ -960,7 +958,7 @@ Gas based fire suppression systems:
 
 * more expensive to install and maintain
 * typically no damage to equipment
-* remove oxygen or interrypt the chemical process.
+* remove oxygen or interrupt the chemical process.
 * can kill everybody in a room!
 * commonly used gases: <mark style="color:$primary;">INERGEN, Argonite, FM200 and Aero-K</mark>
 * <mark style="color:$primary;">Halon</mark> gas was popular now illegal (environmental damage)
