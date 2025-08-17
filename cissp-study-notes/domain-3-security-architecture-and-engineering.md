@@ -468,7 +468,8 @@ Emanations: unseen things leaking out of systems like radio waves, light, sound 
 
 Emanations protection
 
-Shielding (TEMPEST): Walls, Faraday cages
+Shielding (**TEMPEST**): Walls, Faraday cages\
+**EMSEC** (Emission security) hast mostly replaced TEMPEST
 
 White Noise: Strong single of random noise to hide data transfer
 
@@ -478,7 +479,17 @@ Control Zone: prevent access or proximity to locations
 
 CIS hardening guides: Best practice for hardening
 
+MDM
 
+Sideloading: Install apps from sources other than official app stores.
+
+CYOD: Choose your own device
+
+COPE: Corporate-Owned, Personally-Enabled
+
+COBO: Corporate-Owned, Business-Only
+
+COMS: Coporoate-Owned, Managed-Service
 
 Data warehouse vs Big Data
 
