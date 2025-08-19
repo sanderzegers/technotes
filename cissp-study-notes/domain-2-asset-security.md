@@ -13,8 +13,6 @@ Financially sensitive\
 Company restricted\
 PII
 
-
-
 ## Labeling vs Marking
 
 | Labeling 🔦                                                  | Marking 🖍️                       |
@@ -54,6 +52,13 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 
 <figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
+|         | Government   | Privat Sector              |
+| ------- | ------------ | -------------------------- |
+| Class 3 | Top secret   | Confidential / Proprietary |
+| Class 2 | Secret       | Private                    |
+| Class 1 | Confidential | Sensitive                  |
+| Class 0 | Unclassified | Public                     |
+
 ## Data roles
 
 * Data Owner
@@ -76,10 +81,10 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 * Administrators
   * grant access to data based on guidelines provided by data owner
 * Custodian
-  * <mark style="color:$primary;">day-to-day</mark> repsonsibilities for protecting and storing data
+  * <mark style="color:$primary;">day-to-day</mark> responsibilities for protecting and storing data
   * Grants permission on daily basis
   * ensures compliance with data policy and data ownership guidelines
-  * ensure accessiblity, main and monitor
+  * ensure accessibility, main and monitor
   * data archive
   * data monitor
   * implement security controls
@@ -107,14 +112,14 @@ hierarchy: **Policy → Standards → Procedures → Baselines → Guidelines**
 
 ## Data destruction Methods
 
-|                        |                                                                                      |                                    |
-| ---------------------- | ------------------------------------------------------------------------------------ | ---------------------------------- |
-| Erasing                | delete operation on file.                                                            | data is recoverable                |
-| Clearing (overwriting) | preparing media for reuse, data cannot be recovered using traditional recovery tools |                                    |
-| Purging                | more intense form of clearing                                                        | for use in less secure environment |
-| Degaussing             | create strong magnetic filed that erases data on some media                          |                                    |
-| Destruction            | final stage in the media lifecycle. most secure method                               | most secure method                 |
-|                        |                                                                                      |                                    |
+|                        |                                                                                                                   |                                    |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| Erasing / Deleting     | <mark style="color:$primary;">delete operation</mark> on file.                                                    | data is recoverable                |
+| Clearing (overwriting) | <p>preparing media for reuse, data cannot be recovered using traditional recovery tools<br>one-time zero pass</p> |                                    |
+| Purging                | <p>more intense form of clearing<br>multiple overwrite passes</p>                                                 | for use in less secure environment |
+| Degaussing             | create strong magnetic filed that erases data on some media                                                       |                                    |
+| Destruction            | final stage in the media lifecycle. most secure method                                                            | most secure method                 |
+|                        |                                                                                                                   |                                    |
 
 Don't keep data longer around than necessary -> Data retention. Can cause legal issues
 
@@ -160,9 +165,9 @@ select or drop control enhancements: Automated correlation/analysis is added for
 
 Reducing GPDR exposure:
 
-* **Anonmyization**: removing all relevant data so that is impossible to identifiy original subject or person.
+* **Anonymization**: removing all relevant data so that is impossible to identify original subject or person.
   * GPDR is no longer relevant
-* **Pseudonymization**: use pseudonyms or aliases.
+* **Pseudo Anonymization**: use pseudonyms or aliases.
   * less stringent requirements
 
 

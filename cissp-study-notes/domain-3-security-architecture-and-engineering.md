@@ -721,6 +721,8 @@ Null Cipher: Plaintext ist mixed with a large amount of non-ciphertext. For exam
 
 <figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
+Recommended symmetric crypto today: AES (e.g., AES-GCM) or ChaCha20-Poly1305
+
 Advantages: Fast, Strong\
 Disadvantages: Key distribution, Scalability, no authentication, integrity or non-repudation.
 
@@ -795,14 +797,14 @@ Intentional changes: keyed hash, digital signatures
 **DSS**: Digital Signature Standard:
 
 * NIST standards FIPS 186-5 defines how to create and verify digital signtures to ensure integrity, authentication and non-repudations
-* approved algos: RSA, ECDSA and DSA
+* approved algos: <mark style="color:$primary;">RSA</mark>, <mark style="color:$primary;">ECDSA</mark> and <mark style="color:$primary;">DSA</mark>
 * **SHA-1, SHA-2 and SHA-3 message digest**
 
 
 
-RA: Registration Authority (proofs Identity for new Certifcate requests)
+RA: Registration Authority (proofs Identity for new Certificate requests)
 
-**Kerckhoff's Principle**: a cryptosystem should be secure even if everything about the system, except the key, is public knowledge
+**Kerckhoff's Principle**: a cryptosystem should be secure even if everything about the system, except the key, is <mark style="color:$primary;">public knowledge</mark>
 
 **Key Wrapping / Key encryption keys:**\
 Wrap key with another key for safe key transferal (DH for AES key)
@@ -827,21 +829,23 @@ Crypto shedding good variant to verify data is removed from the cloud
   * Breaking cryptographic protocols
   * Finding and correcting weaknesses en encryption algos
 
+Cryptanalysis attacks are a subset of cryptographic attacks: mathematical analysis of cipher/protocol
 
+| Cryptanalysis attacks   | Cryptographic Attacks |
+| ----------------------- | --------------------- |
+| ciphertext only         | Man-in-the-middle     |
+| known plaintext         | Replay                |
+| chosen plaintext        | Temporary files       |
+| chosen ciphertext       | Implementation        |
+| linear and differential | Side-Channel          |
+| factoring               | Dictionary attacks    |
+|                         | Rainbow tables        |
+|                         | Birthday              |
+|                         | Social engineering    |
 
-| Cryptanalysis attacks  | Cryptographic Attacks |
-| ---------------------- | --------------------- |
-| cipthertext only       | Man-in-the-middle     |
-| known plaintext        | Replay                |
-| chosen plaintext       | Temporary files       |
-| chosen ciphertext      | Implementaion         |
-| liean and differential | Side-Channel          |
-| factoring              | Dictionary attacks    |
-|                        | Rainbow tables        |
-|                        | Birthday              |
-|                        | Social engineering    |
-
-
+chosen plaintext: attacker chooses the plaintext to encrypt and then analyzes the ciphertext\
+chosen ciphertext: attacker can feed chosen ciphertexts to a decryption oracle. (CBC padding-oracle attacks)\
+known plaintext: attacks has <mark style="color:$primary;">plaintext-ciphertext pairs</mark>.
 
 ### Quantum computing
 

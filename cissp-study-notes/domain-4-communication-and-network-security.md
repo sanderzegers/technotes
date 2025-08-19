@@ -29,7 +29,6 @@ Firewalls active on Network, Session, Application
 | 3 — Network         | <mark style="color:$primary;">**Internet**</mark> | IP, ICMP, IGMP, IPv6, IPSec                                   |
 | 2 — Data Link       | **Network Access (Link)**                         | Ethernet, PPP, 802.11 Wi-Fi, ARP                              |
 | 1 — Physical        | **Network Access (Link)**                         | UTP/STP cabling, fiber optic, radio (802.11), hubs, repeaters |
-|                     |                                                   |                                                               |
 
 * **Data plane = “packets on the wire.”** Anything that touches every user packet/bit belongs here.
 * **Control plane = “brains of the box.”** It decides _where_ those packets should go.
@@ -38,13 +37,11 @@ Firewalls active on Network, Session, Application
 North/South traffic: in/out of data center\
 East/West traffic: traffic within data center
 
-Air-gapped network: No connectivy to other networks. Access on-site only
+Air-gapped network: No connectivity to other networks. Access on-site only
 
 Layer 1: Hubs, Repeaters, Concentrators
 
-Concentrator: combine all signals for transmisison down a iingle line
-
-
+Concentrator: combine all signals for transmission down a single line
 
 Layer 2: Protocols: ARP, RARP, PPTP, L2TP, L2F
 
@@ -74,11 +71,9 @@ IPv4: 32-bit (4 bytes) / IPv6 128-bit (16 bytes)
 
 Layer 4: Protocols: TCP, UDP, SSL/TLS
 
-| Well known Ports | Registered Ports (IANA) | Dynanmic / Private |
-| ---------------- | ----------------------- | ------------------ |
-| 0 - 1023         | 1024 - 49150            | 49151-65535        |
-|                  |                         |                    |
-|                  |                         |                    |
+| Well known Ports | Registered Ports (IANA) | Dynamic / Private |
+| ---------------- | ----------------------- | ----------------- |
+| 0 - 1023         | 1024 - 49150            | 49151-65535       |
 
 Layer 5: Protocols: PAP, CHAP, EAP, Netbios, RPC
 
@@ -128,8 +123,6 @@ Network attack phase: Reconnaissance -> Enumeration -> Vulnerability Analysis ->
 | 802.11ac               | Wi-Fi 5                 | 1.3 Gbps – 6.9 Gbps       | 5 GHz                       |
 | 802.11ax               | Wi-Fi 6 / Wi-Fi 6E      | Up to 9.6 Gbps            | 2.4 GHz, 5 GHz, and 6 GHz\* |
 | 802.11be (in progress) | Wi-Fi 7 (upcoming)      | Up to 46 Gbps (projected) | 2.4 GHz, 5 GHz, and 6 GHz   |
-|                        |                         |                           |                             |
-|                        |                         |                           |                             |
 
 ad hoc mode: WEP only. Client to Client without AP
 
