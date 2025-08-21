@@ -4,7 +4,7 @@ icon: stethoscope
 
 # Domain 6: Security Assessment & Testing
 
-The purpose of security assessment and testing is to ensure that security requirements/controls are defined, tested and operating effectively.\
+The purpose of security assessment and testing is to ensure that <mark style="color:$primary;">security requirements/controls are defined, tested and operating effectively</mark>.\
 ongoing process!
 
 * vulnerability assessments
@@ -287,12 +287,12 @@ SMART Metrics: Specific, Measurable, Achievable, Relevant, Timely
 * describe datapoints that can be used for goal setting
 * often used in context of employee performance and review
 
-KPI: Key performance indicators
+**KPI**: Key performance indicators
 
 * backward looking
 * indicate achievement of performance target
 
-KRI: Key risk indicators
+**KRI**: Key risk indicators
 
 * forward looking
 * exposure to operational risk
@@ -320,7 +320,7 @@ Example Areas for Metrics:
 
 Analyze test output and generate report
 
-Security Assement and testing report should include steps related to:
+Security Assessment and testing report should include steps related to:
 
 * Remediation
 * Exception handling
@@ -371,7 +371,7 @@ Audit process:
 
 * Determining audit goals
 * Involving the right business unit leaders
-* Determe the audit scope
+* Determine the audit scope
 * Choose audit team
 * plan the audit
 * Conduct the audit
@@ -384,31 +384,31 @@ SAS70 -> SSAE 16 -> SSAE 18
 
 every SOC 1 / SOC 2 / SSAE-18 engagement is led and signed by an _independent_ CPA firm; the Big Four and dozens of specialist boutiques dominate the market.
 
-| SOC family |                                                                                             | Primary audience                            | Common CISSP-relevant use                                 |
-| ---------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- | --------------------------------------------------------- |
-| **SOC 1**  | financial reporting risks                                                                   | Financial auditors, CFOs                    | Outsourced payroll, claims processing.                    |
-| **SOC 2**  | 5 trust principles: security, availabilty, confidentialiy, processing integrity and privacy | Security & compliance teams                 | Cloud hosting, SaaS platforms, managed security services. |
-| **SOC 3**  | marketing tool                                                                              | Public marketing copy of SOC 2 (short-form) | Vendor due-diligence “logo” on websites.                  |
+| SOC family |                                                                                                                                                                                                              | Primary audience                            | Common CISSP-relevant use                                 |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- | --------------------------------------------------------- |
+| **SOC 1**  | <mark style="color:$primary;">financial reporting</mark> risks                                                                                                                                               | Financial auditors, CFOs                    | Outsourced payroll, claims processing.                    |
+| **SOC 2**  | 5 trust principles: <mark style="color:$primary;">security, availability, confidentiality</mark>, processing <mark style="color:$primary;">integrity</mark> and <mark style="color:$primary;">privacy</mark> | Security & compliance teams                 | Cloud hosting, SaaS platforms, managed security services. |
+| **SOC 3**  | <mark style="color:$primary;">marketing</mark> tool                                                                                                                                                          | Public marketing copy of SOC 2 (short-form) | Vendor due-diligence “logo” on websites.                  |
 
-Type 1 report
+**Type 1 report**
 
 * focus on design of controls at a point of time
-* focus on paperwork (policies, procedures, baselines etc)
+* focus on <mark style="color:$primary;">paperwork</mark> (policies, procedures, baselines etc)
 * evaluate whether a process is properly designed
 
-Type 2 report
+**Type 2 report**
 
 * examines design of a control
 * **control effectiveness over a period of time**
 * Checks entries in change requests for example.
 
-SOC 2, Type 2 most commonly requested report for security professionals!!
+<mark style="color:$primary;">SOC 2, Type 2</mark> most commonly requested report for security professionals!!
 
-Startups normally start with type 1 to identifiy missing controls, gaps, etc. The years after it will be Type 2 report.
+Startups normally start with type 1 to identify missing controls, gaps, etc. The years after it will be Type 2 report.
 
 #### How the pieces fit together in practice
 
-1. **Engagement letter** – Service organisation hires an independent CPA firm.
+1. **Engagement letter** – Service organization hires an independent CPA firm.
 2. **Planning & risk assessment** – Auditor maps the scope, including **subservice organisations** (e.g., a cloud IaaS provider) now mandatory under SSAE-18.
 3. **Fieldwork**
    * **Type I:** test design at a point in time.
@@ -428,7 +428,7 @@ Startups normally start with type 1 to identifiy missing controls, gaps, etc. Th
 Audit roles:
 
 * executive (senior) management
-* audit commitee
+* audit committee
 * security officer
 * compliance manager
 * internal auditors

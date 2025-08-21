@@ -87,7 +87,7 @@ Layer 7: Protocols (https, ftp, dns, telnet, ssh
 
 
 
-Converged refers to IP network carying non-ip traffic: FCoE, iscsi, voip, SRTP and SIP
+**Converged** refers to IP network carying non-ip traffic: FCoE, iscsi, voip, SRTP and SIP
 
 iscsi: Internet Small Computer System Interface
 
@@ -101,13 +101,13 @@ Vishing: Voice phishing
 
 Network attack phase: Reconnaissance -> Enumeration -> Vulnerability Analysis -> Exploitation
 
-|                     |                       |                                                                                                                                                                             |
-| ------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Fragment attacks    | Overlapping fragments | bypass firewall and IDS/IPS by fragmenting, and make the fragments overlapping.                                                                                             |
-|                     | Teardrop              | <p>attacker sends fragments of packets of differing sizes, out of order, fake fragment sequnce numbers.<br>Target cannot resseamble packets,  ie using ressource or DoS</p> |
-| IP Spoofing Attacks | Smurf                 | ICMP relay attack (source ip spoofing)                                                                                                                                      |
-|                     | Fraggle               | port 7 or port 19. CHARGEN (Char code generator) IP spoofing.                                                                                                               |
-|                     |                       |                                                                                                                                                                             |
+|                     |                       |                                                                                                                                                                                                                  |
+| ------------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fragment attacks    | Overlapping fragments | bypass firewall and IDS/IPS by fragmenting, and make the fragments overlapping.                                                                                                                                  |
+|                     | Teardrop              | <p>attacker sends <mark style="color:$primary;">fragments</mark> of packets of differing sizes, out of order, fake fragment sequnce numbers.<br>Target cannot resseamble packets,  ie using ressource or DoS</p> |
+| IP Spoofing Attacks | Smurf                 | <mark style="color:$primary;">ICMP relay attack (source ip spoofing)</mark>                                                                                                                                      |
+|                     | Fraggle               | port 7 or port 19. CHARGEN (Char code generator) IP spoofing.                                                                                                                                                    |
+|                     |                       |                                                                                                                                                                                                                  |
 
 ### Wireless
 

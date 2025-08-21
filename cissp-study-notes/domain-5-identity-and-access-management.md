@@ -85,7 +85,7 @@ Kim Cameron’s **Seven Laws of Identity** (2005)
 
 
 
-Access control service:&#x20;
+## Access control service
 
 identification, authentication, authorization, accountability (IAAA)
 
@@ -203,7 +203,7 @@ assertions are written in XML
 
 
 
-IDaas: identity as a service
+**IDaas**: identity as a service
 
 Common capabilities:
 

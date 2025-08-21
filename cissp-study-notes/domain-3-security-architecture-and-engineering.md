@@ -285,6 +285,7 @@ formal standards used to measure and compare the security strength of computer s
 * F level rating (functionality) = Orange Book
 * E level rating (Assurance level)
 * E0 - E6
+* almost same components as common criteria
 
 ### Common Criteria (ISO-IEC 15408)
 
@@ -343,11 +344,11 @@ Value of asset drives the selection of controls
 mac model classification:
 
 * hierarchical environment
-  * ordererd structure, from low security to high security
+  * ordered structure, from low security to high security
   * allows objects in higher level to access lower level
 * compartmentalized environment
   * no relationship between one security domain and another
-  * each domain = seperate isolated compartment
+  * each domain = separate isolated compartment
 * hybrid environment
   * combines both hierarchical and compartmentalized environments
 
@@ -376,7 +377,7 @@ You assess a specific system as built and operated in _your_ environment, then a
 * Two phases. Related but different.
 * used to assess the effectiveness of application security as well as operating system and hardware security
 
-Current DoD standards for C\&A: Risk MAnagement Framework (RMF) which replaced (DIACAP and  DITSCAP).
+Current DoD standards for C\&A: Risk Management Framework (RMF) which replaced (DIACAP and  DITSCAP).
 
 Other US gov branches: CNSSP (Committee on National Security Systems) (replaces NIACAP)
 
@@ -418,13 +419,11 @@ RMC: Subject access Object through a set of rules. This activity is logged and m
 
 RMC is a concept. RMC implemented is called security kernel
 
-
-
 TCB (Trusted Computing Based) is totality of protection mechanism within an architecture
 
 TCB contains, cpu, memory, storage, firmware, os, system kernel, etc.
 
-[https://youtu.be/\_nyZhYnCNLA?list=PL7XJSuT7Dq\_XPK\_qmYMqfiBjbtHJRWigD\&t=10923](https://youtu.be/_nyZhYnCNLA?list=PL7XJSuT7Dq_XPK_qmYMqfiBjbtHJRWigD\&t=10923)
+
 
 ### Processor state
 
@@ -483,13 +482,13 @@ MDM
 
 Sideloading: Install apps from sources other than official app stores.
 
-CYOD: Choose your own device
+**CYOD**: Choose your own device
 
-COPE: Corporate-Owned, Personally-Enabled
+**COPE**: Corporate-Owned, Personally-Enabled
 
-COBO: Corporate-Owned, Business-Only
+**COBO**: Corporate-Owned, Business-Only
 
-COMS: Coporoate-Owned, Managed-Service
+**COMS**: Coporoate-Owned, Managed-Service
 
 Data warehouse vs Big Data
 
@@ -505,24 +504,26 @@ Data warehouse vs Big Data
 
 Two important insights:
 
-Inference: deducing information from evidence and reasoning rather than from explicit statements\
-Aggregation: Pulls data into one one location
+**Inference**: deducing information from evidence and reasoning rather than from explicit statements\
+**Aggregation**: Pulls data into one one location
 
 
 
 
 
-ICS: Industrial Control Systems
+## ICS: Industrial Control Systems
 
-* general term used to describe control systems related to industrial processes and critical infrastructre.
+
+
+* general term used to describe control systems related to industrial processes and critical infrastructure.
 
 Three primary types:
 
-* SCADA (Supervisory Control and Data Acquistion
-* DCS (Distributed Control System
-* PLC (Programmable Logic Controller
+* **SCADA** (Supervisory Control and Data Acquisition)
+* **DCS** (Distributed Control System)
+* **PLC** (Programmable Logic Controller)
 
-OT is a broader term than ICS. refers to hardware and software used to monitor and control physiclal rpocesses, devies and industrial systems.
+OT is a broader term than ICS. refers to hardware and software used to monitor and control physical processes, devices and industrial systems.
 
 ICS focuses on control and automation of industrial processes.
 
@@ -570,9 +571,9 @@ GovCloud created by AWS, community cloud for government agencies in the US
 
 
 
-SPML
+**SPML**
 
-* deprecated
+* <mark style="color:$primary;">deprecated</mark>
 * OASIS standard (Organization for the Advancement of Structured Information Standards)
 * Provisioning only (creating, disabling user accounts)
 
@@ -584,12 +585,12 @@ SPML
 * process is done closer to the source of data
   * locally, far from the cloud
 * IOT
-* process on the device (motion detection camera)
+* <mark style="color:$primary;">process on the device</mark> (motion detection camera)
 
 ### Fog computing
 
-* places gateway devices in the field to collect and correlate data centrally at the edge
-* iot gateway aggregates data run anomaly and sends summary to cloud
+* places <mark style="color:$primary;">gateway devices</mark> in the field to collect and correlate data centrally at the edge
+* IOT gateway aggregates data run anomaly and sends summary to cloud
 
 
 
@@ -664,7 +665,7 @@ Goals:
 
 **Avalanche**: determine security and effectiveness of a crypto algorithm. Looks at the degree of confusion and diffusion the a crypto algorithm provides. Ideal case: Single bit -> at least 50 percent change in cipher text!
 
-Rail Fence (ZigZag): simple <mark style="color:$primary;">transposition</mark> cipher. Not secure by modern standard.&#x20;
+**Rail Fence (ZigZag)**: simple <mark style="color:$primary;">transposition</mark> cipher. Not secure by modern standard.&#x20;
 
 ### Block Cipher Modes
 
@@ -708,12 +709,12 @@ Summary to learn:
 * **GCM**: Galois/Counter mode:
   * counter mode: efficient and parallelizable
   * includes data <mark style="color:$primary;">authenticity</mark>
-* **CCM**: Counter with Cipher block Chaining Messaged Authenticaton Code mode:
+* **CCM**: Counter with Cipher block Chaining Messaged Authentication Code mode:
   * counter mode
   * cipher block chaining message authentication code (CBC-MAC) for <mark style="color:$primary;">authentication</mark>
   * simpler to implement, but slightly lower performance than GCM
 
-Null Cipher: Plaintext ist mixed with a large amount of non-ciphertext. For example first letter of each word in a sentence.
+Null Cipher: Plaintext is mixed with a large amount of non-ciphertext. For example first letter of each word in a sentence.
 
 
 
@@ -802,7 +803,7 @@ Intentional changes: keyed hash, digital signatures
 
 
 
-RA: Registration Authority (proofs Identity for new Certificate requests)
+**RA: Registration Authority** (proofs Identity for new Certificate requests)
 
 **Kerckhoff's Principle**: a cryptosystem should be secure even if everything about the system, except the key, is <mark style="color:$primary;">public knowledge</mark>
 
