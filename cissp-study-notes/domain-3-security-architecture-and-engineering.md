@@ -71,13 +71,13 @@ Three of the most popular security architectures:
 
 They are a way to <mark style="color:$primary;">formalize</mark> security policy:
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 typical implemented by enforcing integrity, confidentiality or other controls.
 
 Provides Broad guidelines only.
 
-
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 Three properties:
 
@@ -135,17 +135,17 @@ All other models listed in CISSP study without Biba and Bell-LaPaDula
 
 
 
-<figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 
 | Layer / Lattice based models                                                           | Rule-based model           |
 | -------------------------------------------------------------------------------------- | -------------------------- |
 | <p>Bell-LaPadula </p><ul><li>addresses only <strong>confidentiality</strong></li></ul> | Information Flow           |
-| <p>Biba</p><ul><li>addresses only <strong>integrity</strong></li></ul>                 | Clark-Wilson               |
+| <p>Biba</p><ul><li>addresses only <strong>integrity</strong></li></ul>                 | State machine model        |
+|                                                                                        | Noninterference Model      |
+|                                                                                        | Clark-Wilson               |
 |                                                                                        | Brewer-Nash (Chinese Wall) |
-|                                                                                        | Graham-Denning             |
-|                                                                                        | Harrison-Ruzzo-Ullman      |
 
 ### Bell-LaPadula
 
@@ -369,6 +369,22 @@ mac model classification:
 ### Role-based access control
 
 * well-defined collection of named job roles
+
+
+
+## Authorization mechanisms
+
+Differences between **Permissions**, **Rights** and **Privileges**:
+
+You have permissions to read and write the filex1.txt, you have rights to access the internal folder, you have root privileges.&#x20;
+
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+**Constrained Interface**: restrict what users can <mark style="color:$primary;">do</mark> or <mark style="color:$primary;">see</mark> based on their privileges.&#x20;
+
+**Content-Dependent Control**: bases access decisions on the actual content of the data being accessed, instead of whole resource. Example: Database views
+
+**Context-Dependent Control:** in which context the user is attempting to access a resource or perform actions. User should have account before purchase from online shop.
 
 ## Certification and Accreditation
 
@@ -649,7 +665,10 @@ Goals:
   * of Delivery: Receiver cannot deny received message
 * Access Control
 
-
+Key length (provide equal protections:\
+Symmetric: 128 bits\
+RSA: 3072 bits\
+Elliptic curve: 256 bits
 
 **Key clustering**: two different keys generate same ciphertext for same plaintext. Similar to collision in hashes
 
@@ -727,6 +746,8 @@ Recommended symmetric crypto today: AES (e.g., AES-GCM) or ChaCha20-Poly1305
 Advantages: Fast, Strong\
 Disadvantages: Key distribution, Scalability, no authentication, integrity or non-repudation.
 
+
+
 total keys for n users: n \* (n-1) / 2
 
 RC4 = Stream cipher\
@@ -765,7 +786,7 @@ AES-GCM and ChaCha20-Poly1305 when confidentiality + integrtiy is needed in a si
 
 ### Hash algorithms
 
-<figure><img src=".gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 SHA-1 = obsolete; SHA-2 = today’s default; SHA-3 = different design (sponge) + SHAKE options.
 

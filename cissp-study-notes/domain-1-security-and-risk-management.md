@@ -292,6 +292,17 @@ Operationally Critical Threat, Asset, And Vulnerability Evaluation
 * Emphasizes collaboration and a holistic approach to security.
 * Leaves security strategy largely to internal IT teams and does not scale well.
 
+
+
+**Reduction Analysis**: breaking down a system into five core elements:\
+aka decomposing
+
+* trust boundaries
+* data flow paths
+* input points
+* privileged operations
+* details about security controls.
+
 ## Wassenaar Arrangement:
 
 Goal: **stop advanced arms or “dual-use” tech** (things with civilian _and_ military value—like AI chips, strong crypto, hacking tools) from ending up in the wrong hands.
