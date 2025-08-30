@@ -119,7 +119,7 @@ Three properties:
 
 
 
-### **rule-based model**
+### **Rule-based model**
 
 specific rules dictates how security operates
 
@@ -150,7 +150,7 @@ Biba, Star Model, Bell-LaPadula, Clark-Wilson, Brewer-Nash (Chinese Wall Model)
 ### Bell-LaPadula
 
 * state machine <mark style="color:$primary;">enforces confidentiality</mark>
-* m<mark style="color:$primary;">andatory access control</mark>
+* <mark style="color:$primary;">mandatory access control</mark>
   * to enforce DoD multilevel security policy (<mark style="color:$primary;">Government</mark>!!)
 * simple security property
   * no read up
@@ -188,22 +188,38 @@ demonstrating how to blend confidentiality & integrity constraints
 
 ### Clark-Wilson
 
-well-formed transactions, separation of duties, and the subject-TP-object ‘triple’ with CDIs/UDIs
+* well-formed transactions
+  * Transitions from one valid state to another.
+  * atomic
+  * audited
+  * scoped (touches only its authorized CDI)
+* separation of duties
+  * the person who certifies a TP isn’t the one who executes/authorizes it
+* access-control ‘triple’ with (User, TP, CDI-set)
+  * only approved users, can run certain TPs on certain CDIs)
+
+
 
 rule-based model focuses only on integrity
 
-
-
 * constrained data item (CDI)
   * any data item whose integrity is protected by the security model
+  * "crown-jewel" data
+* Transformation procedure (TP)
+  * are the only procedures that are allowed to modify a CDI
+  * abstract operations such as read, write and modify
 * unconstrained data item (UDI)
   * any data item that is not controlled by the security model
     * can be manipulated by users
 * integrity verification procedure (IVP)
   * procedure that scans data items and confirms their integrity
-* Transformation procedures (TPs)
-  * abstract operations such as read, write and modify
-  * are the only procedures that are allowed to modify a CDI
+
+
+
+Use cases:
+
+* Financial Systems (payments, payroll)
+* ERP/CRM master-data changes
 
 
 
@@ -228,9 +244,17 @@ Subject has no longer direct access to the object:
 
 <figure><img src=".gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
-### Take Grant Model
+### Take-Grant Model
+
+graph model to answer: “Could permission X end up in person Y’s hands through a chain of delegations?”
+
+Goal: allows to figure out when rights in the system can changed and where leakage of permissions can occur through distribution of permissions.
 
 confidentiality-based model
+
+t (take): lets you take right from someone
+
+g (grant): lets you grant a right to someone
 
 Four basic operations:
 
@@ -249,8 +273,6 @@ Example: Banking: Retail Investments and Merger & Acquisitions
 Other rule-based models (no details mentioned):\
 \- Graham-Denning Model\
 \- Harrison-Ruzzo-Ullman model
-
-
 
 ### Graham-Denning model
 
