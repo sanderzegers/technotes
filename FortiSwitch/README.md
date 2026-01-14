@@ -15,7 +15,7 @@ Protocol.
 
 **Trunk**: LAG (not necessarily accepting all VLANs)
 
-<figure><img src="../.gitbook/assets/grafik (20).png" alt=""><figcaption><p>FortiSwitch Link Typers</p></figcaption></figure>
+<figure><img src=".gitbook/assets/grafik (20).png" alt=""><figcaption><p>FortiSwitch Link Typers</p></figcaption></figure>
 
 
 
@@ -30,4 +30,4 @@ It's advisable to also consult the standalone documentation, even when using swi
 
 {% embed url="https://docs.fortinet.com/product/fortiswitch/" %}
 
-#### &#x20;
+#### <br>

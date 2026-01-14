@@ -62,8 +62,7 @@ VDOM : root
         S448EFTF10000065  S448EF-v7.2.5-build453,230707 (GA)             (0/100/100)   S448EF-v7.2-build495     (Idle) 
 ```
 
-Reboot the switches from the GUI, starting with the access switches and working your way back to the core. In a multi-tier setup, reboot the access switches first, then the second-tier core switch, and finally the first-tier core switch. Reboot MCLAG switches at the same time.\
-
+Reboot the switches from the GUI, starting with the access switches and working your way back to the core. In a multi-tier setup, reboot the access switches first, then the second-tier core switch, and finally the first-tier core switch. Reboot MCLAG switches at the same time.<br>
 
 In the List View under 'Managed FortiSwitches' you can select multiple switches and reboot them at the same time.
 
