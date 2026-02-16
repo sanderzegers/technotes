@@ -35,7 +35,7 @@ df = pd.read_csv('data.csv')
 
 
 
-## Data Inspection
+## DataFrame Inspection
 
 ```
 df.head()             # First 5 rows
@@ -47,6 +47,29 @@ df.columns            # Column names
 df.dtypes             # Data types of columns
 df.isnull().sum()     # Count missing values per column
 ```
+
+
+
+## DataFrame Manipulation
+
+```python
+# Concat multiple tables (list of tables), ignore list name
+pd.concat(tables,ignore_index=True)
+
+# Add new column
+df = df.rename(columns={"old_name": "new_name", "a": "A"})
+
+# Set value based on another column
+df["dstport_udp"] = df["dstport"].where(df["Protocol"].eq(17)).astype("Int64")
+
+# Drop columns
+df = df.drop(columns=["dstport", "dstport"])
+
+
+
+```
+
+
 
 
 
