@@ -25,10 +25,15 @@ df = pd.DataFrame(data, columns=['A', 'B'])
 
 
 
-Load from CSV
+File Management
 
 ```
+# Reading
 df = pd.read_csv('data.csv')
+
+# Saving
+
+df.to_csv('out.csv',sep=';',index=False,encoding='utf-8-sig')
 ```
 
 
@@ -46,6 +51,9 @@ df.describe()         # Summary statistics
 df.columns            # Column names
 df.dtypes             # Data types of columns
 df.isnull().sum()     # Count missing values per column
+
+
+val = df.loc[494, "srcip"] # Get srcip column at row 494
 ```
 
 
@@ -65,8 +73,11 @@ df["dstport_udp"] = df["dstport"].where(df["Protocol"].eq(17)).astype("Int64")
 # Drop columns
 df = df.drop(columns=["dstport", "dstport"])
 
+# Drop duplicate columns
+df = df.drop_duplicates()
 
-
+# Order by column
+df = df.sort_values(by="col")
 ```
 
 

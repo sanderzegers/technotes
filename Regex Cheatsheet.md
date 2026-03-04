@@ -35,7 +35,7 @@
 | a?     | Zero or One of a         |               |
 | a*     | Zero or more of a        |               |
 | a+     | One or more of a         |               |
-| a+?    | One ore more of a (lazy) |               |
+| a+?    | One or more of a (lazy)  |               |
 | a*?    | Zero or more of a (lazy) | ```\[.*?\]``` |
 | a{1,5} | Between one or five a's  |               |
 | a{3,}  | At least three a's       |               |
