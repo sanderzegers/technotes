@@ -1,5 +1,22 @@
 # Docker Cheatsheet
 
+### Terminology
+
+| Term         | Definition                                               |
+| ------------ | -------------------------------------------------------- |
+| Image        | read-only template used to create containers             |
+| Container    | running instance of an image                             |
+| Dockerfile   | file with instructions to build a Docker image           |
+| Registry     | Service that stores and distributes images               |
+| Repository   | A collection of image versions in a registry             |
+| Volume       | Persistent storage used by containers                    |
+| Bind Mount   | direct link between a host folder and a container folder |
+| Port Mapping | Exposes a container port to the host machine             |
+| Composer     | A tool for defining and running multi-container apps     |
+| Daemon       | background Docker service managing containers and images |
+
+
+
 ### Images
 
 | Syntax | Description | Example |
@@ -16,7 +33,7 @@
 
 | Syntax | Description | Example |
 | ------ | ----------- | ------- |
-| `docker run <image>` | Create and start a container | `docker run nginx` |
+| `docker run <image>` | **Create** and start a container | `docker run nginx` |
 | `docker run -it <image> <shell>` | Start an interactive container | `docker run -it ubuntu bash` |
 | `docker run -d <image>` | Run container in background | `docker run -d nginx` |
 | `docker ps` | List running containers | `docker ps` |
@@ -154,6 +171,40 @@ RUN apt-get update && apt-get install -y curl git
 WORKDIR /workspace
 CMD ["bash"]
 ```
+
+### Well known base images
+
+format `image:tag`
+
+Avoid  latest, prefer version tags, optional sha256 digests (fixed version):
+
+python:3.12 usually updates image to newer 3.12.x releases
+python:3.12.8 is more fixed.
+@sha256: is the exact image
+
+```
+# okay for quick tests
+FROM nginx:latest
+
+# better default
+FROM nginx:1.27
+
+# best for reproducible builds
+FROM nginx:1.27@sha256:...
+```
+
+
+
+| Image                      | Descriptions                                            |
+| -------------------------- | ------------------------------------------------------- |
+| python / node / php / java | App runtime                                             |
+| debian                     | good safe default                                       |
+| ubuntu                     |                                                         |
+| alpine                     | smallest common base, musl instead of glibc             |
+| scratch                    | empty minimal base, for single statically linked binary |
+| nginx / httpd              | web server / reverse proxy                              |
+
+
 
 ### Build and Run Flow
 
