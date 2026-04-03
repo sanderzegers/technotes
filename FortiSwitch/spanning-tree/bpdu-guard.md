@@ -24,7 +24,7 @@ end
 Display BPDU Guard status for each switch
 
 ```
-G60E # diagnose switch-controller switch-info bpdu-guard-status  S448EFTF23007146
+FG60E # diagnose switch-controller switch-info bpdu-guard-status  S448EFTF23007146
 Vdom: root
 Managed Switch : S448EFTF23001234 0
 

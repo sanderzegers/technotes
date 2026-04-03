@@ -1,6 +1,6 @@
 # Best Practices / Security
 
-* Setup default fortswitch password
+* Setup default FortiSwitch password
 
 ```
 config switch-controller switch-profile
@@ -32,6 +32,12 @@ end
 ```
 
 * Disable LLDP ISL Profiles on non FortiLink ports to prevent VLAN-hopping attack
+
+Either manually per port or with:
+
+```
+diagnose switch-controller switch-recommendation lock-down-topo-lldp-profile
+```
 
 
 
@@ -83,6 +89,8 @@ end
 
 {% embed url="https://community.fortinet.com/t5/FortiSwitch/Troubleshooting-Tip-How-to-verify-working-of-storm-control/ta-p/225109" %}
 
-* Enable network-assisted device detection
+* Lock down the FortiSwitch ICL links to make the automatically created ICLs and ISLs static. \
+  In certain situations, the peer switch might not be detected anymore, and without these settings, the system could remove the ICL/ISL, potentially causing a network loop.
 
-LLDP / CDP packets can't reach the Fortigate for additional device detection information. That's why it's recommended to enable it on the switches.
+<pre><code><strong>diagnose switch-controller switch-recommendation fabric-lockdown-enable
+</strong></code></pre>

@@ -1,8 +1,8 @@
 # Firmware Upgrade
 
-There is a recommended order how for upgrading a managed FortiSwitch environment. However, ignoring this might have no impact on smaller firmware steps, but it is highly recommended for larger setups and significant firmware uprades, especially between major Firmware releases, such as 6.4.3 to 7.2.9
+There is a recommended order for upgrading a managed FortiSwitch environment. Ignoring this may have no impact when performing small firmware updates, but it is strongly advised for larger deployments and major firmware upgrades, especially when moving between major releases, such as from 6.4.3 to 7.2.9.
 
-Upgrade Fortigate first and then work your way out from the access switches back to the core switches. It is highly recommended to upgrade and restart switches in an MCLAG configuration simultaneously. MCLAG configurations with switches running different firmware versions are not supported. I recommend using firmware staging for MCLAG setups.
+Upgrade the FortiGate first, then work your way out from the access switches back to the core switches. It is highly recommended to upgrade and restart switches in an MCLAG configuration simultaneously. MCLAG configurations with switches running different firmware versions are not supported. I recommend using firmware staging for MCLAG setups.
 
 Fortinet maintains a list of recommended Fortigate and FortiSwitch version combinations. Just search for 'FortiLink Compatibility' on the internet; it should provide the latest compatibility chart.
 
