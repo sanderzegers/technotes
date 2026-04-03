@@ -150,6 +150,7 @@
 | `CMD ["executable", "arg"]` | Default command when the container starts | `CMD ["python", "app.py"]` |
 | `ENTRYPOINT ["executable"]` | Make the container behave like an executable | `ENTRYPOINT ["python"]` |
 | `VOLUME ["/path"]` | Mark a path for external persistent data | `VOLUME ["/data"]` |
+| `# Comment` | Add a comment | `# Use debian as base image` |
 
 ### Minimal Dockerfile Template
 
