@@ -39,6 +39,7 @@ The router VDOMs are named `R1` through `R9`. The `root` VDOM is used as the inf
 | Loopback interfaces  | `172.17.0.0/16` | `/32 per router` | One loopback per router VDOM |
 | Point-to-point links | `172.18.0.0/16` |   `/31 per link` | Used for PPP VDOM links      |
 | Shared Ethernet LAN  | `172.19.0.0/24` |            `/24` | Used for `NET1`              |
+| Simulated LANs       |   `10.1.0.0/16` | `/24 per router` | Simulate local conneted Nets |
 
 ### 4. Loopback Interfaces
 
@@ -54,7 +55,23 @@ The router VDOMs are named `R1` through `R9`. The `root` VDOM is used as the inf
 | `R8` | `R8-LO0`       | `172.17.0.8` | `255.255.255.255` |
 | `R9` | `R9-LO0`       | `172.17.0.9` | `255.255.255.255` |
 
-### 5. Point-to-Point VDOM Links
+### 5. Local / Simulated Site Networks
+
+These interfaces provide local routed prefixes for each router VDOM. They are implemented as loopback interfaces and can be used as simple networks to advertise during OSPF or BGP labs.
+
+| VDOM | Interface Name | Local Network | Interface IP |         Netmask |
+| ---- | -------------- | ------------: | -----------: | --------------: |
+| `R1` | `R1-LAN0`      | `10.1.1.0/24` |   `10.1.1.1` | `255.255.255.0` |
+| `R2` | `R2-LAN0`      | `10.1.2.0/24` |   `10.1.2.1` | `255.255.255.0` |
+| `R3` | `R3-LAN0`      | `10.1.3.0/24` |   `10.1.3.1` | `255.255.255.0` |
+| `R4` | `R4-LAN0`      | `10.1.4.0/24` |   `10.1.4.1` | `255.255.255.0` |
+| `R5` | `R5-LAN0`      | `10.1.5.0/24` |   `10.1.5.1` | `255.255.255.0` |
+| `R6` | `R6-LAN0`      | `10.1.6.0/24` |   `10.1.6.1` | `255.255.255.0` |
+| `R7` | `R7-LAN0`      | `10.1.7.0/24` |   `10.1.7.1` | `255.255.255.0` |
+| `R8` | `R8-LAN0`      | `10.1.8.0/24` |   `10.1.8.1` | `255.255.255.0` |
+| `R9` | `R9-LAN0`      | `10.1.9.0/24` |   `10.1.9.1` | `255.255.255.0` |
+
+### 6. Point-to-Point VDOM Links
 
 | Link           | VDOM Link Name | Type  |           Subnet | Side 0 Interface |     Side 0 IP | Side 1 Interface |     Side 1 IP |
 | -------------- | -------------- | ----- | ---------------: | ---------------- | ------------: | ---------------- | ------------: |
@@ -69,7 +86,7 @@ The router VDOMs are named `R1` through `R9`. The `root` VDOM is used as the inf
 | R5 ↔ R6        | `R5R6-`        | `ppp` | `172.18.56.0/31` | `R5R6-0`         | `172.18.56.0` | `R5R6-1`         | `172.18.56.1` |
 | R6 ↔ R7        | `R6R7-`        | `ppp` | `172.18.67.0/31` | `R6R7-0`         | `172.18.67.0` | `R6R7-1`         | `172.18.67.1` |
 
-### 6. NET1 Shared Ethernet Segment
+### 7. NET1 Shared Ethernet Segment
 
 `NET1` is a virtual software switch in the `root` VDOM. It simulates a broadcast domain where multiple routers can reach each other.
 
