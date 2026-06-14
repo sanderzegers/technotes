@@ -30,7 +30,7 @@ The router VDOMs are named `R1` through `R9`. The `root` VDOM is used as the inf
 
 ### 2. Topology
 
-<figure><img src=".gitbook/assets/Architecture-1.drawio.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/Architecture-1.png" alt=""><figcaption></figcaption></figure>
 
 ### 3. Addressing Plan
 
@@ -39,7 +39,7 @@ The router VDOMs are named `R1` through `R9`. The `root` VDOM is used as the inf
 | Loopback interfaces  | `172.17.0.0/16` | `/32 per router` | One loopback per router VDOM |
 | Point-to-point links | `172.18.0.0/16` |   `/31 per link` | Used for PPP VDOM links      |
 | Shared Ethernet LAN  | `172.19.0.0/24` |            `/24` | Used for `NET1`              |
-| Simulated LANs       |   `10.1.0.0/16` | `/24 per router` | Simulate local conneted Nets |
+| Simulated LANs       |  `10.10.0.0/16` | `/24 per router` | Simulate local conneted Nets |
 
 ### 4. Loopback Interfaces
 
@@ -59,17 +59,17 @@ The router VDOMs are named `R1` through `R9`. The `root` VDOM is used as the inf
 
 These interfaces provide local routed prefixes for each router VDOM. They are implemented as loopback interfaces and can be used as simple networks to advertise during OSPF or BGP labs.
 
-| VDOM | Interface Name | Local Network | Interface IP |         Netmask |
-| ---- | -------------- | ------------: | -----------: | --------------: |
-| `R1` | `R1-LAN0`      | `10.1.1.0/24` |   `10.1.1.1` | `255.255.255.0` |
-| `R2` | `R2-LAN0`      | `10.1.2.0/24` |   `10.1.2.1` | `255.255.255.0` |
-| `R3` | `R3-LAN0`      | `10.1.3.0/24` |   `10.1.3.1` | `255.255.255.0` |
-| `R4` | `R4-LAN0`      | `10.1.4.0/24` |   `10.1.4.1` | `255.255.255.0` |
-| `R5` | `R5-LAN0`      | `10.1.5.0/24` |   `10.1.5.1` | `255.255.255.0` |
-| `R6` | `R6-LAN0`      | `10.1.6.0/24` |   `10.1.6.1` | `255.255.255.0` |
-| `R7` | `R7-LAN0`      | `10.1.7.0/24` |   `10.1.7.1` | `255.255.255.0` |
-| `R8` | `R8-LAN0`      | `10.1.8.0/24` |   `10.1.8.1` | `255.255.255.0` |
-| `R9` | `R9-LAN0`      | `10.1.9.0/24` |   `10.1.9.1` | `255.255.255.0` |
+| VDOM | Interface Name |  Local Network | Interface IP |         Netmask |
+| ---- | -------------- | -------------: | -----------: | --------------: |
+| `R1` | `R1-LAN0`      | `10.10.1.0/24` |  `10.10.1.1` | `255.255.255.0` |
+| `R2` | `R2-LAN0`      | `10.10.2.0/24` |  `10.10.2.1` | `255.255.255.0` |
+| `R3` | `R3-LAN0`      | `10.10.3.0/24` |  `10.10.3.1` | `255.255.255.0` |
+| `R4` | `R4-LAN0`      | `10.10.4.0/24` |  `10.10.4.1` | `255.255.255.0` |
+| `R5` | `R5-LAN0`      | `10.10.5.0/24` |  `10.10.5.1` | `255.255.255.0` |
+| `R6` | `R6-LAN0`      | `10.10.6.0/24` |  `10.10.6.1` | `255.255.255.0` |
+| `R7` | `R7-LAN0`      | `10.10.7.0/24` |  `10.10.7.1` | `255.255.255.0` |
+| `R8` | `R8-LAN0`      | `10.10.8.0/24` |  `10.10.8.1` | `255.255.255.0` |
+| `R9` | `R9-LAN0`      | `10.10.9.0/24` |  `10.10.9.1` | `255.255.255.0` |
 
 ### 6. Point-to-Point VDOM Links
 
