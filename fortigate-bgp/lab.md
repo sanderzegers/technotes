@@ -96,3 +96,92 @@ These interfaces provide local routed prefixes for each router VDOM. They are im
 | VDOM                   |           `root` |
 | Subnet                 |  `172.19.0.0/24` |
 | Connected router VDOMs | `R4`, `R5`, `R8` |
+
+### 8. Loading the Baseline Configuration
+
+The baseline lab configuration is stored in:
+
+{% embed url="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/configs/baseline/bgp-lab-master-rev1.conf" %}
+
+This configuration creates the FortiGate multi-VDOM lab foundation:
+
+* router VDOMs `R1` through `R9`
+* point-to-point VDOM links
+* shared Ethernet segment `NET1`
+* loopback interfaces
+* simulated local LAN prefixes
+
+> Do not apply this configuration to a production FortiGate. Use a lab VM, or spare appliance.
+
+**Option 1: Run the configuration as a GUI script**
+
+1. Download or copy the file `bgp-lab-master-rev1.conf`.
+2. Log in to the FortiGate GUI as an administrator with global permissions.
+3. Open the script runner from the FortiGate GUI. Top Admin -> Configuration -> Scripts
+4. Upload the baseline configuration.
+5. Run the script.
+
+**Option 2: Paste the configuration manually in the CLI**
+
+Open the FortiGate CLI and enter global configuration mode:
+
+```
+config global
+```
+
+Then paste the contents of `bgp-lab-master-rev1.conf` .
+
+Wait until the full configuration has been accepted. If the session disconnects after enabling multi-VDOM mode, log in again, enter global mode, and paste the remaining configuration.
+
+#### **Basic validation**
+
+The baseline configuration does not configure OSPF or BGP yet. At this stage, only directly connected tests are expected to work.
+
+Set a low ping repeat count:
+
+```
+sudo root execute ping-options repeat-count 2
+```
+
+**NET1 shared Ethernet test**
+
+`R4`, `R5`, and `R8` are connected to the shared `NET1` segment.
+
+```
+sudo R8 execute ping 172.19.0.5
+sudo R5 execute ping 172.19.0.4
+sudo R4 execute ping 172.19.0.8
+```
+
+Expected result: all three tests should succeed.
+
+**Point-to-point link tests**
+
+Test a few direct VDOM links:
+
+```
+sudo R3 execute ping 172.18.13.0
+sudo R1 execute ping 172.18.13.1
+
+sudo R2 execute ping 172.18.12.0
+sudo R1 execute ping 172.18.12.1
+
+sudo R7 execute ping 172.18.67.0
+sudo R6 execute ping 172.18.67.1
+```
+
+Expected result: these tests should succeed because each target is on a directly connected point-to-point link.
+
+**Local loopback and simulated LAN tests**
+
+Each router VDOM has a loopback and a simulated LAN interface.
+
+```
+sudo R1 execute ping 172.17.0.1
+sudo R1 execute ping 10.10.1.1
+
+sudo R8 execute ping 172.17.0.8
+sudo R8 execute ping 10.10.8.1
+```
+
+Expected result: these tests should succeed because they test local interfaces inside the same VDOM.
