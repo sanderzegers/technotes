@@ -30,7 +30,7 @@ The router VDOMs are named `R1` through `R9`. The `root` VDOM is used as the inf
 
 ### 2. Topology
 
-<figure><img src=".gitbook/assets/Architecture-1.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://raw.githubusercontent.com/sanderzegers/technotes/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master.svg" alt=""><figcaption></figcaption></figure>
 
 ### 3. Addressing Plan
 
