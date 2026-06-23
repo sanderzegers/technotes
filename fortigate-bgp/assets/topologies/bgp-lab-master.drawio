@@ -712,9 +712,6 @@
         <mxCell id="RlcAfKhrmeFjKLOtb-fS-42" parent="RlcAfKhrmeFjKLOtb-fS-39" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value=".1" vertex="1">
           <mxGeometry height="30" width="60" x="424" y="56" as="geometry" />
         </mxCell>
-        <mxCell id="RlcAfKhrmeFjKLOtb-fS-73" parent="RlcAfKhrmeFjKLOtb-fS-39" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;textOpacity=20;" value="Lab Rev 1.0" vertex="1">
-          <mxGeometry height="30" width="70" x="1080" y="10" as="geometry" />
-        </mxCell>
         <mxCell id="RlcAfKhrmeFjKLOtb-fS-74" parent="RlcAfKhrmeFjKLOtb-fS-0" value="local networks" />
         <mxCell id="RlcAfKhrmeFjKLOtb-fS-79" parent="RlcAfKhrmeFjKLOtb-fS-74" style="text;html=1;whiteSpace=wrap;align=center;verticalAlign=middle;rounded=0;strokeColor=default;" value="10.10.1.1/24" vertex="1">
           <mxGeometry height="30" width="80" x="20" y="20" as="geometry" />
