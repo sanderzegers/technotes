@@ -117,7 +117,7 @@ Routing table for VRF=0
 B       10.10.3.0/24 [20/0] via 172.18.12.0 (recursive is directly connected, R1R2-1), 00:00:08, [1/0]
 ```
 
-So the network got re-announced by R1 to R2. Mind you there is no direct peering between R1 and R3
+So the network got re-announced by R1 to R2. Mind you there is no direct peering between R1 and R2
 
 From a received and advertised-routes perspective:
 
@@ -301,6 +301,12 @@ FGT02 (global) # sudo R1 get router info bgp neighbors 172.18.12.1 advertised-ro
 
 ## Summary
 
-In this lab, we extended the topology from two routers to three routers. With eBGP, R2 can advertise a route learned from R1 to R3, and the AS\_PATH is updated as the route crosses autonomous systems.&#x20;
+In this lab, we extended the topology from two routers to three routers.
 
-With iBGP, R2 learns the route from R1, but does not advertise that iBGP-learned route to R3 by default. This behavior prevents routing loops inside an AS and is the reason larger iBGP networks require either a full mesh or route reflectors.
+With eBGP, R3 advertises 10.10.3.0/24 to R1. R1 then re-advertises this route to R2. When R2 receives the route, the AS\_PATH shows that the route passed through AS 65002 before reaching AS 65004.
+
+With iBGP, R3 also advertises 10.10.3.0/24 to R1. R1 installs the route, but does not advertise it onward to R2. This is expected behavior: by default, iBGP does not advertise routes learned from one iBGP peer to another iBGP peer.
+
+This is why larger iBGP designs need either a full mesh, route reflectors, or another design pattern.
+
+In the next lab, we solve this iBGP limitation using either full-mesh iBGP or a route reflector.

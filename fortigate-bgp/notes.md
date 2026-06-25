@@ -12,10 +12,7 @@ It stores the path we have to go through to reach the destination network
 
 Just a small note on timers: the timers configured on the FortiGate are not exact delays. RFC 4271 explicitly allows jitter to be applied to BGP timers to prevent peers from sending updates in synchronized bursts. The RFC suggests using a random factor between 0.75 and 1.0 of the configured timer value.
 
-Some notes for beginners:
 
-* We are using 0.0.0.0/31 ranges on the VLINKs. Which are point to point. Just two IP addresses. So normally 10.10.10.0 is a network ip range. But here it is a valid IP address
-* The `sudo R3` allows to run commands in a different vdom then the one you are currently using
 
 ## BGP introductionary courses and sources
 
