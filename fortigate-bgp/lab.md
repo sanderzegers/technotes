@@ -2,13 +2,13 @@
 description: Lab Revision 1 / 6.2026
 ---
 
-# Lab
+# Lab Baseline
 
 ## FortiGate BGP Lab — Baseline Configuration Documentation
 
 ### 1. Lab Scope
 
-This document describes the baseline FortiGate VDOM lab configuration. The lab is targeted at demonstrating, testing, and validating OSPF and BGP routing deployments in a controlled environment.
+This document describes the baseline FortiGate VDOM lab configuration. The lab is targeted at demonstrating, testing, and validating BGP routing deployments in a controlled environment.
 
 The topology includes multiple connectivity types so that different routing scenarios can be tested from the same baseline setup:
 
@@ -33,6 +33,14 @@ The router VDOMs are named `R1` through `R9`. The `root` VDOM is used as the inf
 <figure><img src="https://raw.githubusercontent.com/sanderzegers/technotes/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master.svg" alt=""><figcaption></figcaption></figure>
 
 ### 3. Addressing Plan
+
+{% hint style="info" %}
+This lab uses /31 subnets for point-to-point links.
+
+A /31 subnet contains exactly two usable IP addresses. This is why you may see addresses ending in `.0` and `.1` on the same link.
+
+Do not confuse this with a /30 subnet, where the first address is the network address and the last address is the broadcast address. With /31 point-to-point links, both addresses are usable.
+{% endhint %}
 
 | Purpose              |          Prefix |    Prefix Length | Notes                        |
 | -------------------- | --------------: | ---------------: | ---------------------------- |

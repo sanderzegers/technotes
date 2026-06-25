@@ -3,6 +3,7 @@
 * [Overview](README.md)
 * [Notes](notes.md)
 * [Lab Baseline](lab.md)
+* [Lab Tips & Tricks](lab-tips-and-tricks.md)
 
 ## Cheat Sheets
 
@@ -16,3 +17,4 @@
 * [Lab 2: Basic eBGP Peering](labs/lab-2-basic-ebgp-peering.md)
 * [Lab 3: Advertising Networks with BGP](labs/lab-3-advertising-networks-with-bgp.md)
 * [Lab 4: BGP Route Propagation over Multiple Hops](labs/lab-4-bgp-route-propagation-over-multiple-hops.md)
+* [Lab 5: Solving iBGP Route Propagation with Full Mesh and Route Reflectors](labs/lab-5-solving-ibgp-route-propagation-with-full-mesh-and-route-reflectors.md)
