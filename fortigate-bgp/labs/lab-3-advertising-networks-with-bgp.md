@@ -20,7 +20,7 @@ eBGP Settings:
 
 ## Packet Captures
 
-<table><thead><tr><th width="174">PCAP File</th><th>Description</th><th>What to look for</th></tr></thead><tbody><tr><td>lab3-ebgp-network-announcement</td><td>Announcement via network statement</td><td>BGP UPDATE Message (packet 18)</td></tr><tr><td>lab3-ibgp-network-announcement.pcapng</td><td>Announcement via network statement</td><td>BGP UPDATE Message (packet 21)</td></tr><tr><td>lab3-ibgp-network-removal.pcapng</td><td>Removal Route when interface is going down</td><td>BGP UPDATE Message (packet 29)</td></tr></tbody></table>
+<table><thead><tr><th width="174">PCAP File</th><th>Description</th><th>What to look for</th></tr></thead><tbody><tr><td><a href="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab3/lab3-ebgp-network-announcement.pcapng">lab3-ebgp-network-announcement.pcapng</a></td><td>Announcement via network statement</td><td>BGP UPDATE Message (packet 18)</td></tr><tr><td><a href="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab3/lab3-ibgp-network-announcement.pcapng">lab3-ibgp-network-announcement.pcapng</a></td><td>Announcement via network statement</td><td>BGP UPDATE Message (packet 21)</td></tr><tr><td><a href="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab3/lab3-ibgp-network-removal.pcapng">lab3-ibgp-network-removal.pcapng</a></td><td>Removal Route when interface is going down</td><td>BGP UPDATE Message (packet 29)</td></tr></tbody></table>
 
 ## Setup simple network announcements
 
