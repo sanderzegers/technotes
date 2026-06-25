@@ -8,24 +8,26 @@ Just a very basic iBGP peering between two VDOMs. The goal is not to exchange an
 
 <figure><img src="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master-Lab1.svg" alt=""><figcaption></figcaption></figure>
 
-R1 AS 65001\
-R2 AS 65001
+| Router |    AS | Interface IP | BGP Neighbor |
+| ------ | ----: | ------------ | ------------ |
+| R1     | 65001 | 172.18.12.0  | 172.18.12.1  |
+| R2     | 65001 | 172.18.12.1  | 172.18.12.0  |
 
 ## Packet Captures
 
-|                                  |                                                                                                              |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| lab1-bgp-simple-ibgp-peer.pcapng | Very simple peering, without route announcements. Keep-alive send every 50 secs, with default configuration. |
-| lab1-bgp-wrong-as.pcapng         | Remote Router on R1 is configured with wrong remote AS.                                                      |
-|                                  |                                                                                                              |
+| PCAP File                                                                                                                                        | Description                                                                                                  | What to look for |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ---------------- |
+| [lab1-bgp-simple-ibgp-peer.pcapng](https://lab1-bgp-simple-ibgp-peer.pcapng)                                                                     | Very simple peering, without route announcements. Keep-alive send every 50 secs, with default configuration. |                  |
+| [lab1-bgp-wrong-as.pcapng](https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab1/lab1-bgp-wrong-as.pcapng) | Remote Router on R1 is configured with wrong remote AS.                                                      |                  |
+|                                                                                                                                                  |                                                                                                              |                  |
 
 ## Peering requirements
 
-To create an ibgp peering between both peers, following settings must match:
+To create an ibgp peering between both peers, following conditions must be correct.
 
 | Requirement         | Description                                                                                           |
 | ------------------- | ----------------------------------------------------------------------------------------------------- |
-| IP reachability     | Each peer must able to reach other peer's BGP address                                                 |
+| IP reachability     | Each peer must be able to reach other peer's BGP address                                              |
 | TCP/179 Allowed     | BGP uses TCP Port 179. If traffic is passing a firewall, traffic must be allowed by a firewall policy |
 | Correct Remote AS   | Each router must configure the other router's AS correctly. For iBGP, this is the same  AS            |
 | Correct neighbor IP | The configured neighbor address must match the source address used by the peer                        |
@@ -47,6 +49,7 @@ config router bgp
             set remote-as 65001
         next
     end
+end
 next
 edit R2
 config router bgp
@@ -94,6 +97,21 @@ Neighbor    V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRc
 | Outq         | Incoming Queue for parsing BGP messages (normally 0)                |
 | Up/Down      | BGP session duration in current state                               |
 | State/PfRcxd | Shows state if not established, otherwise number of prefix received |
+
+## BGP State Table
+
+These are the 6 possible BGP neighbor states. A succesful connection is 'Established'. See chapter [BGP State table](../cheat-sheets/bgp-state-table.md) for more details.
+
+| State       | Meaning                                                                                       |
+| ----------- | --------------------------------------------------------------------------------------------- |
+| Idle        | BGP process is not currently trying to connect, or the session was reset                      |
+| Connect     | BGP is trying to establish the TCP session                                                    |
+| Active      | BGP is still trying to connect, often due to reachability, TCP/179, or neighbor config issues |
+| OpenSent    | TCP is up, BGP OPEN message has been sent                                                     |
+| OpenConfirm | OPEN was accepted, waiting for KEEPALIVE                                                      |
+| Established | Session is up; routes can now be exchanged                                                    |
+
+
 
 ### Verify BGP Neighbor Status
 
@@ -166,21 +184,21 @@ Nexthop local: ::
 BGP connection: non shared network
 ```
 
-|                        |   |
-| ---------------------- | - |
-| keepalive interval     |   |
-|  Neighbor capabilities |   |
-| Route refresh request  |   |
+|                       |                                                                                                                                     |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| keepalive interval    | Interval in which Keepalive packets are sent.                                                                                       |
+| Neighbor capabilities | Shows all the supported neighbor capabilities. See chapter [BGP Capabilities](../cheat-sheets/bgp-capabilities.md) for more details |
+| Route refresh request |                                                                                                                                     |
 
 ### BGP Router restart methods
 
 Methods to restart BGP peerings from most disruptive to the most graceful.
 
-|                                         |                                                                                                                                                              |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `execute router start`                  | <p>Restart entire routing engine (static routing, bgp, ospf, etc)<br>Only during maintenance window</p>                                                      |
-| `execute router clear bgp ip <ip>`      | Restart BGP session to peer with \<ip>. Flushes all BGP routes.                                                                                              |
-| `execute router clear bgp ip <ip> soft` | Will use BGP UPDATE message at the next configured advertisement-interval. Can be necessary after changing an outbound route-map, access-list or prefix-list |
+|                                                  |                                                                                                                                                                                                      |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `execute router restart`                         | <p>Restart entire routing engine (static routing, bgp, ospf, etc)<br>Only during maintenance window</p>                                                                                              |
+| `execute router clear bgp ip <neighbor-ip>`      | Restart BGP session to peer with \<neighbor-ip>. Flushes all BGP routes.                                                                                                                             |
+| `execute router clear bgp ip <neighbor-ip> soft` | Refreshes routes without tearing down the BGP TCP session. If route refresh is negotiated, FortiGate can request the peer to resend routes; this is useful after changing inbound or outbound policy |
 
 More details: [https://community.fortinet.com/fortigate-3/technical-tip-bgp-soft-reset-to-refresh-bgp-routing-table-without-tearing-down-existing-peering-sessions-92848](https://community.fortinet.com/fortigate-3/technical-tip-bgp-soft-reset-to-refresh-bgp-routing-table-without-tearing-down-existing-peering-sessions-92848)
 
