@@ -4,10 +4,19 @@
 
 <figure><img src="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master-Lab1.svg" alt=""><figcaption></figcaption></figure>
 
+iBGP Settings:
+
 | Router |    AS | Interface IP | BGP Neighbor | Loopback Lan Network |
 | ------ | ----: | ------------ | ------------ | -------------------- |
 | R1     | 65001 | 172.18.12.0  | 172.18.12.1  | 10.10.1.1/24         |
 | R2     | 65001 | 172.18.12.1  | 172.18.12.0  | 10.10.2.1/24         |
+
+eBGP Settings:
+
+| Router |    AS | Interface IP | BGP Neighbor |
+| ------ | ----: | ------------ | ------------ |
+| R1     | 65002 | 172.18.12.0  | 172.18.12.1  |
+| R2     | 65003 | 172.18.12.1  | 172.18.12.0  |
 
 ## Packet Captures
 
@@ -78,7 +87,7 @@ Total number of neighbors 1
 
 R1 sends an UPDATE message which contains:
 
-* Path Attribute: IGP
+* ORIGIN: IGP
 * AS\_PATH: empty
 * NEXT\_HOP: 172.18.12.0
 * LOCAL\_PREF: 100
@@ -122,7 +131,7 @@ config router bgp
 end
 </code></pre>
 
-Verify the router is received on R2:
+Verify the route is received on R2:
 
 ```
 FGT02 (R2) # get router info bgp summary 
@@ -151,7 +160,7 @@ B       10.10.1.0/24 [20/0] via 172.18.12.0 (recursive is directly connected, R1
 
 R1 sends an UPDATE message which contains:
 
-* Path Attribute: IGP
+* ORIGIN: IGP
 * AS\_PATH: 65002
 * NEXT\_HOP: 172.18.12.0
 * Network IP and Subnet: 10.10.1.0/24
@@ -235,6 +244,10 @@ Route Removal through UPDATE Message and withdrawn routes option.
 
 <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
+## Summary
 
+In this lab, BGP was used to advertise a local loopback/LAN prefix with a network statement. The BGP session alone did not advertise the route; the prefix had to be explicitly added to BGP.&#x20;
 
-\`
+By default, FortiGate only advertises the prefix if an exact matching route exists in the local routing table. When the interface was disabled, the route was withdrawn. Disabling network-import-check allowed the prefix to be advertised even though the local interface was down.
+
+The iBGP and eBGP UPDATE messages used the same BGP message type, but the path attributes differed. The iBGP advertisement used an empty AS\_PATH and included LOCAL\_PREF, while the eBGP advertisement included the local AS in the AS\_PATH.
