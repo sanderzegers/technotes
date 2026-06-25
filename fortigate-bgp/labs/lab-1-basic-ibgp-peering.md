@@ -8,8 +8,10 @@ Just a very basic iBGP peering between two VDOMs. The goal is not to exchange an
 
 <figure><img src="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master-Lab1.svg" alt=""><figcaption></figcaption></figure>
 
-R1 AS 65001\
-R2 AS 65001
+| Router |    AS | Interface IP | BGP Neighbor |
+| ------ | ----: | ------------ | ------------ |
+| R1     | 65001 | 172.18.12.0  | 172.18.12.1  |
+| R2     | 65001 | 172.18.12.1  | 172.18.12.0  |
 
 ## Packet Captures
 
@@ -192,11 +194,11 @@ BGP connection: non shared network
 
 Methods to restart BGP peerings from most disruptive to the most graceful.
 
-|                                         |                                                                                                                                                                                                      |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `execute router restart`                | <p>Restart entire routing engine (static routing, bgp, ospf, etc)<br>Only during maintenance window</p>                                                                                              |
-| `execute router clear bgp ip <ip>`      | Restart BGP session to peer with \<ip>. Flushes all BGP routes.                                                                                                                                      |
-| `execute router clear bgp ip <ip> soft` | Refreshes routes without tearing down the BGP TCP session. If route refresh is negotiated, FortiGate can request the peer to resend routes; this is useful after changing inbound or outbound policy |
+|                                                  |                                                                                                                                                                                                      |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `execute router restart`                         | <p>Restart entire routing engine (static routing, bgp, ospf, etc)<br>Only during maintenance window</p>                                                                                              |
+| `execute router clear bgp ip <neighbor-ip>`      | Restart BGP session to peer with \<neighbor-ip>. Flushes all BGP routes.                                                                                                                             |
+| `execute router clear bgp ip <neighbor-ip> soft` | Refreshes routes without tearing down the BGP TCP session. If route refresh is negotiated, FortiGate can request the peer to resend routes; this is useful after changing inbound or outbound policy |
 
 More details: [https://community.fortinet.com/fortigate-3/technical-tip-bgp-soft-reset-to-refresh-bgp-routing-table-without-tearing-down-existing-peering-sessions-92848](https://community.fortinet.com/fortigate-3/technical-tip-bgp-soft-reset-to-refresh-bgp-routing-table-without-tearing-down-existing-peering-sessions-92848)
 

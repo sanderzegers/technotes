@@ -14,3 +14,4 @@
 
 * [Lab 1: Basic iBGP Peering](labs/lab-1-basic-ibgp-peering.md)
 * [Lab 2: Basic eBGP Peering](labs/lab-2-basic-ebgp-peering.md)
+* [Lab 3: Advertising Networks with BGP](labs/lab-3-advertising-networks-with-bgp.md)
