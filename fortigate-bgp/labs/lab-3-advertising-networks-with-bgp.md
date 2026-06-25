@@ -1,5 +1,9 @@
 # Lab 3: Advertising Networks with BGP
 
+## Objective
+
+In this lab we demonstrate how BGP advertises networks between two hops and compare iBGP and eBGP behaviour.
+
 ## Topology
 
 <figure><img src="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master-Lab1.svg" alt=""><figcaption></figcaption></figure>

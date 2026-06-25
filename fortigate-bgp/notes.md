@@ -10,6 +10,8 @@ BGP is a path vector routing protocol
 
 It stores the path we have to go through to reach the destination network
 
+Just a small note on timers: the timers configured on the FortiGate are not exact delays. RFC 4271 explicitly allows jitter to be applied to BGP timers to prevent peers from sending updates in synchronized bursts. The RFC suggests using a random factor between 0.75 and 1.0 of the configured timer value.
+
 ## BGP introductionary courses and sources
 
 Books:
