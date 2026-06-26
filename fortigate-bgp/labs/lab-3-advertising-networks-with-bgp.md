@@ -66,13 +66,13 @@ end
 ```
 
 ```
-FGT02 (R2) # get router info routing-table bgp
+BGP-LAB (R2) # get router info routing-table bgp
 Routing table for VRF=0
 B       10.10.1.0/24 [200/0] via 172.18.12.0 (recursive is directly connected, R1R2-1), 00:07:51, [1/0]
 ```
 
 ```
-FGT02 (R2) # get router info bgp summary 
+BGP-LAB (R2) # get router info bgp summary 
 
 VRF 0 BGP router identifier 172.17.0.2, local AS number 65001
 BGP table version is 1
@@ -138,7 +138,7 @@ end
 Verify the route is received on R2:
 
 ```
-FGT02 (R2) # get router info bgp summary 
+BGP-LAB (R2) # get router info bgp summary 
 
 VRF 0 BGP router identifier 172.17.0.2, local AS number 65003
 BGP table version is 1
@@ -152,7 +152,7 @@ Total number of neighbors 1
 ```
 
 ```
-FGT02 (R2) # get router info routing-table bgp
+BGP-LAB (R2) # get router info routing-table bgp
 Routing table for VRF=0
 B       10.10.1.0/24 [20/0] via 172.18.12.0 (recursive is directly connected, R1R2-1), 00:03:22, [1/0]
 
@@ -184,7 +184,7 @@ end
 The network is not announced anymore:
 
 ```
-FGT02 (R1) # sudo R2 get router info bgp summary 
+BGP-LAB (R1) # sudo R2 get router info bgp summary 
 
 VRF 0 BGP router identifier 172.17.0.2, local AS number 65001
 BGP table version is 1
@@ -197,7 +197,7 @@ Neighbor    V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRc
 Total number of neighbors 1
 
 
-FGT02 (R1) # sudo R2 get router info routing-table bgp
+BGP-LAB (R1) # sudo R2 get router info routing-table bgp
 No route available
 ```
 
@@ -219,11 +219,11 @@ next
 And the route is back again, even though, the loopback interface is still down:
 
 ```
-FGT02 (R1) # get system interface | grep R1-LAN0
+BGP-LAB (R1) # get system interface | grep R1-LAN0
 == [ R1-LAN0 ]
 name: R1-LAN0   ip: 10.10.1.1 255.255.255.0   status: down    type: loopback   netflow-sampler: disable    sflow-sampler: disable    src-check: enable    mtu-override: disable 
 
-FGT02 (R1) # sudo R2 get router info bgp summary 
+BGP-LAB (R1) # sudo R2 get router info bgp summary 
 
 VRF 0 BGP router identifier 172.17.0.2, local AS number 65001
 BGP table version is 1
@@ -236,7 +236,7 @@ Neighbor    V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRc
 Total number of neighbors 1
 
 
-FGT02 (R1) # sudo R2 get router info routing-table bgp
+BGP-LAB (R1) # sudo R2 get router info routing-table bgp
 Routing table for VRF=0
 B       10.10.1.0/24 [200/0] via 172.18.12.0 (recursive is directly connected, R1R2-1), 00:00:30, [1/0]
 

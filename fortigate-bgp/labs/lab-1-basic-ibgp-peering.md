@@ -65,7 +65,7 @@ end
 ### Verify BGP peering summary
 
 ```
-FGT02 (R1) # get router info bgp  summary 
+BGP-LAB (R1) # get router info bgp  summary 
 
 VRF 0 BGP router identifier 172.17.0.1, local AS number 65001
 BGP table version is 1
@@ -118,7 +118,7 @@ These are the 6 possible BGP neighbor states. A succesful connection is 'Establi
 `get router info bgp neighbors <ip>` shows additional information for the configured neighbor routers:
 
 ```
-FGT02 (R1) # get router info bgp neighbors 172.18.12.1
+BGP-LAB (R1) # get router info bgp neighbors 172.18.12.1
 VRF 0 neighbor table:
 BGP neighbor is 172.18.12.1, remote AS 65001, local AS 65001, internal link
   BGP version 4, remote router ID 172.17.0.2
