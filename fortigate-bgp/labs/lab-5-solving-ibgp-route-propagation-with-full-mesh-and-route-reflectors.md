@@ -18,11 +18,11 @@ iBGP Settings:
 
 ## Packet Captures <a href="#packet-captures" id="packet-captures"></a>
 
-| PCAP File                               | Description                                                    | What to look for                                                                                                              |
-| --------------------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| lab5-ibgp-full-mesh.pcapng              | Full mesh ibgp topology. All 3 routers are peered.             | R3 send BGP updates to R1 and R2 directly (packet #34 #38)                                                                    |
-| lab5-ibgp-route-reflector-client.pcapng | R1 is configured as route reflector.                           | R1 forwards the route announced from R3 to R2 (packets #12 and #29) ORGINATOR\_ID and CLUSTER\_LIST path attributes are added |
-| lab5-ibgp-next-hop-self-rr.pcapng       | R1 is still configured as route reflector and next-hop-self-rr | Same as the route reflector lab, this time the NEXT\_HOP address is replaced between R1 and R2. (packet #31)                  |
+| PCAP File                                                                                                                                                                      | Description                                                    | What to look for                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [lab5-ibgp-full-mesh.pcapng](https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab5/lab5-ibgp-full-mesh.pcapng)                           | Full mesh ibgp topology. All 3 routers are peered.             | R3 send BGP updates to R1 and R2 directly (packet #34 #38)                                                                    |
+| [lab5-ibgp-route-reflector-client.pcapng](https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab5/lab5-ibgp-route-reflector-client.pcapng) | R1 is configured as route reflector.                           | R1 forwards the route announced from R3 to R2 (packets #12 and #29) ORGINATOR\_ID and CLUSTER\_LIST path attributes are added |
+| [lab5-ibgp-next-hop-self-rr.pcapng](https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab5/lab5-ibgp-next-hop-self-rr.pcapng)             | R1 is still configured as route reflector and next-hop-self-rr | Same as the route reflector lab, this time the NEXT\_HOP address is replaced between R1 and R2. (packet #31)                  |
 
 ## Full Mesh iBGP
 
@@ -114,7 +114,7 @@ config vdom
 edit R2
     config router static
         edit 0
-            set dst 172.18.13.0 255.255.255.0
+            set dst 172.18.13.0 255.255.255.254
             set gateway 172.18.12.0
             set device "R1R2-1"
         next
@@ -123,7 +123,7 @@ edit R2
  edit R3
      config router static
          edit 0
-             set dst 172.18.12.0/31
+             set dst 172.18.12.0 255.255.255.254
              set gateway 172.18.13.0
              set device "R1R3-1-1"
          next
