@@ -65,7 +65,7 @@ end
 Note the different local AS and remote AS
 
 ```
-FGT02 (R1) # get router info bgp  summary 
+BGP-LAB (R1) # get router info bgp  summary 
 
 VRF 0 BGP router identifier 172.17.0.1, local AS number 65002
 BGP table version is 1
@@ -84,7 +84,7 @@ Total number of neighbors 1
 `get router info bgp neighbors <ip>`&#x20;
 
 ```
-FGT02 (R1) # get router info bgp neighbors 172.18.12.1
+BGP-LAB (R1) # get router info bgp neighbors 172.18.12.1
 
 VRF 0 neighbor table:
 BGP neighbor is 172.18.12.1, remote AS 65003, local AS 65002, external link

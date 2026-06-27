@@ -74,7 +74,7 @@ end
 Verify BGP connectivity:
 
 ```
-FGT02 (R1) # get router info bgp summary 
+BGP-LAB (R1) # get router info bgp summary 
 
 VRF 0 BGP router identifier 172.17.0.1, local AS number 65002
 BGP table version is 1``
@@ -107,12 +107,12 @@ end
 Verify the 10.10.3.0/24 networks is installed on all routers:
 
 ```
-FGT02 (R3) # sudo R1 get router info routing-table bgp
+BGP-LAB (R3) # sudo R1 get router info routing-table bgp
 Routing table for VRF=0
 B       10.10.3.0/24 [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:00:20, [1/0]
 
 
-FGT02 (R3) # sudo R2 get router info routing-table bgp
+BGP-LAB (R3) # sudo R2 get router info routing-table bgp
 Routing table for VRF=0
 B       10.10.3.0/24 [20/0] via 172.18.12.0 (recursive is directly connected, R1R2-1), 00:00:08, [1/0]
 ```
@@ -122,7 +122,7 @@ So the network got re-announced by R1 to R2. Mind you there is no direct peering
 From a received and advertised-routes perspective:
 
 ```
-FGT02 (R3) # sudo R3 get router info bgp neighbors 172.18.13.0 advertised-routes 
+BGP-LAB (R3) # sudo R3 get router info bgp neighbors 172.18.13.0 advertised-routes 
 VRF 0 BGP table version is 1, local router ID is 172.17.0.3
 Status codes: s suppressed, d damped, h history, * valid, > best, i - internal
 Origin codes: i - IGP, e - EGP, ? - incomplete
@@ -136,7 +136,7 @@ Total number of prefixes 1
 Received on R1:
 
 ```
-FGT02 (R3) # sudo R1 get router info bgp neighbors 172.18.13.1 routes
+BGP-LAB (R3) # sudo R1 get router info bgp neighbors 172.18.13.1 routes
 VRF 0 BGP table version is 1, local router ID is 172.17.0.1
 Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
               S Stale
@@ -150,22 +150,21 @@ Total number of prefixes 1
 
 Forwarded to R2:
 
-```
-FGT02 (R3) # sudo R1 get router info bgp neighbors 172.18.12.1 advertised-routes
-VRF 0 BGP table version is 1, local router ID is 172.17.0.1
+<pre><code><strong>BGP-LAB (R3) # sudo R1 get router info bgp neighbors 172.18.12.1 advertised-routes
+</strong>VRF 0 BGP table version is 1, local router ID is 172.17.0.1
 Status codes: s suppressed, d damped, h history, * valid, > best, i - internal
 Origin codes: i - IGP, e - EGP, ? - incomplete
 
    Network          Next Hop            Metric     LocPrf Weight RouteTag Path
-*> 10.10.3.0/24     172.18.12.0                            0        0 65004 i <-/->
+*> 10.10.3.0/24     172.18.12.0                            0        0 65004 i &#x3C;-/->
 
 Total number of prefixes 1
-```
+</code></pre>
 
 Now check the routes received on R2. Note that the AS\_PATH has grown. To reach 10.10.3.0/24 in AS 65004, traffic must transit through AS 65002.
 
 ```
-FGT02 (R3) # sudo R2 get router info bgp neighbors 172.18.12.0 routes
+BGP-LAB (R3) # sudo R2 get router info bgp neighbors 172.18.12.0 routes
 VRF 0 BGP table version is 1, local router ID is 172.17.0.2
 Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
               S Stale
@@ -220,7 +219,7 @@ end
 Verify BGP connectivity on R1:
 
 ```
-FGT02 (R1) # get router info bgp summary
+BGP-LAB (R1) # get router info bgp summary
 
 VRF 0 BGP router identifier 172.17.0.1, local AS number 65001
 BGP table version is 1
@@ -251,12 +250,12 @@ end
 Verify received networks on all routers:
 
 ```
-FGT02 (R3) # sudo R1 get router info routing-table bgp
+BGP-LAB (R3) # sudo R1 get router info routing-table bgp
 Routing table for VRF=0
 B       10.10.3.0/24 [200/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:00:48, [1/0]
 
 
-FGT02 (R3) # sudo R2 get router info routing-table bgp
+BGP-LAB (R3) # sudo R2 get router info routing-table bgp
 No route available
 
 ```
@@ -266,7 +265,7 @@ No route available
 R3 announces 10.10.3.0/24 to R1:
 
 ```
-FGT02 (global) # sudo R3 get router info bgp neighbors 172.18.13.0 advertised-routes 
+BGP-LAB (global) # sudo R3 get router info bgp neighbors 172.18.13.0 advertised-routes 
 VRF 0 BGP table version is 1, local router ID is 172.17.0.3
 Status codes: s suppressed, d damped, h history, * valid, > best, i - internal
 Origin codes: i - IGP, e - EGP, ? - incomplete
@@ -280,7 +279,7 @@ Total number of prefixes 1
 Which is also received by R1:
 
 ```
-FGT02 (global) # sudo R1 get router info bgp neighbors 172.18.13.1 routes
+BGP-LAB (global) # sudo R1 get router info bgp neighbors 172.18.13.1 routes
 VRF 0 BGP table version is 1, local router ID is 172.17.0.1
 Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
               S Stale
@@ -295,7 +294,7 @@ Total number of prefixes 1
 But R1 does not advertise the 10.10.3.0/24 route to R2:
 
 ```
-FGT02 (global) # sudo R1 get router info bgp neighbors 172.18.12.1 advertised-routes
+BGP-LAB (global) # sudo R1 get router info bgp neighbors 172.18.12.1 advertised-routes
 % No prefix for neighbor 172.18.12.1
 ```
 
