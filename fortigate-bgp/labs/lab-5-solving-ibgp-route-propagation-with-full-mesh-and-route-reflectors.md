@@ -2,7 +2,7 @@
 
 ## Objective
 
-In the previous lab we showed that iBGP does not propagate networks out of the box. We show two different approaches on how to achieve this. With a **Full Mesh** config and with **Route Reflectors.**
+In the previous lab, we saw that iBGP-learned routes are not advertised to other iBGP peers by default. We show two different approaches on how to achieve this. With a **Full Mesh** config and with **Route Reflectors.**
 
 ## Topology <a href="#topology" id="topology"></a>
 
@@ -123,7 +123,7 @@ edit R2
  edit R3
      config router static
          edit 0
-             set dst 172.18.12.0/24
+             set dst 172.18.12.0/31
              set gateway 172.18.13.0
              set device "R1R3-1-1"
          next
@@ -173,7 +173,7 @@ end
 
 ```
 
-Verify R2 has neighbor adjency with R3 and received the 10.10.3.0/24 route
+Verify R2 has neighbor adjacency with R3 and received the 10.10.3.0/24 route
 
 <pre><code>FGT02 (R2) # get router info bgp summary 
 
@@ -201,9 +201,9 @@ Total number of prefixes 1
 
 </code></pre>
 
-Note that the Next Hop to the network `10.10.3.0/24` is set to `172.18.13.1`. This route is not directly connected on R2. So a valid underlaying routing is required. In this lab we used static routes, other IGP routing protocols like OSPF are also common to build the underlay network.
+Note that the Next Hop to the network `10.10.3.0/24` is set to `172.18.13.1`. This route is not directly connected on R2. So a valid underlying routing is required. In this lab we used static routes, other IGP routing protocols like OSPF are also common to build the underlay network.
 
-So, one method to redistribute routes learned from iBGP over iBGP is to use a full-mesh configuration. The issue with this approach is that it doesn't scale well. The table below demonstrates how quickly the number of required BGP sessions increases with each additional router.
+One method to allow iBGP routes to be propagated between all routers is to build a full-mesh iBGP topology. The issue with this approach is that it doesn't scale well. The table below demonstrates how quickly the number of required BGP sessions increases with each additional router.
 
 | iBGP Routers | Full-Mesh sessions |
 | ------------ | ------------------ |
@@ -283,7 +283,7 @@ edit R2
  edit R3
      config router static
          edit 0
-             set dst 172.18.12.0/24
+             set dst 172.18.12.0/31
              set gateway 172.18.13.0
              set device "R1R3-1-1"
          next
@@ -331,7 +331,7 @@ round-trip min/avg/max = 0.2/0.2/0.3 ms
 
 ```
 
-Now let's configure the route reflector by setting configuring `route-reflactor-client` for both neighbors on R1.
+Now let's configure the route reflector by setting configuring `route-reflector-client` for both neighbors on R1.
 
 ```
 config vdom
@@ -349,7 +349,7 @@ end
 next
 ```
 
-All iBGP announcements are now reflected to all other peers connected to R1.
+R1 can now reflect routes learned from one route-reflector client to the other route-reflector client.
 
 Verify with routing-table
 
@@ -371,7 +371,7 @@ Paths: (1 available, best #1, table Default-IP-Routing-Table)
 ```
 
 Note that 10.10.3.0/24 is reachable via 172.18.13.1 and we received this route recursively through R1.\
-Since we already have static routes for 172.18.13.0/24, we know how to reach R3 via the underlaying network.
+Since we already have static routes for 172.18.13.0/24, we know how to reach R3 via the underlying network.
 
 Verify ping from R2 to R3 local Net works:
 
@@ -428,11 +428,13 @@ BGP-LAB (global) # sudo R2 get router info routing-table details 172.18.13.1
 % Network not in table
 ```
 
-It's still beiing advertised form R1.
+It's still being advertised from R1.
 
 But R2 has no route to 172.18.13.1 at all. That's why it's not injected in the routing table (RIB).
 
 Now normally you have a default route. So let's add a default route to a dummy internet interface and see what happens.
+
+This default route is only used to demonstrate recursive next-hop resolution. It is not the correct underlay design for this lab.
 
 ```
 config global
@@ -492,9 +494,9 @@ So it's now pointing to our new internet dummy interface: R2NET1-0. This is defi
 
 What if we just could replace 172.18.13.1 with the IP from R1? Here is where the `next-hop-self-rr` option comes in handy.
 
-## Replacing Nexthop Attribute on the route reflector
+## Replacing Next-hop Attribute on the route reflector
 
-Enable the `next-hop-self-rr` option for both neighbours on R1:
+Enable the `next-hop-self-rr` option for both neighbors on R1:
 
 ```
 config vdom
@@ -537,23 +539,17 @@ C       172.30.0.2/32 is directly connected, R2-INTERNET
 
 ```
 
-Now the routes for 10.10.30/24 on R2 are correct. The interfaces is R1R2-1.
+Now the routes for 10.10.30/24 on R2 are correct. The interface is R1R2-1.
 
-Ping still won't work, because R3 still does not know on how to reach R2. So we'll announce the 172.18.12.0/31 network on R2, since this is the source ip of the ping.
+Ping still won't work, because R3 still does not know on how to reach R2. So we'll announce the local LAN network on R2 (10.10.2.0/24).
 
 ```
 config vdom
 edit R2
     config router bgp
-        set as 65001
-        config neighbor
-            edit "172.18.12.0"
-                set remote-as 65001
-            next
-        end
         config network
             edit 1
-                set prefix 172.18.12.0 255.255.255.254
+                set prefix 10.10.2.0 255.255.255.0
             next
         end
     end
@@ -563,27 +559,23 @@ end
 This route is also reflected on R1 and next hop value is replaced. Let's check the Route on R3 and ping from R2
 
 ```
-BGP-LAB (global) # sudo R3 get router info routing-table bgp
+BGP-LAB (R2) # sudo R3 get router info routing-table bgp
 Routing table for VRF=0
-B       172.18.12.0/31 [200/0] via 172.18.13.0 (recursive is directly connected, R1R3-1-1), 00:04:54, [1/0]
+B       10.10.2.0/24 [200/0] via 172.18.13.0 (recursive is directly connected, R1R3-1-1), 00:00:36, [1/0]
+
 ```
 
 ```
-BGP-LAB (global) # sudo R2 execute ping 10.10.3.1
+BGP-LAB (R2) # execute ping-options source 10.10.2.1
+
+BGP-LAB (R2) # execute ping 10.10.3.1
 PING 10.10.3.1 (10.10.3.1): 56 data bytes
 64 bytes from 10.10.3.1: icmp_seq=0 ttl=254 time=0.4 ms
 64 bytes from 10.10.3.1: icmp_seq=1 ttl=254 time=0.2 ms
-64 bytes from 10.10.3.1: icmp_seq=2 ttl=254 time=0.3 ms
 ^C
 --- 10.10.3.1 ping statistics ---
-3 packets transmitted, 3 packets received, 0% packet loss
+2 packets transmitted, 2 packets received, 0% packet loss
 round-trip min/avg/max = 0.2/0.3/0.4 ms
-
-BGP-LAB (global) # sudo R2 execute traceroute 10.10.3.1
-traceroute to 10.10.3.1 (10.10.3.1), 32 hops max, 3 probe packets per hop, 72 byte packets
- 1  172.18.12.0  0.301 ms  0.191 ms  0.143 ms
- 2  10.10.3.1  0.370 ms  0.229 ms  0.184 ms
-
 ```
 
 ## Links
