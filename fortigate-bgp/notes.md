@@ -59,3 +59,9 @@ Lab 13: Route Maps\
 Lab 14: Communities\
 Lab 15: Soft Reset and Route Refresh
 
+| Lab                                     | Routers | Reason                                                   |
+| --------------------------------------- | ------: | -------------------------------------------------------- |
+| Lab 6: Prefix-lists and route filtering |       2 | Simple and focused                                       |
+| Lab 7: Path selection                   |  3 or 4 | Needs multiple possible paths                            |
+| Lab 8: Route-maps and attributes        |  3 or 4 | Better with multiple paths                               |
+| Lab 9: Redistribution                   |       3 | Nice to show connected/static/OSPF-to-BGP-style behavior |
