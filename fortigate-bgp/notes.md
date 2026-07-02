@@ -65,3 +65,54 @@ Lab 15: Soft Reset and Route Refresh
 | Lab 7: Path selection                   |  3 or 4 | Needs multiple possible paths                            |
 | Lab 8: Route-maps and attributes        |  3 or 4 | Better with multiple paths                               |
 | Lab 9: Redistribution                   |       3 | Nice to show connected/static/OSPF-to-BGP-style behavior |
+
+
+
+
+
+### Access-lists
+
+A simple list based on a prefix consisting of an IPv4 or IPv6 address and netmask or cisco wildcard mask.
+
+Simple netmask which allows 10.10.8.0/24, block everything else:
+
+```
+config router access-list
+    edit "standard"
+        config rule
+            edit 1
+                set prefix 10.10.8.0 255.255.255.0
+            next
+        end
+    next
+end
+```
+
+When this access-list is used as a BGP filter, routes that do not match the permit rule are not allowed.
+
+Access-lists can also use a Cisco-style wildcard mask. A wildcard mask defines which bits must match and which bits can be ignored.
+
+A `0` bit means: this bit must match.\
+A `1` bit means: this bit can be anything.
+
+```
+config router access-list
+    edit "cisco_wildcard"
+        config rule
+            edit 1
+                unset prefix
+                set wildcard 10.10.8.1 0.0.255.0
+            next
+            edit 2
+                unset prefix
+                set wildcard 172.16.0.0 0.0.15.255
+            next
+        end
+    next
+end
+```
+
+Rule 1 allows, 10.10.<0-255>1
+
+Rule 2 allows, 172.16.<0-15>.<0-255>
+
