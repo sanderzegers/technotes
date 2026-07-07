@@ -14,3 +14,11 @@ FGT01# diagnose ip router bgp all enable
 FGT01# diagnose ip router bgp level info
 FGT01# diagnose debug enable
 ```
+
+
+
+| Command                                               | Explenation               |
+| ----------------------------------------------------- | ------------------------- |
+| `diagnose ip router command show-vrf <vdom> show run` | Show ZebOS configuration  |
+| `diagnose ip router command show show l`              | List all ZebOS commands   |
+|                                                       |                           |

@@ -8,6 +8,7 @@
 
 * [BGP State table](cheat-sheets/bgp-state-table.md)
 * [BGP Capabilities](cheat-sheets/bgp-capabilities.md)
+* [BGP Best-Path Algorithm](cheat-sheets/bgp-best-path-algorithm.md)
 * [CLI Commands](cheat-sheets/cli-commands.md)
 
 ## Labs
@@ -18,6 +19,7 @@
 * [Lab 4: BGP Route Propagation over Multiple Hops](labs/lab-4-bgp-route-propagation-over-multiple-hops.md)
 * [Lab 5: Solving iBGP Route Propagation with Full Mesh and Route Reflectors](labs/lab-5-solving-ibgp-route-propagation-with-full-mesh-and-route-reflectors.md)
 * [Lab 6: Prefix-lists and route filtering](labs/lab-6-prefix-lists-and-route-filtering.md)
+* [Lab 7: BGP path selection](labs/lab-7-bgp-path-selection.md)
 
 ***
 
