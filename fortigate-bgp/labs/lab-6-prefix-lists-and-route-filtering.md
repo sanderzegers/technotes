@@ -2,7 +2,7 @@
 
 ## Objective
 
-In this lab we learn how to control BGP route advertisements. We start by advertising multiple networks, then use prefix-lists to allow or block specific routes. Finally, we introduce route-maps as a more flexible way to match and control BGP routes.
+In this lab we learn how to control BGP route advertisements. We start by advertising multiple networks, then use prefix-lists to allow or block specific routes.&#x20;
 
 This lab starts with a short introduction to prefix-lists.
 
@@ -17,11 +17,11 @@ This lab starts with a short introduction to prefix-lists.
 
 ## Packet Captures
 
-<table><thead><tr><th width="174">PCAP File</th><th>Description</th><th>What to look for</th></tr></thead><tbody><tr><td></td><td></td><td></td></tr></tbody></table>
+<table><thead><tr><th width="174">PCAP File</th><th>Description</th><th>What to look for</th></tr></thead><tbody><tr><td>lab6-ebgp-outgoing-prefixlist.pcapng</td><td>Enable outgoing prefix list, after BGP session was established</td><td>#12 Update packets only contains one IP range</td></tr><tr><td>lab6-ebgp-incoming-prefxlist-soft-reset.pcapng</td><td>Enable incoming prefix list, after BGP session was established.</td><td>Packet #29 still contains two routes</td></tr></tbody></table>
 
 ## Prefix-list
 
-The Prefix-list is used to match network prefixes. This is usually the cleanest option for BGP route filtering.&#x20;
+The prefix-list is used to match network prefixes. This is usually the cleanest option for BGP route filtering.&#x20;
 
 You can see a simple prefix-list example below. Note The default action for any non specified prefix is deny.
 
@@ -87,7 +87,7 @@ Some examples:
 
 We'll start with the eBGP peering from Lab2. Re-Load the lab baseline and execute:
 
-We'll add an additional loopback interface to R1
+We'll add an additional loopback interface to R1.
 
 ```
 config vdom
@@ -197,7 +197,7 @@ Total number of prefixes 2
 
 ```
 
-Still both routes! When applying or changing prefix-lists or route maps. BGP needs to be resetted. We'll do a soft reset for the outgoing routes to 172.18.12.1, to minimize the impact.
+Still both routes! When applying or changing prefix-lists or route maps. The BGP session needs to be resetted. We'll do a soft reset for the outgoing routes to 172.18.12.1, to minimize the impact.
 
 ```
 BGP-LAB (R1) # execute router clear bgp ip 172.18.12.1 soft out
@@ -261,7 +261,7 @@ end
 Now lets reset BGP peering on both sites:
 
 ```
-BGP-LAB (R1) # execute router clear bgp all
+BGP-LAB (R1) # execute router clear bgp all soft
 
 BGP-LAB (R1) # sudo R2 execute router clear bgp all
 ```
