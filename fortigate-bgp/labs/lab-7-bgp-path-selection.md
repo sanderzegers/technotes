@@ -2,15 +2,15 @@
 
 ## Objective
 
-In this lab we learn how to control BGP route advertisements. We start by advertising multiple networks, then use prefix-lists to allow or block specific routes.&#x20;
+In this lab we look at BGP path selection.&#x20;
 
-This lab starts with a short introduction to prefix-lists.
+R1 receives the same prefix from two different eBGP paths. We compare the BGP attributes and see why FortiGate selects one path as the best path and installs it into the routing table.
 
 ## Topology
 
 <figure><img src="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master-Lab6.svg" alt=""><figcaption></figcaption></figure>
 
-<table><thead><tr><th width="111.4166259765625">Router</th><th width="95.8333740234375" align="right">AS</th><th width="182.75">Interface IP</th><th width="201.5">BGP Neighbor</th><th>Local Networks</th></tr></thead><tbody><tr><td>R1</td><td align="right">65001</td><td>R1-R2: <code>172.18.12.0/31</code><br>R1-R3: <code>172.18.13.0/31</code></td><td>R2: <code>172.18.12.1</code><br>R3: <code>172.18.13.1</code></td><td>-</td></tr><tr><td>R2</td><td align="right">65002</td><td>R1-R2: <code>172.18.12.1/31</code><br>R2-R4: <code>172.18.24.0/31</code></td><td>R1: <code>172.18.12.0</code><br>R4: <code>172.18.24.1</code></td><td>-</td></tr><tr><td>R3</td><td align="right">65003</td><td>R1-R3: <code>172.18.13.1/31</code><br>R3-R4: <code>172.18.34.0/31</code></td><td>R1: <code>172.18.13.0</code><br>R4: <code>172.18.34.1</code></td><td>-</td></tr><tr><td>R4</td><td align="right">65004</td><td>R2-R4: <code>172.18.24.1/31</code><br>R3-R4: <code>172.18.34.1/31</code></td><td>R2: <code>172.18.24.0</code><br>R3: <code>172.18.34.0</code></td><td><code>10.10.4.1/24</code></td></tr></tbody></table>
+<table><thead><tr><th width="111.4166259765625">Router</th><th width="95.8333740234375" align="right">AS</th><th width="182.75">Interface IP</th><th width="201.5">BGP Neighbor</th><th>Local Networks</th></tr></thead><tbody><tr><td>R1</td><td align="right">65001</td><td>R1-R2: <code>172.18.12.0/31</code><br>R1-R3: <code>172.18.13.0/31</code></td><td>R2: <code>172.18.12.1</code><br>R3: <code>172.18.13.1</code></td><td>-</td></tr><tr><td>R2</td><td align="right">65002</td><td>R1-R2: <code>172.18.12.1/31</code><br>R2-R4: <code>172.18.24.0/31</code></td><td>R1: <code>172.18.12.0</code><br>R4: <code>172.18.24.1</code></td><td>-</td></tr><tr><td>R3</td><td align="right">65003</td><td>R1-R3: <code>172.18.13.1/31</code><br>R3-R4: <code>172.18.34.0/31</code></td><td>R1: <code>172.18.13.0</code><br>R4: <code>172.18.34.1</code></td><td>-</td></tr><tr><td>R4</td><td align="right">65004</td><td>R2-R4: <code>172.18.24.1/31</code><br>R3-R4: <code>172.18.34.1/31</code></td><td>R2: <code>172.18.24.0</code><br>R3: <code>172.18.34.0</code></td><td><code>10.10.4.0/24</code></td></tr></tbody></table>
 
 ## Packet Captures
 
@@ -149,7 +149,7 @@ Paths: (2 available, best #2, table Default-IP-Routing-Table)
 
 R1 receives two BGP paths to `10.10.4.0/24`.
 
-One path is learned via R2, and the other path is learned via R3. Both paths have a different next-hop address and a different AS path.
+One path is learned via R2, and the other path is learned via R3. Both paths have a different next-hop address and a different AS path. The AS paths are different, but the AS path length is equal. Both paths have an AS path length of 2, so AS path length does not decide the winner in this example.
 
 However, only one of these paths is selected as the best path and installed in the local routing table, also called the RIB.
 
@@ -163,18 +163,22 @@ To understand why a route was chosen, we need to compare the BGP attributes of b
 
 Let’s compare the attributes for `10.10.4.0/24` via R2 and R3.
 
-| Attribute                                                     |                                                    Via R3 |                                     Via R2 | Winner                                  |
-| ------------------------------------------------------------- | --------------------------------------------------------: | -----------------------------------------: | --------------------------------------- |
-| Weight                                                        |                                                         0 |                                          0 | Equal                                   |
-| Local preference                                              |                                                       100 |                                        100 | Equal                                   |
-| Route originated by local router                              |                                                        No |                                         No | Equal                                   |
-| AS path length                                                |                                                         2 |                                          2 | Equal                                   |
-| Origin                                                        |                                                       IGP |                                        IGP | Equal                                   |
-| MED / metric                                                  |                                                         0 |                                          0 | Equal                                   |
-| Route type                                                    |                                                  external |                                   external | Equal                                   |
-| IGP metric to next-hop                                        |                                        directly connected |                         directly connected | Equal                                   |
-| <mark style="color:$success;">Prefer oldest eBGP route</mark> | <mark style="color:$success;">older / current best</mark> | <mark style="color:$success;">newer</mark> | <mark style="color:$success;">R2</mark> |
-| Prefer lowest neighbor IP address                             |                                             `172.18.13.1` |                              `172.18.12.1` | R2                                      |
+| Attribute                                                     |                                     Via R3 |                                                    Via R2 | Winner                                  |
+| ------------------------------------------------------------- | -----------------------------------------: | --------------------------------------------------------: | --------------------------------------- |
+| Weight                                                        |                                          0 |                                                         0 | Equal                                   |
+| Local preference                                              |                                        100 |                                                       100 | Equal                                   |
+| Route originated by local router                              |                                         No |                                                        No | Equal                                   |
+| AS path length                                                |                                          2 |                                                         2 | Equal                                   |
+| Origin                                                        |                                        IGP |                                                       IGP | Equal                                   |
+| MED / metric                                                  |                                          0 |                                                         0 | Equal                                   |
+| Route type                                                    |                                   external |                                                  external | Equal                                   |
+| IGP metric to next-hop                                        |                         directly connected |                                        directly connected | Equal                                   |
+| <mark style="color:$success;">Prefer oldest eBGP route</mark> | <mark style="color:$success;">newer</mark> | <mark style="color:$success;">older / current best</mark> | <mark style="color:$success;">R2</mark> |
+| Prefer lowest neighbor IP address                             |                              `172.18.13.1` |                                             `172.18.12.1` | R2                                      |
+
+## Summary
+
+At this point we only observed the BGP best-path decision. In the next lab we will influence the decision ourselves by using route-maps to change BGP attributes such as local preference.
 
 
 
