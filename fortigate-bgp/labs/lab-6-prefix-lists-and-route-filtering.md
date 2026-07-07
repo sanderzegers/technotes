@@ -10,10 +10,10 @@ This lab starts with a short introduction to prefix-lists.
 
 <figure><img src="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master-Lab1.svg" alt=""><figcaption></figcaption></figure>
 
-| Router |    AS | Interface IP | BGP Neighbor | Local Networks                       |
-| ------ | ----: | ------------ | ------------ | ------------------------------------ |
-| R1     | 65002 | 172.18.12.0  | 172.18.12.1  | <p>10.10.1.0/24<br>10.10.11.0/24</p> |
-| R2     | 65003 | 172.18.12.1  | 172.18.12.0  | 10.10.2.1/24                         |
+| Router |    AS | Interface IP   | BGP Neighbor | Local Networks                       |
+| ------ | ----: | -------------- | ------------ | ------------------------------------ |
+| R1     | 65002 | 172.18.12.0/31 | 172.18.12.1  | <p>10.10.1.0/24<br>10.10.11.0/24</p> |
+| R2     | 65003 | 172.18.12.1/31 | 172.18.12.0  | 10.10.2.0/24                         |
 
 ## Packet Captures
 
@@ -23,7 +23,7 @@ This lab starts with a short introduction to prefix-lists.
 
 The prefix-list is used to match network prefixes. This is usually the cleanest option for BGP route filtering.&#x20;
 
-You can see a simple prefix-list example below. Note The default action for any non specified prefix is deny.
+You can see a simple prefix-list example below. Note The default action for any not specified prefix is deny.
 
 ```
 config router prefix-list    
@@ -85,7 +85,7 @@ Some examples:
 
 ## Outbound prefix-list
 
-We'll start with the eBGP peering from Lab2. Re-Load the lab baseline and execute:
+We'll start with the eBGP peering from Lab2. Reload the lab baseline and execute:
 
 We'll add an additional loopback interface to R1.
 
@@ -152,7 +152,7 @@ B       10.10.11.0/24 [20/0] via 172.18.12.0 (recursive is directly connected, R
 
 ```
 
-Now let's make sure R1 only announces 10.10.1.0/24 by creating a prefix-list and apply it on the neighbor on R1.
+Now let's make sure R1 only announces 10.10.11.0/24 by creating a prefix-list and applying it outbound on the R1 neighbor.
 
 Create a prefix list, and assign to the neighbor:
 
@@ -197,13 +197,13 @@ Total number of prefixes 2
 
 ```
 
-Still both routes! When applying or changing prefix-lists or route maps. The BGP session needs to be resetted. We'll do a soft reset for the outgoing routes to 172.18.12.1, to minimize the impact.
+Still both routes! When applying or changing prefix-lists or route maps. The BGP session needs to be reset. We'll do a soft reset for the outgoing routes to 172.18.12.1, to minimize the impact.
 
 ```
 BGP-LAB (R1) # execute router clear bgp ip 172.18.12.1 soft out
 ```
 
-Now we wait for the next update timer. And we should see that only 10.10.11.0/24 is announced.
+After the soft clear, BGP re-evaluates the outbound policy and sends the required update or withdraw message.
 
 ```
 BGP-LAB (R1) # get router info bgp neighbors 172.18.12.1 advertised-routes
@@ -223,6 +223,8 @@ Routing table for VRF=0
 B       10.10.11.0/24 [20/0] via 172.18.12.0 (recursive is directly connected, R1R2-1), 1d04h56m, [1/0]
 
 ```
+
+With an outbound prefix-list, R1 does not advertise the filtered route to R2.
 
 Now let's remove the outgoing prefix-list on R1, and add the same prefix-list on R2 and apply as an incoming prefix-list.
 
@@ -258,11 +260,9 @@ config router bgp
 end
 ```
 
-Now lets reset BGP peering on both sites:
+Now let's reset BGP peering on both sides:
 
 ```
-BGP-LAB (R1) # execute router clear bgp all soft
-
 BGP-LAB (R1) # sudo R2 execute router clear bgp all
 ```
 
@@ -292,6 +292,18 @@ Origin codes: i - IGP, e - EGP, ? - incomplete
 
 Total number of prefixes 1
 ```
+
+With an inbound prefix-list, R1 still advertises both routes, but R2 only accepts the route permitted by its local prefix-list.
+
+## Summary
+
+In this lab we learned how to filter BGP routes with prefix-lists.
+
+Prefix-lists are used to match specific network prefixes. They can be applied inbound or outbound on a BGP neighbor.
+
+With an outbound prefix-list, we control which routes are advertised to a neighbor. With an inbound prefix-list, the neighbor still sends the routes, but the local router decides which routes to accept.
+
+This lab also showed that BGP route filtering is a local policy decision. Each router can decide which routes it sends and which routes it accepts.
 
 ## Links
 
