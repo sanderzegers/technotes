@@ -117,7 +117,7 @@ Paths: (2 available, best #2, table Default-IP-Routing-Table)
 
 </code></pre>
 
-For this we nee d to configure route maps. So let's introduce them.
+For this we need to configure route maps. So let's introduce them.
 
 ## Route Maps
 
@@ -130,6 +130,8 @@ Route-maps are often used together with prefix-lists or access-lists. The prefix
 In this lab, we use a route-map to modify the BGP local preference attribute. This allows us to influence which BGP path is preferred without changing the network topology itself.
 
 Let's configure a route map, which sets the local preference value to 200 for the 10.10.4.0/24 range:
+
+The prefix-list matches the route we want to influence. The route-map then changes the local preference for that matched route.
 
 ```
 config vdom
@@ -158,7 +160,13 @@ config router route-map
 end
 ```
 
-Now let's apply the route map to neighbor R3:
+In this route-map we do not explicitly configure `set action permit`, because `permit` is the default action on FortiGate.
+
+The route-map only changes the local preference for routes that match the prefix-list. Routes that do not match are not changed by this rule.
+
+Now let's apply the route map to neighbor R3.
+
+We apply the route-map inbound because we want R1 to change the attributes of the route as it receives it from R3.
 
 ```
 config router bgp
@@ -245,10 +253,12 @@ Paths: (2 available, best #1, table Default-IP-Routing-Table)
       Last update: Tue Jul  7 14:29:25 2026
 ```
 
+Local preference only influences the best path when multiple valid paths exist. If the preferred path disappears, BGP can still use the remaining valid path.
+
 ## Summary
 
-In this lab we used a route-map to modify the BGP local preference attribute. Local preference is used to influence which outbound path is preferred by the local AS. A higher local preference is preferred.
+In this lab we used a route-map to modify the BGP local preference attribute. The prefix-list matched `10.10.4.0/24`, and the route-map set the local preference to `200` for the path learned from R3.
 
-We matched the route `10.10.4.0/24` with a prefix-list, used a route-map to set its local preference to `200`, and applied that route-map inbound on the R1 neighbor toward R3. After refreshing BGP, R1 selected the path via R3 instead of the path via R2.
+After refreshing BGP, R1 selected the path through R3 instead of R2. When the R3 path was removed, R1 fell back to the remaining path through R2.
 
-This lab shows that route-maps are not only used for filtering routes. They can also be used to change BGP attributes and influence the BGP best path selection process.
+This shows that route-maps can be used to change BGP attributes and influence the BGP best path selection process.
