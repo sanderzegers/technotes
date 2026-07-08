@@ -164,7 +164,7 @@ In this route-map we do not explicitly configure `set action permit`, because `p
 
 The route-map only changes the local preference for routes that match the prefix-list. Routes that do not match are not changed by this rule.
 
-Now let's apply the route map to neighbor R3.
+Now let's apply the route-map inbound on the R1 neighbor toward R3
 
 We apply the route-map inbound because we want R1 to change the attributes of the route as it receives it from R3.
 
