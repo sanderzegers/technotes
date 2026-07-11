@@ -59,6 +59,19 @@ Lab 13: Route Maps\
 Lab 14: Communities\
 Lab 15: Soft Reset and Route Refresh
 
+
+
+| Lab | Topic                           |
+| --- | ------------------------------- |
+| 9   | Communities                     |
+| 10  | Aggregation & Summarization     |
+| 11  | MED                             |
+| 12  | Multipath / ECMP                |
+| 13  | Troubleshooting & Route Refresh |
+| 14  | Advanced Design Scenarios       |
+
+
+
 | Lab                                     | Routers | Reason                                                   |
 | --------------------------------------- | ------: | -------------------------------------------------------- |
 | Lab 6: Prefix-lists and route filtering |       2 | Simple and focused                                       |
