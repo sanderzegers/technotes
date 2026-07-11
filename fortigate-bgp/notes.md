@@ -34,54 +34,82 @@ eBGP simulation:
 
 ## Lab draft
 
-Part 1: BGP Peering Basics\
-Lab 1: Basic iBGP Peering\
-Lab 2: Basic eBGP Peering\
-Lab 3: Comparing iBGP and eBGP Neighbor Output
+• Lab 11: Loopback Peering and update-source
 
-Part 2: Route Advertisement\
-Lab 4: Advertising Networks\
-Lab 5: Comparing AS Path and Next-Hop Behavior
+Summary: This lab introduces BGP peering over loopback interfaces instead of directly connected interface addresses. It shows why loopback-based peering is commonly used in larger or more stable designs, and why underlying reachability plus update-source are required for the session to establish.
 
-Part 3: iBGP-Specific Behavior\
-Lab 6: iBGP Split-Horizon\
-Lab 7: Route Reflectors\
-Lab 8: next-hop-self
+Tasks:
 
-Part 4: eBGP-Specific Behavior\
-Lab 9: eBGP Multihop\
-Lab 10: AS Path Prepending\
-Lab 11: Basic Transit Between ASes
+* Create loopback interfaces on two or more routers and assign stable BGP peering IPs.
+* Verify that loopback addresses are not reachable yet from the remote peer.
+* Add static routes or underlay routing so the loopback addresses become reachable.
+* Configure BGP neighbors to use loopback IPs instead of interface IPs.
+* Apply update-source so the session uses the loopback as the source address.
+* Verify session establishment with get router info bgp summary and get router info bgp neighbors.
+* Break underlay reachability and observe the effect on the BGP session.
+* Restore reachability and confirm session recovery.
 
-Part 5: Common BGP Tools\
-Lab 12: Prefix Filtering\
-Lab 13: Route Maps\
-Lab 14: Communities\
-Lab 15: Soft Reset and Route Refresh
+Lab 12: AS-Path Prepending
 
+Summary: This lab shows how to influence inbound path selection from a remote AS by prepending the local AS multiple times on advertised routes. The reader verifies how the AS path changes in BGP updates and how a remote router prefers the shorter path when multiple routes to the same prefix are available.
 
+Tasks:
 
-| Lab | Topic                           |
-| --- | ------------------------------- |
-| 9   | Communities                     |
-| 10  | Aggregation & Summarization     |
-| 11  | MED                             |
-| 12  | Multipath / ECMP                |
-| 13  | Troubleshooting & Route Refresh |
-| 14  | Advanced Design Scenarios       |
+* Build a topology where one prefix can be learned through two external paths.
+* Verify the initial best path on the remote router before any policy is applied.
+* Create a route-map that prepends the local AS on one advertised route.
+* Apply the route-map outbound to the chosen neighbor.
+* Perform a soft outbound reset so the new policy is advertised.
+* Verify on the receiving router that the AS path is now longer on one path.
+* Confirm that the remote router changes or keeps its best path based on AS-path length.
+* Remove the prepending policy and verify that the original behavior returns.
 
+Lab 13: MED
 
+Summary: This lab introduces the Multi-Exit Discriminator attribute and shows how it can be used to suggest a preferred entry point into an AS when multiple links exist between the same neighboring autonomous systems. The lab focuses on how MED is advertised, received, and compared in the best-path process.
 
-| Lab                                     | Routers | Reason                                                   |
-| --------------------------------------- | ------: | -------------------------------------------------------- |
-| Lab 6: Prefix-lists and route filtering |       2 | Simple and focused                                       |
-| Lab 7: Path selection                   |  3 or 4 | Needs multiple possible paths                            |
-| Lab 8: Route-maps and attributes        |  3 or 4 | Better with multiple paths                               |
-| Lab 9: Redistribution                   |       3 | Nice to show connected/static/OSPF-to-BGP-style behavior |
+Tasks:
 
+* Create a topology with two links between the same neighboring ASes.
+* Advertise the same prefix across both paths.
+* Verify the initial best path selection on the receiving router.
+* Create a route-map to set a lower MED on one path and a higher MED on the other.
+* Apply the route-map outbound on the advertising side.
+* Perform a soft reset and verify that the MED values are present in the received paths.
+* Confirm that the lower MED path is preferred when other attributes are equal.
+* Change the MED values and observe how best-path selection changes.
 
+Lab 14: Multipath / ECMP
 
+Summary: This lab shows that BGP does not always have to install only one path. When multiple paths are considered equal and multipath is enabled, FortiGate can install more than one route into the routing table. This lab helps the reader compare ordinary best-path behavior with equal-cost multipath behavior.
 
+Tasks:
+
+* Build a topology where the same prefix is learned through two equivalent paths.
+* Verify that only one best path is installed by default.
+* Compare the received BGP attributes and confirm that both paths are otherwise eligible.
+* Enable BGP multipath on the receiving router.
+* Refresh the BGP session or routes as required.
+* Verify that both paths are installed in the routing table.
+* Test forwarding behavior across both next hops if supported by the lab.
+* Disable multipath again and confirm that the routing table returns to a single best path.
+
+Lab 15: Troubleshooting and Route Refresh
+
+Summary: This lab turns operational troubleshooting into a structured exercise. It combines neighbor verification, advertised and received route inspection, policy checks, soft resets, and route refresh behavior so the reader learns how to diagnose why a route is missing, rejected, or not preferred.
+
+Tasks:
+
+* Start from a working BGP scenario with known expected routes.
+* Introduce a fault such as a wrong remote AS, missing network statement, unreachable next hop, or filtering policy.
+* Use get router info bgp summary to identify session state problems.
+* Use get router info bgp neighbors, routes, and advertised-routes to locate where the route is lost.
+* Inspect prefix-lists, community-lists, and route-maps applied to the neighbor.
+* Correct the fault and use soft reset or route refresh where appropriate.
+* Compare soft inbound, soft outbound, and hard reset behavior.
+* Verify that the route reappears and that the final best path matches expectations.
+
+If you want, I can turn these into GitBook-ready chapter skeletons with Objective, Topology, Tasks, and Expected outcome sections.
 
 ### Access-lists
 

@@ -9,6 +9,7 @@
 * [BGP State table](cheat-sheets/bgp-state-table.md)
 * [BGP Capabilities](cheat-sheets/bgp-capabilities.md)
 * [BGP Best-Path Algorithm](cheat-sheets/bgp-best-path-algorithm.md)
+* [iBGP vs eBGP Quick Comparison](cheat-sheets/ibgp-vs-ebgp-quick-comparison.md)
 * [CLI Commands](cheat-sheets/cli-commands.md)
 
 ## Labs
