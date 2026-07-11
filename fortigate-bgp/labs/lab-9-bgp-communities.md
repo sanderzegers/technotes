@@ -12,7 +12,7 @@ In this lab, you will learn how to attach BGP communities to routes, advertise t
 
 ## Packet Captures
 
-<table><thead><tr><th width="174">PCAP File</th><th>Description</th><th>What to look for</th></tr></thead><tbody><tr><td>lab9-communities-soft-reset.pcapng</td><td>Policy routes applied to neighbors and soft reset</td><td>Update packets containing the community attribute and Transitive flag.</td></tr><tr><td>lab9-no-export-community-applied.pcapng</td><td>Exercise 3. No export-policy applied.</td><td>Updates packets containing NO_EXPORT community, from R4 to R3 and R2.<br>Update messages to R1 to withdraw 10.10.40.0/24 route.</td></tr></tbody></table>
+<table><thead><tr><th width="174">PCAP File</th><th>Description</th><th>What to look for</th></tr></thead><tbody><tr><td><a href="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab9/lab9-communities-soft-reset.pcapng">lab9-communities-soft-reset.pcapng</a></td><td>Policy routes applied to neighbors and soft reset</td><td>Update packets containing the community attribute.</td></tr><tr><td><a href="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/pcaps/Lab9/lab9-no-export-community-applied.pcapng">lab9-no-export-community-applied.pcapng</a></td><td>Exercise 3. No export-policy applied.</td><td>Updates packets containing NO_EXPORT community, from R4 to R3 and R2.<br>Update messages to R1 to withdraw the 10.10.40.0/24 route.</td></tr></tbody></table>
 
 ## BGP Communities
 
@@ -151,7 +151,7 @@ Total number of prefixes 2
 </strong><strong>B       10.10.40.0/24 [20/0] via 172.18.12.1 (recursive is directly connected, R1R2-0), 00:00:52, [1/0]
 </strong></code></pre>
 
-### Exercise 1
+### Exercise 1: Assigning BGP Communities
 
 As a first step you will attach a BGP community to one of the routes advertised by R4 and send it to R2 and R3. You will then verify how the community appears in the BGP table before using it for routing policy.
 
@@ -205,9 +205,11 @@ edit R4
 end
 ```
 
-A standard BGP community is a 32-bit value, usually written as `ASN:value`. It is common practice to use the local AS number as the first value, but this is only a naming convention. Other valid numbers can also be used.
-
-Now apply the route-maps to both neighbors on R4 and do a soft reset
+{% hint style="info" %}
+A standard BGP community is a 32-bit value, usually written as `ASN:value`. Using the local AS number The first value is commonly the originating AS number, but this is a convention rather than a requirement.\
+\
+This lab uses standard BGP communities, which are 32-bit values. BGP also supports extended communities (64-bit values) and large communities (96-bit values), which provide additional flexibility and carry more information.
+{% endhint %}
 
 ```
 config vdom
@@ -245,8 +247,8 @@ Total number of prefixes 2
 
 The community is added by an outbound route-map. FortiGate does not always display outbound communities in the local BGP table, so the easiest verification is often on the receiving router or with a packet capture.
 
-<pre><code><strong>BGP-LAB (R4) # sudo R2 get router info bgp network 10.10.4.0/24
-</strong>VRF 0 BGP routing table entry for 10.10.4.0/24
+<pre><code>BGP-LAB (R4) # sudo R2 get router info bgp network 10.10.4.0/24
+VRF 0 BGP routing table entry for 10.10.4.0/24
 Paths: (1 available, best #1, table Default-IP-Routing-Table)
   Advertised to non peer-group peers:
    172.18.12.0
@@ -259,8 +261,8 @@ Paths: (1 available, best #1, table Default-IP-Routing-Table)
 
 
 
-<strong>BGP-LAB (R4) # sudo R1 get router info bgp network 10.10.4.0/24
-</strong>VRF 0 BGP routing table entry for 10.10.4.0/24
+BGP-LAB (R4) # sudo R1 get router info bgp network 10.10.4.0/24
+VRF 0 BGP routing table entry for 10.10.4.0/24
 Paths: (2 available, best #2, table Default-IP-Routing-Table)
   Advertised to non peer-group peers:
    172.18.13.1
@@ -280,8 +282,8 @@ Paths: (2 available, best #2, table Default-IP-Routing-Table)
 
 
 
-<strong>BGP-LAB (R4) # sudo R1 get router info bgp network 10.10.40.0/24
-</strong>VRF 0 BGP routing table entry for 10.10.40.0/24
+BGP-LAB (R4) # sudo R1 get router info bgp network 10.10.40.0/24
+VRF 0 BGP routing table entry for 10.10.40.0/24
 Paths: (2 available, best #2, table Default-IP-Routing-Table)
   Advertised to non peer-group peers:
    172.18.13.1
@@ -302,16 +304,25 @@ Paths: (2 available, best #2, table Default-IP-Routing-Table)
 
 </code></pre>
 
-### Exercise 2
+### Exercise 2: Selecting Paths with Communities
 
-In this exercise, you will use the communities attached in the previous exercise to make R1 prefer different paths towards R4.
+In this exercise, you will use the communities assigned in the previous exercise to make R1 prefer a different path for each network advertised by R4.
 
 First, create two community lists on R1. Each list matches one of the communities configured on R4.
 
-Next, create two inbound route-maps. Routes received from R2 with community `65004:100` receive a local preference of `200`. Routes received from R3 with community `65004:200` receive the same local preference:
+Next, create two inbound route-maps:
 
-```
-config vdom
+* Routes received from R2 with community `65004:100` receive a local preference of `200`.
+* Routes received from R3 with community `65004:200` receive a local preference of `200`.
+
+This results in the following path-selection policy:
+
+| R4 Prefix     | Community | Preferred Path on R1 |
+| ------------- | --------- | -------------------- |
+| 10.10.4.0/24  | 65004:100 | via R2               |
+| 10.10.40.0/24 | 65004:200 | via R3               |
+
+<pre><code>config vdom
 edit R1
     config router community-list
         edit "CL_65004_100"
@@ -337,23 +348,23 @@ edit R1
         edit "RM_PREF_R2_IN"
             config rule
                 edit 100
-                    set match-community "CL_65004_100"
-                    set set-local-preference 200
-                next
+<strong>                    set match-community "CL_65004_100"
+</strong><strong>                    set set-local-preference 200
+</strong>                next
             end
         next
     
         edit "RM_PREF_R3_IN"
             config rule
                 edit 100
-                    set match-community "CL_65004_200"
-                    set set-local-preference 200
-                next
+<strong>                    set match-community "CL_65004_200"
+</strong><strong>                    set set-local-preference 200
+</strong>                next
             end
         next
     end
 end
-```
+</code></pre>
 
 Apply them to R1 neighbors and perform a soft inbound reset:
 
@@ -495,15 +506,11 @@ Paths: (2 available, best #2, table Default-IP-Routing-Table)
 
 This time, both paths remain available. The communities identify the routes, while the inbound route-maps use local preference to select the preferred path.
 
-
-
 ### Exercise 3: Using a Well-Known Community
 
 In this exercise, you will apply the well-known `no-export` community to one of the routes advertised by R4. R2 and R3 will receive the route, but they will not advertise it further to R1.
 
 This demonstrates that some communities have a predefined meaning and do not require a route-map on the receiving router to apply their behavior.
-
-
 
 ```
 config vdom
@@ -524,11 +531,9 @@ edit "R4"
         config neighbor
             edit "172.18.24.0"
                 set route-map-out "RM_SET_NO_EXPORT"
-                set send-community standard
             next
             edit "172.18.34.0"
                 set route-map-out "RM_SET_NO_EXPORT"
-                set send-community standard
             next
         end
     end
