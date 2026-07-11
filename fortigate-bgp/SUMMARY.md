@@ -21,6 +21,7 @@
 * [Lab 6: Prefix-lists and route filtering](labs/lab-6-prefix-lists-and-route-filtering.md)
 * [Lab 7: BGP path selection](labs/lab-7-bgp-path-selection.md)
 * [Lab 8: Route-maps and local preference](labs/lab-8-route-maps-and-local-preference.md)
+* [Lab 9: BGP Communities](labs/lab-9-bgp-communities.md)
 
 ***
 
