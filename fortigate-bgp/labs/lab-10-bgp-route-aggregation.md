@@ -153,7 +153,7 @@ B       10.10.42.0/24 [20/0] via 172.18.13.1 (recursive is directly connected, R
 B       10.10.43.0/24 [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:01:35, [1/0]
 ```
 
-### Exercise 1: Assigning BGP Communities
+### Exercise 1: Configuring a BGP Aggregate Route
 
 Let's configure the route summarization on R4:
 
@@ -228,24 +228,28 @@ Paths: (2 available, best #2, table Default-IP-Routing-Table)
 
 </code></pre>
 
-The new summarized /22 route is announced correctly. We can see on R1, that R4 summarized this route.
+The new /22 aggregate is advertised correctly. On R1, the AGGREGATOR and ATOMIC\_AGGREGATE attributes show that R4 created the aggregate.
 
-The old /24 are also still being announced. Let's stop the announcement.
+The four /24 routes are still advertised alongside the aggregate. Enable summary-only to suppress these more-specific routes from BGP updates.
 
-<pre><code>config vdom
+### Exercise 2: Suppressing More-Specific Routes
+
+By default, FortiGate advertises both the aggregate route and its contributing more-specific routes. In this exercise, you will enable summary-only so that only the aggregate is advertised to BGP neighbors.
+
+```
+config vdom
     edit "R4"
-    config router bgp
-        set as 65004
-        set router-id 4.4.4.4
-        config aggregate-address
-            edit 1
-                set prefix 10.10.40.0 255.255.252.0
-<strong>                set summary-only enable
-</strong>            next
+        config router bgp
+            config aggregate-address
+                edit 1
+                    set prefix 10.10.40.0/22
+                    set summary-only enable
+                next
+            end
         end
-    end
+    next
 end
-</code></pre>
+```
 
 And verify again on R1 and R4.
 
@@ -306,7 +310,7 @@ Routing table for VRF=0
 </strong>
 </code></pre>
 
-### Exercise 3: Test aggregate Route Dependency
+### Exercise 3: Test Aggregate Route Dependency
 
 Disable all but one interface in the 10.10.40.0/22 range. Then observe what happens to the advertised route summary:
 
@@ -359,7 +363,8 @@ Routing table for VRF=0
 
 </code></pre>
 
-The `/22` route remains advertised, although three interfaces are down. The associated networks are unreachable.
+The /22 route is still advertised because 10.10.40.0/24 is still available. However, 10.10.41.0/24, 10.10.42.0/24, and 10.10.43.0/24 are no longer reachable. \
+Traffic sent to these networks is dropped. This demonstrates the blackholing risk of route aggregation.
 
 Disable the final interface in this range: `R4-LAN1`.
 
@@ -385,7 +390,9 @@ No route available
 
 ```
 
-The summary route is not announced anymore. To announce a summary route, at least one interface in the summary range must be online.
+The summary route is not announced anymore.
+
+The aggregate remains active as long as at least one contributing more-specific route exists in the BGP table. When the final contributing route disappears, FortiGate withdraws the aggregate.
 
 ## Summary
 
@@ -393,7 +400,7 @@ In this lab, you configured BGP route aggregation on a FortiGate. R4 combined fo
 
 You verified that BGP advertises both the aggregate and the specific routes by default. You then enabled `summary-only` to suppress the more-specific routes from BGP updates.
 
-You also examined the `ATOMIC_AGGREGATE` and `AGGREGATOR` path attributes, verified advertised routes with FortiGate commands, and observed the withdrawal of the specific routes in a packet capture.
+You also examined the `ATOMIC_AGGREGATE` and `AGGREGATOR` path attributes, verified advertised routes with FortiGate commands.
 
 Finally, you tested how the aggregate depends on its component routes and discussed the risk of advertising address space for which no valid specific route exists.
 
