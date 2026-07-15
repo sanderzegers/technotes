@@ -24,6 +24,7 @@
 * [Lab 8: Route-maps and local preference](labs/lab-8-route-maps-and-local-preference.md)
 * [Lab 9: BGP Communities](labs/lab-9-bgp-communities.md)
 * [Lab 10: BGP Route Aggregation](labs/lab-10-bgp-route-aggregation.md)
+* [Lab 11: BGP Multipath and Equal-Cost Load Balancing](labs/lab-11-bgp-multipath-and-ecmp.md)
 
 ***
 
