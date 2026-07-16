@@ -102,7 +102,7 @@ config vdom
 
     edit R3
         config router bgp
-            set as 65002
+            set as 65003
             set router-id 3.3.3.3
             config neighbor
                 edit "172.18.13.0"
@@ -143,8 +143,31 @@ end
 Verify that all BGP sessions are established:
 
 ```
-sudo R1 get router info bgp summary
-sudo R4 get router info bgp summary
+BGP-LAB (R1) # get router info bgp sum
+
+VRF 0 BGP router identifier 1.1.1.1, local AS number 65001
+BGP table version is 2
+5 BGP AS-PATH entries
+0 BGP community entries
+
+Neighbor    V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+172.18.12.1 4      65002       4       5        1    0    0 00:01:09        2
+172.18.13.1 4      65003       4       8        0    0    0 00:00:04        0
+
+Total number of neighbors 2
+
+BGP-LAB (R1) # sudo R4 get router info bgp summary
+
+VRF 0 BGP router identifier 4.4.4.4, local AS number 65004
+BGP table version is 2
+7 BGP AS-PATH entries
+0 BGP community entries
+
+Neighbor    V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+172.18.24.0 4      65002       4       6        1    0    0 00:01:36        2
+172.18.34.0 4      65003       7      17        2    0    0 00:00:33        0
+
+Total number of neighbors 2
 ```
 
 R1 should receive both R4 prefixes from R2 and R3. R4 should receive both R1 prefixes through the same two transit routers.
@@ -153,24 +176,42 @@ R1 should receive both R4 prefixes from R2 and R3. R4 should receive both R1 pre
 
 Multipath is disabled by default. Inspect R1's BGP table:
 
-```
-sudo R1 get router info bgp network 10.10.4.0/24
-```
+<pre><code>BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
+VRF 0 BGP routing table entry for 10.10.4.0/24
+Paths: (2 available, best #2, table Default-IP-Routing-Table)
+  Advertised to non peer-group peers:
+   172.18.13.1
+  Original VRF 0
+  65003 65004
+    172.18.13.1 from 172.18.13.1 (3.3.3.3)
+      Origin IGP distance 20 metric 0, localpref 100, valid, external
+      Last update: Thu Jul 16 12:04:40 2026
 
-R1 should have two valid paths:
+  Original VRF 0
+  65002 65004
+<strong>    172.18.12.1 from 172.18.12.1 (2.2.2.2)
+</strong><strong>      Origin IGP distance 20 metric 0, localpref 100, valid, external, best
+</strong>      Last update: Thu Jul 16 12:03:31 2026
+
+</code></pre>
+
+R1 has two valid paths:
 
 | Path   | Next hop      | AS path       |
 | ------ | ------------- | ------------- |
 | Via R2 | `172.18.12.1` | `65002 65004` |
-| Via R3 | `172.18.13.1` | `65002 65004` |
+| Via R3 | `172.18.13.1` | `65003 65004` |
 
 The weight, local preference, AS path, origin, MED, route type, and next-hop reachability are equal. BGP continues through its tie breakers and selects one path as best.
 
 Now inspect the routing table:
 
-```
-sudo R1 get router info routing-table bgp
-```
+<pre><code>BGP-LAB (R1) # get router info routing-table bgp
+Routing table for VRF=0
+<strong>B       10.10.4.0/24 [20/0] via 172.18.12.1 (recursive is directly connected, R1R2-0), 00:02:46, [1/0]
+</strong>B       172.17.0.4/32 [20/0] via 172.18.12.1 (recursive is directly connected, R1R2-0), 00:02:46, [1/0]
+
+</code></pre>
 
 Only one next hop for `10.10.4.0/24` should be installed. Having two paths in the BGP table does not automatically produce ECMP in the routing table.
 
@@ -196,17 +237,34 @@ sudo R1 execute router clear bgp all soft in
 
 Verify the BGP and routing tables:
 
-```
-sudo R1 get router info bgp network 10.10.4.0/24
-sudo R1 get router info routing-table bgp
-```
+<pre><code>BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
+VRF 0 BGP routing table entry for 10.10.4.0/24
+Paths: (2 available, best #2, table Default-IP-Routing-Table)
+  Advertised to non peer-group peers:
+   172.18.13.1
+  Original VRF 0
+  65003 65004
+    172.18.13.1 from 172.18.13.1 (3.3.3.3)
+<strong>      Origin IGP distance 20 metric 0, localpref 100, valid, external
+</strong>      Last update: Thu Jul 16 12:07:21 2026
+
+  Original VRF 0
+  65002 65004
+    172.18.12.1 from 172.18.12.1 (2.2.2.2)
+<strong>      Origin IGP distance 20 metric 0, localpref 100, valid, external, best
+</strong>      Last update: Thu Jul 16 12:07:03 2026
+
+
+BGP-LAB (R1) # get router info routing-table bgp
+Routing table for VRF=0
+<strong>B       10.10.4.0/24 [20/0] via 172.18.12.1 (recursive is directly connected, R1R2-0), 00:00:08, [1/0]
+</strong><strong>                     [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:00:08, [1/0]
+</strong>B       172.17.0.4/32 [20/0] via 172.18.12.1 (recursive is directly connected, R1R2-0), 00:00:08, [1/0]
+                      [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:00:08, [1/0]
+
+</code></pre>
 
 The routing table should now contain both next hops for the same prefix:
-
-```
-B       10.10.4.0/24 [20/0] via 172.18.12.1, R1R2-0
-                               via 172.18.13.1, R1R3-1-0
-```
 
 The result is that both next hops are listed under one BGP route.
 
@@ -265,10 +323,33 @@ sudo R1 execute router clear bgp ip 172.18.13.1 soft in
 
 Verify the result:
 
-```
-sudo R1 get router info bgp network 10.10.4.0/24
-sudo R1 get router info routing-table bgp
-```
+<pre><code>BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
+VRF 0 BGP routing table entry for 10.10.4.0/24
+Paths: (2 available, best #1, table Default-IP-Routing-Table)
+  Advertised to non peer-group peers:
+   172.18.12.1
+  Original VRF 0
+  65003 65004
+    172.18.13.1 from 172.18.13.1 (3.3.3.3)
+<strong>      Origin IGP distance 20 metric 0, localpref 200, valid, external, best
+</strong>      Last update: Thu Jul 16 12:09:41 2026
+
+  Original VRF 0
+  65002 65004
+    172.18.12.1 from 172.18.12.1 (2.2.2.2)
+<strong>      Origin IGP distance 20 metric 0, localpref 100, valid, external
+</strong>      Last update: Thu Jul 16 12:07:03 2026
+
+
+
+BGP-LAB (R1) # get router info routing-table bgp
+Routing table for VRF=0
+<strong>B       10.10.4.0/24 [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:00:55, [1/0]
+</strong>B       172.17.0.4/32 [20/0] via 172.18.12.1 (recursive is directly connected, R1R2-0), 00:03:00, [1/0]
+                      [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:03:00, [1/0]
+
+
+</code></pre>
 
 The R3 path should have local preference 200, while the R2 path keeps the default value of 100. Both paths can remain visible in the BGP table, but only the higher-local-preference path through R3 should be installed in the routing table.
 
@@ -293,8 +374,16 @@ end
 Refresh the neighbor again and confirm that both next hops return:
 
 ```
-sudo R1 execute router clear bgp ip 172.18.13.1 soft in
-sudo R1 get router info routing-table bgp
+BGP-LAB (R1) # execute router clear bgp ip 172.18.13.1 soft in
+
+BGP-LAB (R1) # get router info routing-table bgp
+Routing table for VRF=0
+B       10.10.4.0/24 [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:00:55, [1/0]
+                     [20/0] via 172.18.12.1 (recursive is directly connected, R1R2-0), 00:00:55, [1/0]
+B       172.17.0.4/32 [20/0] via 172.18.12.1 (recursive is directly connected, R1R2-0), 00:05:07, [1/0]
+                      [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:05:07, [1/0]
+
+
 ```
 
 ## Exercise 4: Understand ECMP Forwarding
@@ -313,42 +402,45 @@ Note that in modern FortiGate SD-WAN deployments, traffic flow is controlled by 
 Verify the current settings on R1:
 
 ```
-sudo R1 show full-configuration system settings
-```
-
-Look for:
-
-```
-set ecmp-max-paths 2
-set v4-ecmp-mode source-ip-based
+BGP-LAB (R1) # show full system settings | grep ecmp
+    set v4-ecmp-mode source-ip-based
+    set ecmp-max-paths 255
 ```
 
 Because ECMP selection is session-based, repeatedly sending the same flow does not prove load balancing. A single source and destination normally remain on the same path. Generate traffic from multiple source IP addresses or from multiple clients behind R1.
 
-For a simple lab test, start a sniffer on R1:
+For a simple lab test, enable ecmp on R4.
 
 ```
-sudo R1 diagnose sniffer packet any 'icmp and host 10.10.4.1' 4 0 l
+config vdom
+    edit R4
+        config router bgp
+           set ebgp-multipath enable
+        end
+    end
 ```
 
-From another administrator session, generate test traffic with different sources:
-
 ```
-sudo R1 execute ping-options repeat-count 4
-sudo R1 execute ping-options source 10.10.1.1
-sudo R1 execute ping 10.10.4.1
-
-sudo R1 execute ping-options source 172.17.0.1
-sudo R1 execute ping 10.10.4.1
+BGP-LAB (R4) # execute router clear bgp all soft in
 ```
+
+From R1 run a traceroute with two different source IP addresses:
+
+<pre><code>BGP-LAB (R1) # execute traceroute 10.10.4.1
+traceroute to 10.10.4.1 (10.10.4.1), 32 hops max, 1 probe packets per hop, 72 byte packets
+<strong> 1  172.18.12.1  0.348 ms
+</strong> 2  10.10.4.1  0.453 ms
+
+BGP-LAB (R1) # execute traceroute-options source 172.17.0.1
+
+BGP-LAB (R1) # execute traceroute 10.10.4.1
+traceroute to 10.10.4.1 (10.10.4.1), 32 hops max, 1 probe packets per hop, 72 byte packets
+<strong> 1  172.18.13.1  0.330 ms
+</strong> 2  10.10.4.1  0.492 ms
+
+</code></pre>
 
 The hash can place different flows on different paths, but two test sources are not guaranteed to exercise both ECMP members. For a stronger test, use several client source addresses and inspect whether packets leave through both `R1R2-0` and `R1R3-1-0`.
-
-Stop the sniffer with `Ctrl+C` and reset the ping source when finished:
-
-```
-sudo R1 execute ping-options reset
-```
 
 ## Exercise 5: Test Path Failure
 
@@ -366,12 +458,37 @@ config vdom
 end
 ```
 
-Verify the BGP session and route:
+Verify the BGP session and route from R1:
 
 ```
-sudo R1 get router info bgp summary
-sudo R1 get router info routing-table bgp
-sudo R1 execute ping 10.10.4.1
+BGP-LAB (R1) # get router info bgp summary 
+
+VRF 0 BGP router identifier 1.1.1.1, local AS number 65001
+BGP table version is 9
+6 BGP AS-PATH entries
+0 BGP community entries
+
+Neighbor    V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
+172.18.12.1 4      65002      84      88        0    0    0    never Active     
+172.18.13.1 4      65003      85      91        5    0    0 01:04:33        2
+
+Total number of neighbors 2
+
+
+BGP-LAB (R1) # get router info routing-table bgp
+Routing table for VRF=0
+B       10.10.4.0/24 [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:00:13, [1/0]
+B       172.17.0.4/32 [20/0] via 172.18.13.1 (recursive is directly connected, R1R3-1-0), 00:00:13, [1/0]
+
+
+BGP-LAB (R1) # execute ping 10.10.4.1
+PING 10.10.4.1 (10.10.4.1): 56 data bytes
+64 bytes from 10.10.4.1: icmp_seq=0 ttl=254 time=0.5 ms
+64 bytes from 10.10.4.1: icmp_seq=1 ttl=254 time=0.2 ms
+^C
+--- 10.10.4.1 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max = 0.2/0.3/0.5 ms
 ```
 
 The R2 path should disappear. The route through R3 should remain installed, and traffic should continue over the surviving path after convergence.
@@ -406,6 +523,5 @@ BGP multipath extends the best-path process; it does not replace it. The paths m
 
 {% embed url="https://docs.fortinet.com/document/fortigate/7.6.0/administration-guide/25967/equal-cost-multi-path" %}
 
-{% embed url="https://docs.fortinet.com/document/fortigate/7.4.0/cli-reference/528620/config-router-bgp" %}
-
 {% embed url="https://community.fortinet.com/fortigate-3/technical-tip-usage-of-bgp-multipath-and-description-of-the-bgp-nlri-table-97722" %}
+
