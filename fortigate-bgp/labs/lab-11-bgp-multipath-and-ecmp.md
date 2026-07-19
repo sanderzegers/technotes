@@ -10,7 +10,8 @@ BGP multipath does not replace the best-path algorithm. FortiGate still compares
 
 ## Topology
 
-This lab reuses the diamond topology from Labs 7 through 10. R2 and R3 are placed in the same transit AS so that the paths received by R1 have identical AS paths.
+This lab reuses the topology from Labs 7 through 10. R4 advertises the same prefixes through R2 and R3, which remain in different transit ASes.\
+R1 therefore receives two eBGP paths with different next hops and different AS\_PATH values, but with the same AS-path length and otherwise equal relevant BGP attributes for the path-selection.
 
 <figure><img src="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master-Lab6.svg" alt=""><figcaption></figcaption></figure>
 
@@ -21,20 +22,11 @@ This lab reuses the diamond topology from Labs 7 through 10. R2 and R3 are place
 | R3     | 65003 | `3.3.3.3` | <p>R1-R3: <code>172.18.13.1/31</code><br>R3-R4: <code>172.18.34.0/31</code></p> | <p>R1: <code>172.18.13.0</code><br>R4: <code>172.18.34.1</code></p> | -                                                              |
 | R4     | 65004 | `4.4.4.4` | <p>R2-R4: <code>172.18.24.1/31</code><br>R3-R4: <code>172.18.34.1/31</code></p> | <p>R2: <code>172.18.24.0</code><br>R3: <code>172.18.34.0</code></p> | <p><code>10.10.4.0/24</code><br><code>172.17.0.4/32</code></p> |
 
-R4 advertises the same prefixes through R2 and R3. R1 therefore receives two paths with the same BGP attributes but different next hops.
-
-## Packet Captures
-
-\-
-
 ## BGP Multipath and ECMP
 
-BGP multipath and ECMP describe related but different parts of the process:
+BGP multipath and ECMP describe related but different parts of the process.
 
-| Function      | Purpose                                                                                          |
-| ------------- | ------------------------------------------------------------------------------------------------ |
-| BGP multipath | Allows more than one eligible BGP path for a prefix to be installed in the routing table         |
-| ECMP          | Selects a next hop for new traffic when the routing table contains multiple equal-cost next hops |
+BGP multipath adds multiple valid BGP paths to the routing table. ECMP then spreads traffic across them.
 
 On FortiGate, eBGP and iBGP multipath are controlled separately:
 
@@ -152,7 +144,7 @@ BGP table version is 2
 
 Neighbor    V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 172.18.12.1 4      65002       4       5        1    0    0 00:01:09        2
-172.18.13.1 4      65003       4       8        0    0    0 00:00:04        0
+172.18.13.1 4      65003       4       8        0    0    0 00:00:04        2
 
 Total number of neighbors 2
 
@@ -165,7 +157,7 @@ BGP table version is 2
 
 Neighbor    V         AS MsgRcvd MsgSent   TblVer  InQ OutQ Up/Down  State/PfxRcd
 172.18.24.0 4      65002       4       6        1    0    0 00:01:36        2
-172.18.34.0 4      65003       7      17        2    0    0 00:00:33        0
+172.18.34.0 4      65003       7      17        2    0    0 00:00:33        2
 
 Total number of neighbors 2
 ```
@@ -202,7 +194,10 @@ R1 has two valid paths:
 | Via R2 | `172.18.12.1` | `65002 65004` |
 | Via R3 | `172.18.13.1` | `65003 65004` |
 
-The weight, local preference, AS path, origin, MED, route type, and next-hop reachability are equal. BGP continues through its tie breakers and selects one path as best.
+The weight, local preference, AS-path length, origin, route type, and cost to the next hops are equal. The AS\_PATH values differ, but both contain two AS numbers. BGP therefore continues through its later tie breakers and selects one path as best.
+
+In this capture, the path through R2 is selected. Because that route is older, it wins before the router-ID and neighbor-address tie breakers are considered. \
+Your FortiGate may select the other path if the sessions were established in a different order.
 
 Now inspect the routing table:
 
@@ -264,9 +259,7 @@ Routing table for VRF=0
 
 </code></pre>
 
-The routing table should now contain both next hops for the same prefix:
-
-The result is that both next hops are listed under one BGP route.
+The routing table should now contain both next hops for the same prefix.
 
 {% hint style="info" %}
 One path may still be labeled `best` in detailed BGP output. Multipath does not remove the concept of a best path. It allows additional equal paths to join the best path in the routing table.
@@ -278,8 +271,7 @@ Multipath requires eligible paths. In this exercise, apply a higher local prefer
 
 Create a prefix-list and inbound route-map on R1:
 
-```
-config vdom
+<pre><code>config vdom
     edit R1
         config router prefix-list
             edit "PL_R4_LAN"
@@ -293,13 +285,13 @@ config vdom
         config router route-map
             edit "RM_PREF_R3_IN"
                 config rule
-                    edit 10
-                        set match-ip-address "PL_R4_LAN"
-                        set set-local-preference 200
-                    next
-                    edit 20
-                    next
-                end
+<strong>                    edit 10
+</strong><strong>                        set match-ip-address "PL_R4_LAN"
+</strong><strong>                        set set-local-preference 200
+</strong>                    next
+<strong>                    edit 20
+</strong><strong>                    next
+</strong>                end
             next
         end
         config router bgp
@@ -311,7 +303,7 @@ config vdom
         end
     next
 end
-```
+</code></pre>
 
 Rule 20 permits unmatched routes without changing them. This prevents the route-map's implicit deny from filtering other prefixes.
 
@@ -390,14 +382,16 @@ B       172.17.0.4/32 [20/0] via 172.18.12.1 (recursive is directly connected, R
 
 With both next hops installed, FortiGate selects an ECMP member for each new session. The default mode used in this lab is `source-ip-based`.
 
-Note that in modern FortiGate SD-WAN deployments, traffic flow is controlled by SD-WAN rules. These rules take precedence over the configured ECMP mode. SD-WAN rules are not covered in this lab.
+{% hint style="warning" %}
+If SD-WAN is enabled, the ECMP load-balancing mode is configured under `config system sdwan` instead of with `v4-ecmp-mode`.&#x20;
+{% endhint %}
 
-| ECMP mode              | Behavior                                                           |
-| ---------------------- | ------------------------------------------------------------------ |
-| `source-ip-based`      | Sessions with the same source IP use the same ECMP path            |
-| `source-dest-ip-based` | The source and destination IP addresses are used to select a path  |
-| `weight-based`         | Sessions are distributed according to configured route weights     |
-| `usage-based`          | A path is used until its configured bandwidth threshold is reached |
+| ECMP mode              | Behavior                                                                                                                          |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `source-ip-based`      | Sessions with the same source IP use the same ECMP path                                                                           |
+| `source-dest-ip-based` | The source and destination IP addresses are used to select a path                                                                 |
+| `weight-based`         | Sessions are distributed according to configured ECMP route or interface weights. This is separate from the BGP weight attribute. |
+| `usage-based`          | A path is used until its configured bandwidth threshold is reached                                                                |
 
 Verify the current settings on R1:
 
@@ -409,7 +403,9 @@ BGP-LAB (R1) # show full system settings | grep ecmp
 
 Because ECMP selection is session-based, repeatedly sending the same flow does not prove load balancing. A single source and destination normally remain on the same path. Generate traffic from multiple source IP addresses or from multiple clients behind R1.
 
-For a simple lab test, enable ecmp on R4.
+To make the forwarding test (traceroute) work in both directions, enable eBGP multipath on R4 so that both return paths toward R1 are installed.
+
+Without `ebgp-multipath` on R4, it installs only one return path toward R1. A traceroute that arrives through the other transit router can create asymmetric forwarding and may fail FortiGate’s reverse-path validation. Enabling multipath on R4 installs both reverse paths, allowing probes received through either R2 or R3 to pass and receive replies.
 
 ```
 config vdom
@@ -417,7 +413,8 @@ config vdom
         config router bgp
            set ebgp-multipath enable
         end
-    end
+   next
+end
 ```
 
 ```
@@ -426,7 +423,9 @@ BGP-LAB (R4) # execute router clear bgp all soft in
 
 From R1 run a traceroute with two different source IP addresses:
 
-<pre><code>BGP-LAB (R1) # execute traceroute 10.10.4.1
+<pre><code>BGP-LAB (R1) # execute traceroute-options source 10.10.1.1
+
+BGP-LAB (R1) # execute traceroute 10.10.4.1
 traceroute to 10.10.4.1 (10.10.4.1), 32 hops max, 1 probe packets per hop, 72 byte packets
 <strong> 1  172.18.12.1  0.348 ms
 </strong> 2  10.10.4.1  0.453 ms
@@ -440,7 +439,7 @@ traceroute to 10.10.4.1 (10.10.4.1), 32 hops max, 1 probe packets per hop, 72 by
 
 </code></pre>
 
-The hash can place different flows on different paths, but two test sources are not guaranteed to exercise both ECMP members. For a stronger test, use several client source addresses and inspect whether packets leave through both `R1R2-0` and `R1R3-1-0`.
+The hash can place different flows on different paths, but two test sources are not guaranteed to exercise both ECMP members. For a stronger test, use several client source addresses.
 
 ## Exercise 5: Test Path Failure
 
@@ -522,6 +521,3 @@ BGP multipath extends the best-path process; it does not replace it. The paths m
 ## Links
 
 {% embed url="https://docs.fortinet.com/document/fortigate/7.6.0/administration-guide/25967/equal-cost-multi-path" %}
-
-{% embed url="https://community.fortinet.com/fortigate-3/technical-tip-usage-of-bgp-multipath-and-description-of-the-bgp-nlri-table-97722" %}
-
