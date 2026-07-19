@@ -10,8 +10,7 @@ BGP multipath does not replace the best-path algorithm. FortiGate still compares
 
 ## Topology
 
-This lab reuses the topology from Labs 7 through 10. R4 advertises the same prefixes through R2 and R3, which remain in different transit ASes.\
-R1 therefore receives two eBGP paths with different next hops and different AS\_PATH values, but with the same AS-path length and otherwise equal relevant BGP attributes for the path-selection.
+This lab reuses the topology from Labs 7 through 10. R4 advertises the same prefixes through R2 and R3, which remain in different transit ASes. R1 therefore receives two eBGP paths with different next hops and different `AS_PATH` values. The AS paths have the same length, and the other relevant path-selection attributes are equal.
 
 <figure><img src="https://github.com/sanderzegers/technotes/raw/refs/heads/undefined/fortigate-bgp/assets/topologies/exports/bgp-lab-master-Lab6.svg" alt=""><figcaption></figcaption></figure>
 
@@ -135,7 +134,7 @@ end
 Verify that all BGP sessions are established:
 
 ```
-BGP-LAB (R1) # get router info bgp sum
+BGP-LAB (R1) # get router info bgp summary
 
 VRF 0 BGP router identifier 1.1.1.1, local AS number 65001
 BGP table version is 2
@@ -194,7 +193,8 @@ R1 has two valid paths:
 | Via R2 | `172.18.12.1` | `65002 65004` |
 | Via R3 | `172.18.13.1` | `65003 65004` |
 
-The weight, local preference, AS-path length, origin, route type, and cost to the next hops are equal. The AS\_PATH values differ, but both contain two AS numbers. BGP therefore continues through its later tie breakers and selects one path as best.
+The weight, local preference, AS-path length, origin, MED, route type, and cost to the next hops are equal.\
+The AS\_PATH values differ, but both contain two AS numbers. BGP therefore continues through its later tie breakers and selects one path as best.
 
 In this capture, the path through R2 is selected. Because that route is older, it wins before the router-ID and neighbor-address tie breakers are considered. \
 Your FortiGate may select the other path if the sessions were established in a different order.
@@ -378,7 +378,7 @@ B       172.17.0.4/32 [20/0] via 172.18.12.1 (recursive is directly connected, R
 
 ```
 
-## Exercise 4: Understand ECMP Forwarding
+## Exercise 4: Test ECMP Forwarding
 
 With both next hops installed, FortiGate selects an ECMP member for each new session. The default mode used in this lab is `source-ip-based`.
 
@@ -386,12 +386,21 @@ With both next hops installed, FortiGate selects an ECMP member for each new ses
 If SD-WAN is enabled, the ECMP load-balancing mode is configured under `config system sdwan` instead of with `v4-ecmp-mode`.&#x20;
 {% endhint %}
 
-| ECMP mode              | Behavior                                                                                                                          |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `source-ip-based`      | Sessions with the same source IP use the same ECMP path                                                                           |
-| `source-dest-ip-based` | The source and destination IP addresses are used to select a path                                                                 |
-| `weight-based`         | Sessions are distributed according to configured ECMP route or interface weights. This is separate from the BGP weight attribute. |
-| `usage-based`          | A path is used until its configured bandwidth threshold is reached                                                                |
+| ECMP mode              | Behavior                                                                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `source-ip-based`      | Sessions with the same source IP use the same ECMP path                                                            |
+| `source-dest-ip-based` | The source and destination IP addresses are used to select a path                                                  |
+| `weight-based`         | Sessions are distributed according tot he configured ECMP weights. This is separate from the BGP weight attribute. |
+| `usage-based`          | Traffic spills over to another path when the configured bandwidth threshold is reached.                            |
+
+|   |
+| - |
+
+| Sessions are distributed according to the configured ECMP weights. This is separate from the BGP weight attribute. |
+| ------------------------------------------------------------------------------------------------------------------ |
+
+|   |
+| - |
 
 Verify the current settings on R1:
 
@@ -405,7 +414,7 @@ Because ECMP selection is session-based, repeatedly sending the same flow does n
 
 To make the forwarding test (traceroute) work in both directions, enable eBGP multipath on R4 so that both return paths toward R1 are installed.
 
-Without `ebgp-multipath` on R4, it installs only one return path toward R1. A traceroute that arrives through the other transit router can create asymmetric forwarding and may fail FortiGate’s reverse-path validation. Enabling multipath on R4 installs both reverse paths, allowing probes received through either R2 or R3 to pass and receive replies.
+Without `ebgp-multipath` on R4, only one route back toward R1 is active. If a probe arrives through the other transit router, R4’s default feasible-path RPF check may drop it because no active route to the source uses the incoming interface. Enabling multipath installs both return paths, so probes arriving through either R2 or R3 can pass the check and receive replies.
 
 ```
 config vdom
