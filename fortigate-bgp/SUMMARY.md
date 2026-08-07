@@ -26,6 +26,7 @@
 * [Lab 10: BGP Route Aggregation](labs/lab-10-bgp-route-aggregation.md)
 * [Lab 11: BGP Multipath and Equal-Cost Load Balancing](labs/lab-11-bgp-multipath-and-ecmp.md)
 * [Lab 12: AS-Path Prepending and Inbound Traffic Engineering](labs/lab-12-as-path-prepending-and-inbound-traffic-engineering.md)
+* [Lab 13: BGP MED and Preferred Entry Paths](labs/lab-13-bgp-med-and-preferred-entry-paths.md)
 
 ***
 

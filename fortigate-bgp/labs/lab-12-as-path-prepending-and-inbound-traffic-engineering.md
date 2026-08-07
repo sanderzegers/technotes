@@ -33,6 +33,12 @@ The `AS_PATH` attribute records the autonomous systems through which a BGP route
 
 An AS can make one path look less attractive by adding extra copies of its own AS number to an outbound advertisement. This is called AS-path prepending.
 
+{% hint style="warning" %}
+**What about iBGP?** iBGP routers normally pass the `AS_PATH` unchanged and do not add their own AS number. AS-path prepending is therefore mainly used with eBGP.
+
+If you manually add the local AS toward an iBGP peer, that peer may reject the route because it sees its own AS in the path. Use local preference to influence path selection inside an AS.
+{% endhint %}
+
 In this lab, the normal paths received by R1 are:
 
 | Path   | Next hop      | AS path       | AS-path length |
