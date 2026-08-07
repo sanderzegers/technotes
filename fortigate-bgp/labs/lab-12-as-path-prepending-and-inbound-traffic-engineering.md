@@ -152,7 +152,8 @@ Total number of neighbors 2
 
 Inspect `10.10.4.0/24` on R1 before applying any policy:
 
-<pre><code>BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
+```
+BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
 VRF 0 BGP routing table entry for 10.10.4.0/24
 Paths: (2 available, best #2, table Default-IP-Routing-Table)
   Advertised to non peer-group peers:
@@ -167,7 +168,8 @@ Paths: (2 available, best #2, table Default-IP-Routing-Table)
   65003 65004
     172.18.13.1 from 172.18.13.1 (3.3.3.3)
       Origin IGP distance 20 metric 0, localpref 100, valid, external, best
-      Last update: Fri Aug  7 06:30:26 2026</code></pre>
+      Last update: Fri Aug  7 06:30:26 2026
+```
 
 Both AS paths contain two AS numbers. With weight, local preference, AS-path length, origin, MED, and the other earlier attributes equal, BGP continues to later tie breakers. This example selects the path through R2, but your FortiGate may initially select R3 depending on session age and the remaining tie breakers.
 
@@ -235,11 +237,16 @@ sudo R4 execute router clear bgp ip 172.18.34.0 soft out
 Verify what R4 advertises to R3:
 
 ```
-BGP-LAB (R4) # get router info bgp neighbors 172.18.34.0 advertised-routes
+BGP-LAB (R4) # get router info bgp neighbors 172.18.34.0 advertised-routes 
+VRF 0 BGP table version is 2, local router ID is 4.4.4.4
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal
+Origin codes: i - IGP, e - EGP, ? - incomplete
 
-     Network          Next Hop            Metric LocPrf Weight RouteTag Path
- *>  10.10.4.0/24     172.18.34.1              0         32768        0 65004 65004 i
- *>  172.17.0.4/32    172.18.34.1              0         32768        0 i
+   Network          Next Hop            Metric     LocPrf Weight RouteTag Path
+*> 10.10.4.0/24     172.18.34.1                   100  32768        0 65004 65004 i <-/->
+*> 172.17.0.4/32    172.18.34.1                   100  32768        0 i <-/->
+
+Total number of prefixes 2
 ```
 
 The advertised-routes view shows the two AS numbers inserted by the route-map. The receiving eBGP path also contains the normal local AS added during advertisement.
@@ -248,17 +255,22 @@ Now inspect the route on R1:
 
 <pre><code>BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
 VRF 0 BGP routing table entry for 10.10.4.0/24
-Paths: (2 available, best #2, table Default-IP-Routing-Table)
+Paths: (2 available, best #1, table Default-IP-Routing-Table)
+  Advertised to non peer-group peers:
+   172.18.13.1
+  Original VRF 0
+<strong>  65002 65004
+</strong>    172.18.12.1 from 172.18.12.1 (2.2.2.2)
+      Origin IGP distance 20 metric 0, localpref 100, valid, external, best
+      Last update: Fri Aug  7 06:31:40 2026
+
   Original VRF 0
 <strong>  65003 65004 65004 65004
 </strong>    172.18.13.1 from 172.18.13.1 (3.3.3.3)
       Origin IGP distance 20 metric 0, localpref 100, valid, external
+      Last update: Fri Aug  7 06:39:20 2026
 
-  Original VRF 0
-<strong>  65002 65004
-</strong>    172.18.12.1 from 172.18.12.1 (2.2.2.2)
-<strong>      Origin IGP distance 20 metric 0, localpref 100, valid, external, best
-</strong></code></pre>
+</code></pre>
 
 R1 now prefers the path through R2 because its AS path is shorter.
 
@@ -266,12 +278,21 @@ Confirm that the route-map changed only the selected prefix:
 
 ```
 BGP-LAB (R1) # get router info bgp network 172.17.0.4/32
-
+VRF 0 BGP routing table entry for 172.17.0.4/32
 Paths: (2 available, best #2, table Default-IP-Routing-Table)
-  65003 65004
-    172.18.13.1 from 172.18.13.1 (3.3.3.3)
+  Advertised to non peer-group peers:
+   172.18.12.1
+  Original VRF 0
   65002 65004
     172.18.12.1 from 172.18.12.1 (2.2.2.2)
+      Origin IGP distance 20 metric 0, localpref 100, valid, external
+      Last update: Fri Aug  7 06:31:40 2026
+
+  Original VRF 0
+  65003 65004
+    172.18.13.1 from 172.18.13.1 (3.3.3.3)
+      Origin IGP distance 20 metric 0, localpref 100, valid, external, best
+      Last update: Fri Aug  7 06:30:26 2026
 ```
 
 Both paths to `172.17.0.4/32` still have an AS-path length of two.
@@ -325,17 +346,21 @@ Verify the result:
 
 <pre><code>BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
 VRF 0 BGP routing table entry for 10.10.4.0/24
-Paths: (2 available, best #1, table Default-IP-Routing-Table)
-  Original VRF 0
-  65003 65004 65004 65004
-    172.18.13.1 from 172.18.13.1 (3.3.3.3)
-<strong>      Origin IGP distance 20 metric 0, localpref 200, valid, external, best
-</strong>
+Paths: (2 available, best #2, table Default-IP-Routing-Table)
+  Advertised to non peer-group peers:
+   172.18.12.1
   Original VRF 0
   65002 65004
     172.18.12.1 from 172.18.12.1 (2.2.2.2)
 <strong>      Origin IGP distance 20 metric 0, localpref 100, valid, external
-</strong></code></pre>
+</strong>      Last update: Fri Aug  7 06:31:40 2026
+
+  Original VRF 0
+  65003 65004 65004 65004
+    172.18.13.1 from 172.18.13.1 (3.3.3.3)
+<strong>      Origin IGP distance 20 metric 0, localpref 200, valid, external, best
+</strong>      Last update: Fri Aug  7 06:41:31 2026
+</code></pre>
 
 The longer path through R3 wins because its local preference is higher. This demonstrates why AS-path prepending cannot guarantee how another autonomous system will route traffic.
 
@@ -379,21 +404,17 @@ end
 
 Verify the BGP table and routing table:
 
-<pre><code>BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
+```
+BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
 VRF 0 BGP routing table entry for 10.10.4.0/24
 Paths: (1 available, best #1, table Default-IP-Routing-Table)
+  Not advertised to any peer
   Original VRF 0
   65003 65004 65004 65004
     172.18.13.1 from 172.18.13.1 (3.3.3.3)
-<strong>      Origin IGP distance 20 metric 0, localpref 100, valid, external, best
-</strong>
-BGP-LAB (R1) # get router info routing-table details 10.10.4.0/24
-
-Routing table for VRF=0
-Routing entry for 10.10.4.0/24
-  Known via "bgp", distance 20, metric 0, best
-<strong>  * 172.18.13.1, via R1R3-1-0
-</strong></code></pre>
+      Origin IGP distance 20 metric 0, localpref 100, valid, external, best
+      Last update: Fri Aug  7 06:44:54 2026
+```
 
 The prepended path becomes best because it is the only remaining valid path.
 
@@ -413,42 +434,6 @@ end
 
 After the R1-R2 BGP session is established again, R1 should return to the shorter path through R2.
 
-## Exercise 5: Remove AS-Path Prepending
-
-Remove the outbound route-map from the R4 neighbor toward R3:
-
-```
-config vdom
-    edit R4
-        config router bgp
-            config neighbor
-                edit "172.18.34.0"
-                    unset route-map-out
-                next
-            end
-        end
-    next
-end
-```
-
-Refresh the outbound advertisements and inspect the route on R1:
-
-```
-sudo R4 execute router clear bgp ip 172.18.34.0 soft out
-```
-
-```
-BGP-LAB (R1) # get router info bgp network 10.10.4.0/24
-
-Paths: (2 available, best #2, table Default-IP-Routing-Table)
-  65003 65004
-    172.18.13.1 from 172.18.13.1 (3.3.3.3)
-  65002 65004
-    172.18.12.1 from 172.18.12.1 (2.2.2.2)
-```
-
-Both paths should have an AS-path length of two again. The route-map and prefix-list can remain configured without affecting BGP because the route-map is no longer attached to a neighbor.
-
 ## Summary
 
 In this lab, you used an outbound route-map on R4 to prepend two additional copies of AS 65004 to `10.10.4.0/24` when advertising it toward R3. R1 therefore received a shorter path through R2 and a longer path through R3, and selected the shorter path through R2.
@@ -460,4 +445,3 @@ Finally, you disabled the preferred link and verified that the prepended path re
 ## Links
 
 {% embed url="https://docs.fortinet.com/document/fortigate/7.4.8/administration-guide/535228/route-maps" %}
-
