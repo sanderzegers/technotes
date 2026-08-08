@@ -35,6 +35,8 @@
 | ------ | ----------- | ------- |
 | `docker run <image>` | **Create** and start a container | `docker run nginx` |
 | `docker run -it <image> <shell>` | Start an interactive container | `docker run -it ubuntu bash` |
+| `docker run -it -v <local_path>:<container_path> <image> <shell>` | Start an interactive container with a local path mounted | `docker run -it -v "$(pwd)":/workspace ubuntu bash` |
+| `docker run --name <container_name> -h <hostname> -it <image> <shell>` | Set the Docker container name and hostname | `docker run --name test -h test -it ubuntu bash` |
 | `docker run -d <image>` | Run container in background | `docker run -d nginx` |
 | `docker ps` | List running containers | `docker ps` |
 | `docker ps -a` | List all containers | `docker ps -a` |
