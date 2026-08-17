@@ -6,7 +6,7 @@ A list is like an array in other languages such as C and Java. Except:
 * can contain values of different types
 * stores references to objects (rather than the objects themselves
 
-```
+```python
 # Creating lists
 numbers = [1, 2, 3]
 mixed = ["beep", 4, -1.2]
