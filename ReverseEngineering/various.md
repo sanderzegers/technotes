@@ -108,3 +108,9 @@ gcc -z execstack -fno-stack-protector -no-pie -fno-pie -o myprogram myprogram.c
 | -z execstack         | Marks the stack as executable, allowing code execution from the stack, which is typically blocked to prevent certain types of exploits. |   |
 
 Disable ASLR: echo 0 | sudo tee /proc/sys/kernel/randomize\_va\_space
+
+
+
+Linux Syscall list:
+
+{% embed url="https://x86.syscall.sh/" %}
