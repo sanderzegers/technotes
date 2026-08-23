@@ -8,3 +8,9 @@
 * [Lists](data-types/lists.md)
 * [Enums](data-types/enums.md)
 * [Dataclasses](data-types/dataclasses.md)
+
+## Internals
+
+***
+
+* [Marshal](marshal.md)
