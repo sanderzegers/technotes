@@ -40,5 +40,31 @@ numbers.count(2)   # 2
 numbers.index(3)   # 3
 numbers + (4, 5)   # creates a new tuple
 numbers * 2        # creates a repeated tuple
+
+list((1, 2, 3))               
+# [1, 2, 3]
+
+for index, value in enumerate(("A", "B")):
+     print(index,value)     
+#0 A
+#1 B
+
+list(zip(("A", "B"), (1, 2)))
+#[('A','1'),('B','2')]
 ```
 
+```python
+# Assign variables names to tuple values. Values are still constansts.
+
+from typing import NamedTuple
+
+class Point(NamedTuple):
+    x: int
+    y: int
+
+point = Point(10, 20)
+
+point.x       # 10
+point[0]      # 10
+hash(point)   # works
+```
