@@ -16,27 +16,45 @@ values = [0, 1, "two", 3, 4, 5, 6, 7]
 nums = list(range(10))
 # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+chars = list("hello world")
+# ['h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd']
 
 # Length
 len(nums)               # 10
 
-
 # Add an item
 values.append(8)
 # [0, 1, "two", 3, 4, 5, 6, 7, 8]
-
 
 # Indexing
 mixed[-2]               # 4
 # Negative indexes count from the end:
 # -1 = last item, -2 = second-last item
 
-
 # Slicing: [start:stop]
 values[3:5]             # [3, 4]
 # Includes start index (3)
 # Excludes stop index (5)
 
+alphabet = [chr(a) for a in (range(65,65+26))]
+#['A','B','C','D','E','F','G',...,'Z']
+
+alphabet[0]
+# 'A'
+
+alphabet[:3]
+#['A', 'B', 'C']
+
+alphabet[4:6]
+#['E', 'F']
+
+alphabet[::-1]
+#['Z','Y','X','W',...,'A']
+
+alphabet[::3]
+#['A', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y']
+
+# Core Rule: sequence[start:stop:step]
 
 # Check whether a value exists
 -1.2 in mixed           # True
@@ -87,3 +105,4 @@ values                   # []
 | Delete by index/slice | `del items[2]`       |
 | Create a sorted copy  | `sorted(items)`      |
 | Iterate               | `for item in items:` |
+
