@@ -2,18 +2,18 @@
 
 Storm Control limits the rates of unknown unicast packets, broadcast packets and/or unknown multicast packets.
 
-By default this limit is set to 500 packets/second, but it's disabled by default. If the traffic rate for any of the types exceeds the configured threshold, the FortiSwitch unit drops the excess traffic. Packets above this treshold will be dropped.
+By default, this limit is set to 500 packets/second, but it's disabled by default. If the traffic rate for any of the types exceeds the configured threshold, the FortiSwitch unit drops the excess traffic. Packets above this threshold will be dropped.
 
-Only packets categorized by the traffic types are blocked. All other packets are forwarded regulary on the switch port.
+Only packets categorized by the traffic types are blocked. All other packets are forwarded regularly on the switch port.
 
-By default storm control is disabled on the mclag-icl, isl and fortilink connections.\
-It's possible to define a global storm control policy, or a per-port storm control policy. The prefered way is to enable storm-control only on clients edge ports. The "Edge-Port" storm-control-policy is already assigned to all access ports by default. The default settings of the Edge-Port storm-control policy, is to use the global storm-control settings.
+By default, storm control is disabled on the mclag-icl, isl and fortilink connections. It's possible to define a global storm control policy, or a per-port storm control policy. The preferred way is to enable storm-control only on client edge ports. The "Edge-Port" storm-control-policy is already assigned to all access ports by default. The default setting of the Edge-Port storm-control policy is to use the global storm-control settings.
 
-Changing the global storm-control-policy will enable storm-control on all non ICL, ISL or FortiLink ports.
+Changing the global storm-control-policy will enable storm-control on all non-ICL, ISL or FortiLink ports.
 
 ```
 config switch-controller storm-control
     set rate 500
+    set burst-size-level <0-4>
     set unknown-unicast enable
     set unknown-multicast enable
     set broadcast enable
@@ -50,13 +50,19 @@ SW6 # diagnose switch physical-ports hw-counter show rx port1
 -------------------------------------------------------------------------------------
 ```
 
+Since FortiSwitchOS 7.4.3 you can also use `storm-control-monitor` to generate log message when a specific threshold is exceeded and get a better overview:
+
+{% embed url="https://docs.fortinet.com/document/fortiswitch/8.0.0/fortiswitchos-administration-guide/13233/storm-control#Monitorn" %}
+
 ### Storm control types
 
 **unknown-unicast**: Unicast destination MAC is not in MAC table\
 **unknown-multicast**: Multicast destination MAC is not in MAC table\
 **broadcast**: Broadcast packets
 
+{% embed url="https://community.fortinet.com/t5/FortiSwitch/Troubleshooting-Tip-How-to-verify-working-of-storm-control/ta-p/225109" %}
 
 
-Source: https://community.fortinet.com/t5/FortiSwitch/Troubleshooting-Tip-How-to-verify-working-of-storm-control/ta-p/225109
+
+
 
